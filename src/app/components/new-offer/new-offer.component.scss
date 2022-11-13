@@ -1,0 +1,17 @@
+.container{
+  display: flex;
+  flex-direction: column;
+}
+
+.upload{
+  display: flex;
+  flex-direction: column;
+
+}
+.upload label{
+  font-size: 20px;
+}
+
+.upload input {
+  margin: 30px;
+}

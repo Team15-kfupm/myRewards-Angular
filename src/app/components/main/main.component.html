@@ -3,7 +3,7 @@
   <div class="offers">
     <div class="row">
       <h2>Offers</h2>
-      <button mat-raised-button color="primary">Add offer</button>
+      <button mat-raised-button color="primary" (click)="openDialog()">Add offer</button>
     </div>
     <div class="offers-grid" >
       <div class="offer-card" *ngFor="let offer of offers; index as i">
@@ -12,7 +12,7 @@
           <span>"{{offer.title}}"</span>
         </div>
         <div class="actions">
-          <button mat-raised-button color="warn">Remove</button>
+          <button mat-raised-button color="warn" >Remove</button>
         </div>
       </div>
 
