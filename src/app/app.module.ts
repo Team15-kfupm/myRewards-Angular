@@ -15,6 +15,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
+import { LoginPageComponent } from './components/login-page/login-page.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {MatInputModule} from '@angular/material/input';
      MainComponent,
      TopBarComponent,
      NewOfferComponent,
+     LoginPageComponent,
 
 
   ],

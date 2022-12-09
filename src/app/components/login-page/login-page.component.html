@@ -1,0 +1,32 @@
+<div class="side">
+  <div class="form">
+
+    <h1>Login Into Your Account</h1>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput placeholder="Ex. pat@example.com">
+      <button mat-icon-button matSuffix >
+        <mat-icon>email</mat-icon>
+      </button>
+    </mat-form-field>
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+    <button mat-flat-button color="primary">Login</button>
+
+    </div>
+  <div class="big">
+
+    <div>
+      <h1>Welcome to myRewards</h1>
+    </div>
+    <img src="assets/coin.svg" alt="coin">
+  </div>
+</div>
