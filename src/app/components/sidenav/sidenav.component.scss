@@ -1,0 +1,52 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  height: 100%;
+
+  background-color: #34495E;
+
+  padding: 40px;
+
+}
+
+.logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ul{
+  list-style-type: none;
+  color: white;
+  padding: 0;
+}
+
+li{
+  font-size: 24px;
+
+}
+
+.item{
+  display: flex;
+  align-items: center;
+  margin-top: 64px;
+  cursor: pointer;
+
+}
+
+.item svg {
+  margin-right: 15px;
+}
+
+.item:hover{
+
+  li{
+    color: #00CEC9;
+  }
+
+}
+
+

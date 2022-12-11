@@ -1,25 +1,14 @@
 <body>
+<div class="side">
+  <app-sidenav></app-sidenav>
 <div class="container">
-  <div class="offers">
-    <div class="row">
-      <h2>Offers</h2>
-      <button mat-raised-button color="primary" (click)="openDialog()">Add offer</button>
-    </div>
-    <div class="offers-grid" >
-      <div class="offer-card" *ngFor="let offer of offers; index as i">
-        <div class="image"><img src="{{offer.picture}}" alt="offer icon"></div>
-        <div class="offer-title">
-          <span>"{{offer.title}}"</span>
-        </div>
-        <div class="actions">
-          <button mat-raised-button color="warn" >Remove</button>
-        </div>
-      </div>
-
-
-    </div>
-
-
+  <div class="head">
+    <app-wc-header [name]="'Ali'"></app-wc-header>
   </div>
+  <div class="charts">
+    <div class="gen-charts"></div>
+  </div>
+
+</div>
 </div>
 </body>
