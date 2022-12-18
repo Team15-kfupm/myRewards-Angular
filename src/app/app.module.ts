@@ -17,6 +17,8 @@ import {MatInputModule} from '@angular/material/input';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { WcHeaderComponent } from './components/shared/wc-header/wc-header.component';
+import { ChartCardComponent } from './components/shared/chart-card/chart-card.component';
+import { ChartPieComponent } from './components/shared/chart-pie/chart-pie.component';
 
 
 @NgModule({
@@ -26,6 +28,8 @@ import { WcHeaderComponent } from './components/shared/wc-header/wc-header.compo
      LoginPageComponent,
      SidenavComponent,
      WcHeaderComponent,
+     ChartCardComponent,
+     ChartPieComponent,
 
 
   ],

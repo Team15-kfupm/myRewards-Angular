@@ -15,7 +15,7 @@ body{
   width: 100%;
   height: 100%;
 
-  padding: 50px 15px 30px;
+  padding: 50px 5% 30px 5%;
 }
 
 .side{
@@ -35,10 +35,81 @@ body{
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  margin-top: 50px;
+
+  width: 100%;
 }
 
 .gen-charts{
   display: flex;
-  justify-content: space-between;
+  align-items: start;
+  width: 100%;
+}
+
+.gen-charts app-chart-card{
+  margin-right: 26px;
+  margin-left: 26px;
+}
+
+.reg-charts{
+  display: flex;
+  flex-direction: row;
   align-items: center;
+  width: 100%;
+
+  margin-top: 50px;
+}
+
+.reg-charts app-chart-card{
+  width: 395px;
+  height: 100%;
+  margin-left: 26px;
+  margin-right: 26px;
+
+}
+
+.wrapper{
+  display: flex;
+  flex-direction: row;
+
+}
+
+.redeem{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+
+  height: 50%;
+
+  margin-top: 50px;
+  padding: 20px;
+}
+
+.redeem span{
+
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 32px;
+
+  color: #000000;
+
+}
+
+.txtField{
+  display: flex;
+  flex-direction: column;
+}
+
+.txtField input{
+  width: 200px;
+  height: 45px;
+
+  padding: 5px;
+
+  background: #F8F8F8;
+  border-radius: 8px;
+  border: none;
+
+  outline: none;
 }
