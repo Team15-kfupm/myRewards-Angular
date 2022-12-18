@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-page',
@@ -7,10 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
 
-  hide = true
-  constructor() { }
+
+
+  constructor(private _router: Router) {
+  }
+
+
 
   ngOnInit(): void {
   }
+
+goToHome(){
+    this._router.navigate(['home'])
+}
 
 }

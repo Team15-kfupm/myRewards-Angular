@@ -19,6 +19,11 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { WcHeaderComponent } from './components/shared/wc-header/wc-header.component';
 import { ChartCardComponent } from './components/shared/chart-card/chart-card.component';
 import { ChartPieComponent } from './components/shared/chart-pie/chart-pie.component';
+import {FormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import { RegPageComponent } from './components/reg-page/reg-page.component';
+import { OffersPageComponent } from './components/offers-page/offers-page.component';
+import { OfferFormComponent } from './components/offer-form/offer-form.component';
 
 
 @NgModule({
@@ -30,6 +35,9 @@ import { ChartPieComponent } from './components/shared/chart-pie/chart-pie.compo
      WcHeaderComponent,
      ChartCardComponent,
      ChartPieComponent,
+     RegPageComponent,
+     OffersPageComponent,
+     OfferFormComponent,
 
 
   ],
@@ -42,6 +50,9 @@ import { ChartPieComponent } from './components/shared/chart-pie/chart-pie.compo
     MatIconModule,
     MatDialogModule,
     MatInputModule,
+    FormsModule,
+    HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
