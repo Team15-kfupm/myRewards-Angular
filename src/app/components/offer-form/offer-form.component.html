@@ -1,0 +1,14 @@
+
+  <form #offerForm='ngForm' (click)="sendRequest(offerForm.value)">
+  <h2>Create New Offer</h2>
+    <div class="textField"><input type="text" placeholder="Title" name="name" ngModel></div>
+    <div class="textField"><input type="text" placeholder="Description" name="desc" ngModel></div>
+    <div class="textField"><input type="date" placeholder="Start Date" name="sDate" ngModel></div>
+    <div class="textField"><input type="text" placeholder="validity period" name="validity" ngModel></div>
+
+    <div class="actions">
+      <button class="submit-btn" type="submit" >Submit</button>
+      <button class="close-btn"  >Close</button>
+    </div>
+  </form>
+
