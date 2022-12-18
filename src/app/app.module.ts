@@ -5,26 +5,31 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { MainComponent } from './components/main/main.component';
-import { NewOfferComponent } from './components/new-offer/new-offer.component';
+
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { TopBarComponent } from './components/top-bar/top-bar.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import { LoginPageComponent } from './components/login-page/login-page.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { WcHeaderComponent } from './components/shared/wc-header/wc-header.component';
+import { ChartCardComponent } from './components/shared/chart-card/chart-card.component';
+import { ChartPieComponent } from './components/shared/chart-pie/chart-pie.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
      MainComponent,
-     TopBarComponent,
-     NewOfferComponent,
      LoginPageComponent,
+     SidenavComponent,
+     WcHeaderComponent,
+     ChartCardComponent,
+     ChartPieComponent,
 
 
   ],
