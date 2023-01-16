@@ -25,6 +25,7 @@ import { RegPageComponent } from './components/reg-page/reg-page.component';
 import { OffersPageComponent } from './components/offers-page/offers-page.component';
 import { OfferFormComponent } from './components/offer-form/offer-form.component';
 import { OfferCardComponent } from './components/offer-card/offer-card.component';
+import { TextfieldComponent } from './components/shared/textfield/textfield.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { OfferCardComponent } from './components/offer-card/offer-card.component
      OffersPageComponent,
      OfferFormComponent,
      OfferCardComponent,
+     TextfieldComponent,
 
 
   ],
