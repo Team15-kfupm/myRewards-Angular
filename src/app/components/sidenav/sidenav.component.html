@@ -8,7 +8,7 @@
     <div class="item"><svg width="48" height="45" viewBox="0 0 48 45" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M18 31.875V28.125M24 31.875V24.375M30 31.875V20.625M34 39.375H14C12.9391 39.375 11.9217 38.9799 11.1716 38.2766C10.4214 37.5734 10 36.6196 10 35.625V9.375C10 8.38044 10.4214 7.42661 11.1716 6.72335C11.9217 6.02009 12.9391 5.625 14 5.625H25.172C25.7024 5.62511 26.211 5.82272 26.586 6.17437L37.414 16.3256C37.7891 16.6772 37.9999 17.154 38 17.6512V35.625C38 36.6196 37.5786 37.5734 36.8284 38.2766C36.0783 38.9799 35.0609 39.375 34 39.375Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-      <li (click)="goTo('home')">Dashboard</li>
+      <li (click)="goTo('home')" [ngClass]="{enabled:iAmInHome()}" >Dashboard</li>
     </div>
 
     <div class="item">
@@ -17,7 +17,7 @@
       </svg>
 
 
-      <li (click)="goTo('offers')">Offers</li>
+      <li (click)="goTo('offers')" [ngClass]="{'enabled':iAmInOffers()}">Offers</li>
     </div>
 
     <div class="item"><svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">

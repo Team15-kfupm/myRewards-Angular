@@ -15,10 +15,8 @@
       <div class="wrapper">
         <div class="offers-grid">
 
-          <app-offer-card></app-offer-card>
-          <app-offer-card></app-offer-card>
-          <app-offer-card></app-offer-card>
-          <app-offer-card></app-offer-card>
+          <app-offer-card *ngFor="let offer of offers" [title]="offer.title" [image]="offer.image" [description]="offer.description" ></app-offer-card>
+
         </div>
       </div>
 

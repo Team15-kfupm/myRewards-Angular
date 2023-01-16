@@ -2,7 +2,7 @@ body{
 
   //background-color:#F5F5F5;
   font-family: 'Poppins', sans-serif;
-  height: auto;
+  height: 100%;
 
 
 }
@@ -23,6 +23,7 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 .side{
   display: flex;
@@ -55,6 +56,7 @@ body{
   margin-top: 20px;
   display: grid;
   grid-template-columns: auto auto;
+
 
 }
 
