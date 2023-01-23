@@ -8,11 +8,11 @@
   <div *ngIf="type!='pie'" class="txtStat"><span>{{num}} {{unit}}s</span></div>
 
 
-  <app-chart-pie *ngIf="type=='pie'" [color]="'red'" [percentage]="percentage"></app-chart-pie>
+  <app-chart-pie *ngIf="type=='pie'" [color]="'#248BEB'" [percentage]="percentage"></app-chart-pie>
 
   <div class="weekly" *ngIf="type!='pie'">
-    <img src="assets/chart/{{status}}.svg">
-    <span>17% {{status}}er than last week</span>
+    <img alt="icon" src="assets/chart/{{status}}.svg">
+    <span [ngClass]="{'danger':status !='high'}" >17% {{status}}er than last week</span>
   </div>
 
 </div>

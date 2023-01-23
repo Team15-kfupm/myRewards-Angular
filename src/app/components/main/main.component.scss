@@ -8,7 +8,7 @@ body{
 }
 
 .container{
-  background-color:#F5F5F5;
+
   display:flex;
   flex-direction:column;
   justify-content: flex-start;
@@ -113,3 +113,59 @@ body{
 
   outline: none;
 }
+
+@media screen and (max-width: 1300px) {
+
+
+  app-sidenav{
+    display: none;
+  }
+
+  .wrapper{
+    flex-direction: column;
+  }
+
+
+}
+
+
+
+
+@media screen and (max-width: 800px) {
+
+
+  .container{
+
+    justify-content: center;
+    align-items: center;
+  }
+
+  app-sidenav{
+    display: none;
+  }
+
+  .wrapper{
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+
+  .gen-charts{
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+
+  .reg-charts {
+    flex-direction: column;
+    padding: 0;
+  }
+
+   app-chart-card{
+    margin-top: 20px;
+     padding: 0;
+  }
+
+
+}
+

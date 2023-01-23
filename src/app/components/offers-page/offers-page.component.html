@@ -2,6 +2,8 @@
 <div class="side">
   <app-sidenav></app-sidenav>
     <div class="container">
+
+
       <div class="head">
         <app-wc-header [name]="'Ali'"></app-wc-header>
       </div>
@@ -9,6 +11,16 @@
       <div class="add">
         <button (click)="openDialog()">Add Offer</button>
       </div>
+
+      <div class="wrapper">
+        <div class="offers-grid">
+
+          <app-offer-card *ngFor="let offer of offers" [title]="offer.title" [image]="offer.image" [description]="offer.description" ></app-offer-card>
+
+        </div>
+      </div>
+
+
     </div>
   </div>
 </body>

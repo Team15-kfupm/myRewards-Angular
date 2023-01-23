@@ -11,10 +11,21 @@ export class SidenavComponent implements OnInit {
   constructor(private _router: Router) { }
 
   ngOnInit(): void {
+
   }
 
   goTo(route: string){
-    this._router.navigate([route])
+    this._router.navigate([route]).then(r => console.log(r))
+  }
+
+  iAmInHome():boolean{
+
+    return this._router.url == "/home";
+  }
+
+  iAmInOffers():boolean{
+
+    return this._router.url == "/offers";
   }
 
 }
