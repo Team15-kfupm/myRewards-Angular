@@ -26,6 +26,12 @@ import { OffersPageComponent } from './components/offers-page/offers-page.compon
 import { OfferFormComponent } from './components/offer-form/offer-form.component';
 import { OfferCardComponent } from './components/offer-card/offer-card.component';
 import { TextfieldComponent } from './components/shared/textfield/textfield.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+
 
 
 @NgModule({
@@ -55,10 +61,15 @@ import { TextfieldComponent } from './components/shared/textfield/textfield.comp
     MatDialogModule,
     MatInputModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore())
 
   ],
-  providers: [],
+  providers: [
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

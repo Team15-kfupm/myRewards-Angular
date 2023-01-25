@@ -102,6 +102,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "myRewards:build:production",
+            "firebaseProject": "myrewards-e3b0c",
+            "firebaseHostingSite": "myrewards-e3b0c"
+          }
         }
       }
     }
