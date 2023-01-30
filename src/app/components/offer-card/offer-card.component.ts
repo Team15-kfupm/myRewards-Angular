@@ -33,7 +33,7 @@ export class OfferCardComponent implements OnInit {
 
   deleteOffer(id:string):void{
     this.offersService.deleteOffer(id).then(r =>
-    console.log(r));
+    console.log(r)).catch(err=>console.log('Error during delete '+err));
   }
 
 
