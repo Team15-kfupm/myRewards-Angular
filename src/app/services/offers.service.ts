@@ -12,13 +12,14 @@ class FirestoreService {
 })
 export class OffersService {
 
-  constructor( private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore) {
+  }
 
   /**@author Ali
    * @name getOffers
    * @description returns all offers from the firestore
    * **/
-  getOffers(){
+  getOffers() {
     return this.firestore.collection('/offers').snapshotChanges();
   }
 
@@ -27,18 +28,27 @@ export class OffersService {
    * @description  adds Offer object to offers collection in firestore
    * @return Promise<boolean>
    * **/
-  async addOffer(offer:Offer, image:any):Promise<boolean>{
-    if (image != null){
+  async addOffer(offer: Offer, image: any): Promise<boolean> {
+    if (image != null) {
       offer.id = this.firestore.createId();
       await this.firestore.collection('/offers').add(offer);
       console.log('sent to the db !')
 
       return true;
-    }else
+    } else
       return false;
   }
 
 
+  async updateOffer(id:string, updates:any){
+    console.log("Updating "+id)
+    await this.firestore.collection('offers').doc(id).update(updates);
 
+  }
 
 }
+
+
+
+
+

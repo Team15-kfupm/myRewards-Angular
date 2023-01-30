@@ -47,6 +47,8 @@ export class OffersPageComponent implements OnInit {
     });
   }
   openDialog(){
-    const dialogRef = this.dialog.open(OfferFormComponent);
+    this.dialog.open(OfferFormComponent,{
+      data:null
+    });
   }
 }
