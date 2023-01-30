@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {OfferFormComponent} from "../offer-form/offer-form.component";
 import {Offer} from "../../models/offer";
+import {OffersService} from "../../services/offers.service";
 
 @Component({
   selector: 'app-offer-card',
@@ -18,7 +19,7 @@ export class OfferCardComponent implements OnInit {
     title:'',
     image:'',
   };
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private offersService:OffersService) { }
 
   ngOnInit(): void {
   }
@@ -28,6 +29,11 @@ export class OfferCardComponent implements OnInit {
     this.dialog.open(OfferFormComponent,{
       data:offer,
     });
+  }
+
+  deleteOffer(id:string):void{
+    this.offersService.deleteOffer(id).then(r =>
+    console.log(r));
   }
 
 
