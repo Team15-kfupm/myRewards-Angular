@@ -14,6 +14,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { WcHeaderComponent } from './components/shared/wc-header/wc-header.component';
@@ -26,6 +28,12 @@ import { OffersPageComponent } from './components/offers-page/offers-page.compon
 import { OfferFormComponent } from './components/offer-form/offer-form.component';
 import { OfferCardComponent } from './components/offer-card/offer-card.component';
 import { TextfieldComponent } from './components/shared/textfield/textfield.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+
 
 
 @NgModule({
@@ -44,6 +52,7 @@ import { TextfieldComponent } from './components/shared/textfield/textfield.comp
      TextfieldComponent,
 
 
+
   ],
   imports: [
     BrowserModule,
@@ -54,11 +63,17 @@ import { TextfieldComponent } from './components/shared/textfield/textfield.comp
     MatIconModule,
     MatDialogModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore())
 
   ],
-  providers: [],
+  providers: [
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

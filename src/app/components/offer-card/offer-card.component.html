@@ -1,17 +1,17 @@
 <div class="container">
 
-  <img src="{{image}}" alt="coffee">
+  <img src="{{offer.image}}" alt="coffee">
 
   <div class="row">
 
     <div class="info">
-      <h3>{{title}}</h3>
-      <p>{{description}}</p>
+      <h3>{{offer.title}}</h3>
+      <p>{{offer.description}}</p>
     </div>
 
     <div class="action">
-      <button class="delete">Delete</button>
-      <button class="edit">Edit</button>
+      <button class="delete" (click)="deleteOffer(offer.id)">Delete</button>
+      <button class="edit" (click)="onEdit(offer)">Edit</button>
     </div>
 
   </div>

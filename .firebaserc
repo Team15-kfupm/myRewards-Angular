@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "myrewards-e3b0c": {
+      "hosting": {
+        "myRewards": [
+          "myrewards-e3b0c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "myrewards-e3b0c"
+  }
+}
