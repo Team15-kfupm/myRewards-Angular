@@ -14,6 +14,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { WcHeaderComponent } from './components/shared/wc-header/wc-header.component';
@@ -50,6 +52,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
      TextfieldComponent,
 
 
+
   ],
   imports: [
     BrowserModule,
@@ -60,6 +63,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     MatIconModule,
     MatDialogModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     FormsModule,
     HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),

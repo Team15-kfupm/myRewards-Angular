@@ -11,7 +11,8 @@ export class OffersService {
   constructor(private firestore: AngularFirestore) {
   }
 
-  /**@author Ali Amin
+  /**
+   * @author Ali Amin
    * @name getOffers
    * @description returns all offers from the firestore
    * **/
@@ -19,7 +20,8 @@ export class OffersService {
     return this.firestore.collection('/offers').snapshotChanges();
   }
 
-  /**@author Ali Amin
+  /**
+   * @author Ali Amin
    * @name addOffer
    * @description  adds Offer object to Offers collection in firestore
    * @return Promise<boolean>
@@ -36,7 +38,8 @@ export class OffersService {
   }
 
 
-  /**@author Ali Amin
+  /**
+   * @author Ali Amin
    * @name updateOffer
    * @description  is used to update the offer Object "Modify"
    * @return Promise<void>
@@ -47,7 +50,8 @@ export class OffersService {
 
   }
 
-  /**@author Ali Amin
+  /**
+   * @author Ali Amin
    * @name deleteOffer
    * @description  is used to update the offer Object "Modify"
    * @return Promise<void>
