@@ -24,7 +24,7 @@ body {
   align-items: center;
   justify-content: center;
 
-  height: 30vh;
+  height: 100%;
   width: calc(100vw - 480px);
 }
 
@@ -42,14 +42,10 @@ body {
 
 .add button {
   padding: 6px 12px;
-
-
   width: 90px;
   height: 36px;
-
   color: white;
   border: none;
-
   background: #00CEC9;
   border-radius: 4px;
 
