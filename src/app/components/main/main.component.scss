@@ -1,4 +1,4 @@
-body{
+body {
 
   //background-color:#F5F5F5;
   font-family: 'Poppins', sans-serif;
@@ -7,30 +7,30 @@ body{
 
 }
 
-.container{
+.container {
 
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   justify-content: flex-start;
   width: 100%;
-  height: 100%;
+
 
   padding: 50px 5% 30px 5%;
 }
 
-.side{
+.side {
   display: flex;
   flex-direction: row;
   height: 100%;
 }
 
-.head{
+.head {
   width: 100%;
   display: flex;
   justify-content: flex-end;
 }
 
-.charts{
+.charts {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -40,18 +40,18 @@ body{
   width: 100%;
 }
 
-.gen-charts{
+.gen-charts {
   display: flex;
   align-items: start;
   width: 100%;
 }
 
-.gen-charts app-chart-card{
+.gen-charts app-chart-card {
   margin-right: 26px;
   margin-left: 26px;
 }
 
-.reg-charts{
+.reg-charts {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -60,7 +60,7 @@ body{
   margin-top: 50px;
 }
 
-.reg-charts app-chart-card{
+.reg-charts app-chart-card {
   width: 395px;
   height: 100%;
   margin-left: 26px;
@@ -68,13 +68,13 @@ body{
 
 }
 
-.wrapper{
+.wrapper {
   display: flex;
   flex-direction: row;
 
 }
 
-.redeem{
+.redeem {
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -86,7 +86,7 @@ body{
   padding: 20px;
 }
 
-.redeem span{
+.redeem span {
 
   font-weight: 500;
   font-size: 15px;
@@ -96,12 +96,12 @@ body{
 
 }
 
-.txtField{
+.txtField {
   display: flex;
   flex-direction: column;
 }
 
-.txtField input{
+.txtField input {
   width: 200px;
   height: 45px;
 
@@ -117,40 +117,41 @@ body{
 @media screen and (max-width: 1200px) {
 
 
-  app-sidenav{
+  app-sidenav {
     display: none;
   }
 
-  .wrapper{
+  .wrapper {
     flex-direction: column;
   }
 
+  .redeem {
+    margin-left: 0
+  }
 
 }
-
-
 
 
 @media screen and (max-width: 800px) {
 
 
-  .container{
+  .container {
 
     justify-content: center;
     align-items: center;
   }
 
-  app-sidenav{
+  app-sidenav {
     display: none;
   }
 
-  .wrapper{
+  .wrapper {
     flex-direction: column;
     align-items: center;
     padding: 0;
   }
 
-  .gen-charts{
+  .gen-charts {
     flex-direction: column;
     align-items: center;
     padding: 0;
@@ -161,9 +162,13 @@ body{
     padding: 0;
   }
 
-   app-chart-card{
+  app-chart-card {
     margin-top: 20px;
-     padding: 0;
+    padding: 0;
+  }
+
+  .redeem {
+    margin-left: 0
   }
 
 

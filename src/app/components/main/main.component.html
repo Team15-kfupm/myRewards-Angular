@@ -1,42 +1,39 @@
 <body>
-<div class="side">
 
-  <app-sidenav></app-sidenav>
+<div class="container">
 
-  <div class="container">
-
-    <div class="head">
-      <app-wc-header [name]="'Ali'"></app-wc-header>
-    </div>
-
-    <div class="wrapper">
-      <div class="charts">
-        <div class="gen-charts" >
-          <app-chart-card *ngFor="let chart of charts" [num]="chart.num" [title]="chart.title" [unit]="chart.unit" [status]="chart.status"></app-chart-card>
-
-        </div>
-
-        <div class="reg-charts">
-          <app-chart-card *ngFor="let pieChart of pie_charts" [type]="pieChart.type" [title]="pieChart.title" [percentage]="pieChart.percentage"></app-chart-card>
-        </div>
-
-        <div class="reg-charts">
-          <app-chart-card *ngFor="let pieChart of pie_charts2" [type]="pieChart.type" [title]="pieChart.title" [percentage]="pieChart.percentage"></app-chart-card>
-        </div>
-      </div>
-
-      <div class="redeem">
-
-        <div class="txtField">
-          <span>Redeem Offer</span>
-          <input type="text" placeholder="e.g. ####-####-####">
-
-        </div>
-
-      </div>
-    </div>
+  <div class="head">
+    <app-wc-header [name]="'Ali'"></app-wc-header>
   </div>
 
+  <div class="wrapper">
+    <div class="charts">
+      <div class="gen-charts">
+        <app-chart-card *ngFor="let chart of charts" [num]="chart.num" [status]="chart.status" [title]="chart.title"
+                        [unit]="chart.unit"></app-chart-card>
 
+      </div>
+
+      <div class="reg-charts">
+        <app-chart-card *ngFor="let pieChart of pie_charts" [percentage]="pieChart.percentage" [title]="pieChart.title"
+                        [type]="pieChart.type"></app-chart-card>
+      </div>
+
+      <div class="reg-charts">
+        <app-chart-card *ngFor="let pieChart of pie_charts2" [percentage]="pieChart.percentage" [title]="pieChart.title"
+                        [type]="pieChart.type"></app-chart-card>
+      </div>
+    </div>
+
+    <div class="redeem">
+      <div class="txtField">
+        <span>Redeem Offer</span>
+        <input placeholder="e.g. ####-####-####" type="text">
+      </div>
+
+    </div>
+  </div>
 </div>
+
+
 </body>

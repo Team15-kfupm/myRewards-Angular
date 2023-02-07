@@ -1,7 +1,31 @@
-*{
+* {
   font-family: 'Inter', sans-serif;
 }
 
-body{
-  background-color:#F5F5F5;
+body {
+  background-color: #F5F5F5;
+}
+
+.side {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+}
+
+router-outlet {
+  height: auto;
+
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+
+@media screen and (max-width: 800px) {
+  app-sidenav {
+    display: none;
+  }
 }

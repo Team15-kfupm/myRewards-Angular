@@ -1,4 +1,4 @@
-body{
+body {
 
   //background-color:#F5F5F5;
   font-family: 'Poppins', sans-serif;
@@ -7,10 +7,10 @@ body{
 
 }
 
-.container{
+.container {
 
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   justify-content: flex-start;
 
   width: 100%;
@@ -19,25 +19,28 @@ body{
   padding: 50px 5% 30px 5%;
 }
 
-.wrapper{
+.wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
 
+  height: 30vh;
+  width: calc(100vw - 480px);
 }
-.side{
+
+.side {
   display: flex;
   flex-direction: row;
   height: 100%;
 }
 
-.head{
+.head {
   width: 100%;
   display: flex;
   justify-content: flex-end;
 }
 
-.add button{
+.add button {
   padding: 6px 12px;
 
 
@@ -52,7 +55,7 @@ body{
 
 }
 
-.offers-grid{
+.offers-grid {
   margin-top: 20px;
   display: grid;
   grid-template-columns: auto auto;
@@ -60,19 +63,30 @@ body{
 
 }
 
-app-offer-card{
+app-offer-card {
   padding: 50px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
 @media screen and (max-width: 1200px) {
-  .offers-grid{
+  .offers-grid {
     display: flex;
     flex-direction: column;
   }
 
-  app-sidenav{
+  app-sidenav {
     display: none;
   }
 
+  .wrapper {
+    height: auto;
+    width: 100%;
+  }
 }
