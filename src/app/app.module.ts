@@ -21,7 +21,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { WcHeaderComponent } from './components/shared/wc-header/wc-header.component';
 import { ChartCardComponent } from './components/shared/chart-card/chart-card.component';
 import { ChartPieComponent } from './components/shared/chart-pie/chart-pie.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { RegPageComponent } from './components/reg-page/reg-page.component';
 import { OffersPageComponent } from './components/offers-page/offers-page.component';
@@ -33,6 +33,7 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import {AuthService} from "./shared/services/auth.service";
 
 
 
@@ -65,6 +66,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     MatInputModule,
     MatProgressSpinnerModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
@@ -72,7 +74,8 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
   ],
   providers: [
-    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+    AuthService,
   ],
   bootstrap: [AppComponent]
 })
