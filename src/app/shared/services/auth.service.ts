@@ -3,6 +3,7 @@ import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {
   AngularFirestore,
 } from '@angular/fire/compat/firestore';
+import {TimeoutError} from "rxjs";
 
 
 @Injectable({
@@ -33,9 +34,19 @@ export class AuthService {
         window.location.href = '/';
       }, 1000)
     } catch (reason) {
-// todo: add errors
+      // todo: add errors
     }
+  }
 
+  async signUp(email: string, password: string) {
+    try {
+      await this.fireAuth.createUserWithEmailAndPassword(email, password);
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 1000);
+    } catch (reason) {
+
+    }
   }
 
   signOut() {
