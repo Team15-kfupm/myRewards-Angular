@@ -1,28 +1,13 @@
-body {
-
-  //background-color:#F5F5F5;
-  font-family: 'Poppins', sans-serif;
-  height: 100%;
-
-
-}
-
 .container {
-
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
+  justify-content: center;
+  align-items: center;
 
+  padding: 90px 10px 0 0;
 
-  padding: 50px 5% 30px 5%;
 }
 
-.side {
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-}
 
 .head {
   width: 100%;
@@ -33,16 +18,15 @@ body {
 .charts {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   margin-top: 50px;
-
   width: 100%;
 }
 
 .gen-charts {
   display: flex;
-  align-items: start;
+  align-items: center;
   width: 100%;
 }
 
@@ -55,7 +39,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
+
 
   margin-top: 50px;
 }
@@ -132,7 +116,7 @@ body {
 }
 
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 820px) {
 
 
   .container {
@@ -149,8 +133,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 0;
-    height: 30vh;
-    width: calc(100vw - 480px);
+
   }
 
   .gen-charts {
