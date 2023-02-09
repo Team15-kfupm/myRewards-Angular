@@ -14,7 +14,7 @@ export class OfferFormComponent implements OnInit {
 
   id = '';
   title = ''
-  image = ''
+  image: any = '';
   description = ''
   startDate = ''
   validityPeriod = 0
@@ -51,7 +51,6 @@ export class OfferFormComponent implements OnInit {
   resetAll() {
     this.id = '';
     this.title = '';
-    this.image = '';
     this.description = '';
     this.startDate = '';
     this.validityPeriod = 0;
@@ -66,12 +65,11 @@ export class OfferFormComponent implements OnInit {
     this.offerObj.id = this.id;
     this.offerObj.title = this.title;
     this.offerObj.description = this.description;
-    this.offerObj.image = this.title + " Image";
     this.offerObj.startDate = this.startDate;
     this.offerObj.validityPeriod = this.validityPeriod;
 
 
-    this.offersService.addOffer(this.offerObj, "Test");
+    this.offersService.addOffer(this.offerObj, this.image).then(r => console.log(r));
     this.resetAll();
     this.dialogRef.close()
   }
@@ -86,17 +84,24 @@ export class OfferFormComponent implements OnInit {
 
 
   onSave() {
-
     this.offersService.updateOffer(this.id, {
       title: this.title,
       description: this.description,
       image: this.image,
       startDate: this.startDate,
       validityPeriod: this.validityPeriod
-    })
+    }).then(r => console.log(r))
     this.dialogRef.close()
 
   }
 
 
+  onChange(event: Event) {
+    const element = event.currentTarget as HTMLInputElement;
+    let fileList: FileList | null = element.files;
+    if (fileList) {
+      console.log("FileUpload -> files", fileList);
+      this.image = fileList[0];
+    }
+  }
 }

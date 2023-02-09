@@ -1,11 +1,11 @@
-form{
+form {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
 }
 
-input{
+input {
   background-color: #FAFAFA;
   border: none;
   border-radius: 8px;
@@ -18,18 +18,18 @@ input{
 
 }
 
-input{
+input {
   margin-top: 20px;
 }
 
-.actions{
+.actions {
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-evenly;
 }
 
-.submit-btn{
+.submit-btn {
   background-color: #00CEC9;
   color: white;
   border: none;
@@ -40,23 +40,18 @@ input{
   width: 245px;
 
 
-  border-radius:5px ;
+  border-radius: 5px;
 
   margin-top: 20px;
 }
 
-.close-btn{
+.close-btn {
   background-color: #D63031;
   color: white;
   border: none;
   outline: none;
-
   padding: 6px 12px;
-
   width: 245px;
-
-
-  border-radius:5px ;
-
+  border-radius: 5px;
   margin-top: 20px;
 }

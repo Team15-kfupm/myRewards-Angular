@@ -1,6 +1,6 @@
 <div class="container">
 
-  <img src="{{offer.image}}" alt="coffee">
+  <img src="{{offer.image}}">
 
   <div class="row">
 
@@ -10,8 +10,8 @@
     </div>
 
     <div class="action">
-      <button class="delete" (click)="deleteOffer(offer.id)">Delete</button>
-      <button class="edit" (click)="onEdit(offer)">Edit</button>
+      <button (click)="deleteOffer(offer.id)" class="delete">Delete</button>
+      <button (click)="onEdit(offer)" class="edit">Edit</button>
     </div>
 
   </div>

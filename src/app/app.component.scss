@@ -4,12 +4,13 @@
 
 body {
   background-color: #F5F5F5;
+
 }
 
 .side {
   display: flex;
   flex-direction: row;
-  height: auto;
+  height: 100%;
 }
 
 router-outlet {

@@ -7,6 +7,8 @@
   <div class="textField"><input [(ngModel)]="validityPeriod" name="validityPeriod" placeholder="validity period"
                                 type="text"></div>
 
+
+  <input (change)="onChange($event)" type="file">
   <div class="actions">
     <button (click)="onSubmit()" class="submit-btn" type="submit">Submit</button>
     <button (click)="close()" class="close-btn">Close</button>
