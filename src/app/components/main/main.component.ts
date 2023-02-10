@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 
 @Component({
@@ -9,24 +9,26 @@ import { Component, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
 
   charts = [
-    {title:'Total Customers',num:'1,500', type:'', unit:'customer', status:'high' },
-    {title:'Redeemed Offers',num:'15', type:'', unit:'Offer', status:'high' },
-    {title:'Total Shops',num:'3', type:'', unit:'shop', status:'low' },
+    {title: 'Total Customers', num: '1,500', type: 'plain', unit: 'customer', status: 'high'},
+    {title: 'Redeemed Offers', num: '15', type: 'plain', unit: 'Offer', status: 'high'},
+    {title: 'Total Shops', num: '3', type: 'plain', unit: 'shop', status: 'low'},
   ]
 
 
   pie_charts = [
-    {title:'Sales', type:'pie', percentage:60},
-    {title:'Customers', type:'pie', percentage:50},
+    {title: 'Sales', type: 'pie', percentage: 60},
+    {title: 'Customers', type: 'pie', percentage: 50},
   ]
 
 
   pie_charts2 = [
-    {title:'Weekly growth', type:'pie', percentage:75},
-    {title:'Redeemed Offers in this week', type:'pie', percentage:50},
+    {title: 'Weekly growth', type: 'line', percentage: 75},
+    {title: 'Redeemed Offers in this week', type: 'line', percentage: 50},
   ]
 
-  constructor() { }
+  constructor() {
+  }
+
   ngOnInit(): void {
   }
 
