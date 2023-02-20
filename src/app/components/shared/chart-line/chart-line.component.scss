@@ -1,0 +1,72 @@
+
+.main {
+  position: relative;
+}
+
+.header {
+  position: relative;
+  line-height: 3em
+}
+
+.header, .footer span {
+  color: green;
+  font-weight: bold;
+}
+
+.content .loader {
+  color: #ebebeb;
+  font-size: 15px;
+  padding: 8px 12px;
+  margin-top: 10px;
+  font-weight: bold;
+  border-radius: 10px;
+  animation: play 2s;
+}
+
+@keyframes play {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  100% {
+    transition: 2s ease-in;
+    width: calc(100 / 10);
+    opacity: 1;
+  }
+}
+
+.content .first {
+  height: 30px;
+  width: 90%;
+  background-color: darkcyan;
+}
+
+.content .second {
+  height: 30px;
+  width: 40%;
+  background-color: orange;
+}
+
+.content .third {
+  height: 30px;
+  width: 60%;
+  background-color: brown;
+}
+
+.loader span {
+  color: #ebebeb;
+  display: inline;
+  float: right;
+  font-weight: bold
+}
+
+.footer {
+  padding: 20px 0;
+}
+
+.footer span {
+  letter-spacing: .19em;
+}

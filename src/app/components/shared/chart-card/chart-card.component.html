@@ -2,17 +2,19 @@
 
   <div class="txtHead">
     <span>{{title}}</span>
-    <img *ngIf="type!='pie'" src="assets/chart/{{unit}}.svg">
+    <img *ngIf="type=='plain'" src="assets/chart/{{unit}}.svg">
   </div>
 
-  <div *ngIf="type!='pie'" class="txtStat"><span>{{num}} {{unit}}s</span></div>
+  <div *ngIf="type==='plain'" class="txtStat"><span>{{num}} {{unit}}s</span></div>
 
 
   <app-chart-pie *ngIf="type=='pie'" [color]="'#248BEB'" [percentage]="percentage"></app-chart-pie>
 
-  <div class="weekly" *ngIf="type!='pie'">
+  <app-chart-line *ngIf="type=='line'"></app-chart-line>
+
+  <div *ngIf="type=='plain'" class="weekly">
     <img alt="icon" src="assets/chart/{{status}}.svg">
-    <span [ngClass]="{'danger':status !='high'}" >17% {{status}}er than last week</span>
+    <span [ngClass]="{'danger':status !='high'}">17% {{status}}er than last week</span>
   </div>
 
 </div>

@@ -1,29 +1,34 @@
-
-  <form *ngIf="!edit">
+<form *ngIf="!edit">
   <h2>Create New Offer</h2>
-    <div class="textField"><input type="text" placeholder="Title" name="title" [(ngModel)]="title" ></div>
-    <div class="textField"><input type="text" placeholder="Description" name="description" [(ngModel)]="description"></div>
-    <div class="textField"><input type="date" placeholder="Start Date" name="startDate" [(ngModel)]="startDate"></div>
-    <div class="textField"><input type="text" placeholder="validity period" name="validityPeriod" [(ngModel)]="validityPeriod"></div>
+  <div class="textField"><input [(ngModel)]="title" name="title" placeholder="Title" type="text"></div>
+  <div class="textField"><input [(ngModel)]="description" name="description" placeholder="Description" type="text">
+  </div>
+  <div class="textField"><input [(ngModel)]="startDate" name="startDate" placeholder="Start Date" type="date"></div>
+  <div class="textField"><input [(ngModel)]="validityPeriod" name="validityPeriod" placeholder="validity period"
+                                type="text"></div>
 
-    <div class="actions">
-      <button  class="submit-btn" type="submit" (click)="onSubmit()">Submit</button>
-      <button class="close-btn" (click)="close()">Close</button>
-    </div>
-  </form>
+
+  <input (change)="onChange($event)" type="file">
+  <div class="actions">
+    <button (click)="onSubmit()" class="submit-btn" type="submit">Submit</button>
+    <button (click)="close()" class="close-btn">Close</button>
+  </div>
+</form>
 
 <!--  for Edit-->
 
-  <form *ngIf="edit">
-    <h2 >Edit Offer</h2>
-    <div class="textField"><input type="text" placeholder="Title" name="title" [(ngModel)]="data.title" ></div>
-    <div class="textField"><input type="text" placeholder="Description" name="description" [(ngModel)]="data.description"></div>
-    <div class="textField"><input type="date" placeholder="Start Date" name="startDate" [(ngModel)]="data.startDate"></div>
-    <div class="textField"><input type="text" placeholder="validity period" name="validityPeriod" [(ngModel)]="data.validityPeriod"></div>
+<form *ngIf="edit">
+  <h2>Edit Offer</h2>
+  <div class="textField"><input [(ngModel)]="title" name="title" placeholder="Title" type="text"></div>
+  <div class="textField"><input [(ngModel)]="description" name="description" placeholder="Description" type="text">
+  </div>
+  <div class="textField"><input [(ngModel)]="startDate" name="startDate" placeholder="Start Date" type="date"></div>
+  <div class="textField"><input [(ngModel)]="validityPeriod" name="validityPeriod" placeholder="validity period"
+                                type="text"></div>
 
-    <div class="actions">
-      <button *ngIf="edit" class="submit-btn" type="submit" (click)="onSave()">Save</button>
-      <button class="close-btn" (click)="close()">Close</button>
-    </div>
-  </form>
+  <div class="actions">
+    <button (click)="onSave()" *ngIf="edit" class="submit-btn" type="submit">Save</button>
+    <button (click)="close()" class="close-btn">Close</button>
+  </div>
+</form>
 

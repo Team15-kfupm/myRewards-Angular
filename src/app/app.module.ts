@@ -33,6 +33,7 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { ChartLineComponent } from './components/shared/chart-line/chart-line.component';
 import {AuthService} from "./shared/services/auth.service";
 
 
@@ -51,6 +52,7 @@ import {AuthService} from "./shared/services/auth.service";
      OfferFormComponent,
      OfferCardComponent,
      TextfieldComponent,
+     ChartLineComponent,
 
 
 

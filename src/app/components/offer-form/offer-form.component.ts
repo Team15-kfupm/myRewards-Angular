@@ -1,10 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {OffersService} from "../../services/offers.service";
 import {Offer} from "../../models/offer";
-import firebase from "firebase/compat";
-import Timestamp = firebase.firestore.Timestamp;
 
 @Component({
   selector: 'app-offer-form',
@@ -13,46 +10,54 @@ import Timestamp = firebase.firestore.Timestamp;
 })
 export class OfferFormComponent implements OnInit {
 
-  edit=false;
+  edit = false;
 
-  id='';
-  title=''
-  image=''
-  description=''
-  startDate=''
-  validityPeriod=0
+  id = '';
+  title = ''
+  image: any = '';
+  description = ''
+  startDate = ''
+  validityPeriod = 0
 
-  offerObj:Offer ={
-    id:'',
-    title:'',
-    description:'',
-    image:'',
-    startDate:'',
-    validityPeriod:0
+  offerObj: Offer = {
+    id: '',
+    title: '',
+    description: '',
+    image: '',
+    startDate: '',
+    validityPeriod: 0
   }
-  constructor(private offersService:OffersService,
-             private dialogRef: MatDialogRef<OfferFormComponent>, @Inject(MAT_DIALOG_DATA) public data:any)
-  {}
+
+  constructor(private offersService: OffersService,
+              private dialogRef: MatDialogRef<OfferFormComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
   ngOnInit(): void {
 
     this.edit = this.data != null;
+    if (this.edit) {
+      this.id = this.data.id;
+      this.title = this.data.title;
+      this.image = this.data.image;
+      this.description = this.data.description;
+      this.startDate = this.data.startDate;
+      this.validityPeriod = this.data.validityPeriod;
+    }
 
 
   }
 
 
-  resetAll(){
-    this.id='';
-    this.title='';
-    this.image='';
-    this.description='';
-    this.startDate='';
-    this.validityPeriod=0;
+  resetAll() {
+    this.id = '';
+    this.title = '';
+    this.description = '';
+    this.startDate = '';
+    this.validityPeriod = 0;
   }
 
-  onSubmit(){
-    if (this.title == '' || this.description == '' || this.startDate == '' || this.validityPeriod == 0){
+  onSubmit() {
+    if (this.title == '' || this.description == '' || this.startDate == '' || this.validityPeriod == 0) {
       alert('Fill all the fields')
       return
     }
@@ -60,18 +65,17 @@ export class OfferFormComponent implements OnInit {
     this.offerObj.id = this.id;
     this.offerObj.title = this.title;
     this.offerObj.description = this.description;
-    this.offerObj.image = this.title+" Image";
     this.offerObj.startDate = this.startDate;
     this.offerObj.validityPeriod = this.validityPeriod;
 
 
-    this.offersService.addOffer(this.offerObj, "Test");
+    this.offersService.addOffer(this.offerObj, this.image).then(r => console.log(r));
     this.resetAll();
     this.dialogRef.close()
   }
 
 
-  close(){
+  close() {
     this.resetAll();
     this.edit = false;
     this.dialogRef.close()
@@ -79,23 +83,25 @@ export class OfferFormComponent implements OnInit {
   }
 
 
-  onSave(){
-
-    console.log("New title "+this.data.title)
-    this.offersService.updateOffer(this.data.id,{
-      title:this.data.title,
-      description: this.data.description,
-      image:this.data.image,
-      startDate: this.data.startDate,
-      validityPeriod: this.data.validityPeriod
-    })
+  onSave() {
+    this.offersService.updateOffer(this.id, {
+      title: this.title,
+      description: this.description,
+      image: this.image,
+      startDate: this.startDate,
+      validityPeriod: this.validityPeriod
+    }).then(r => console.log(r))
     this.dialogRef.close()
 
   }
 
 
-
-
-
-
+  onChange(event: Event) {
+    const element = event.currentTarget as HTMLInputElement;
+    let fileList: FileList | null = element.files;
+    if (fileList) {
+      console.log("FileUpload -> files", fileList);
+      this.image = fileList[0];
+    }
+  }
 }

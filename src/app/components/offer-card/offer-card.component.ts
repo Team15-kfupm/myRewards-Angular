@@ -11,31 +11,32 @@ import {OffersService} from "../../services/offers.service";
 })
 export class OfferCardComponent implements OnInit {
 
-  @Input() offer:Offer = {
-    id:'',
-    description:'',
-    startDate:'',
-    validityPeriod:0,
-    title:'',
-    image:'',
+  @Input() offer: Offer = {
+    id: '',
+    description: '',
+    startDate: '',
+    validityPeriod: 0,
+    title: '',
+    image: '',
   };
-  constructor(public dialog: MatDialog, private offersService:OffersService) { }
+
+  constructor(public dialog: MatDialog, private offersService: OffersService) {
+  }
 
   ngOnInit(): void {
   }
 
-  onEdit(offer:Offer){
+  onEdit(offer: Offer) {
     //Sending the obj to the dialog
-    this.dialog.open(OfferFormComponent,{
-      data:offer,
+    this.dialog.open(OfferFormComponent, {
+      data: offer,
     });
   }
 
-  deleteOffer(id:string):void{
+  deleteOffer(id: string): void {
     this.offersService.deleteOffer(id).then(r =>
-    console.log(r)).catch(err=>console.log('Error during delete '+err));
+      console.log('Deleted successfully')).catch(err => console.log('Error during delete ' + err));
   }
-
 
 
 }
