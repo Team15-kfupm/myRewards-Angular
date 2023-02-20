@@ -35,8 +35,5 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  signOut() {
-    this.authService.signOut();
-    window.location.href = '/';
-  }
+
 }
