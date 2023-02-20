@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
-export class MainComponent implements OnInit {
+export class DashboardComponent implements OnInit {
 
   charts = [
     {title: 'Total Customers', num: '1,500', type: 'plain', unit: 'customer', status: 'high'},
