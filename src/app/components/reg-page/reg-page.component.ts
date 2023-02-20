@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {FormBuilder} from "@angular/forms";
+import {AuthService} from "../../shared/services/auth.service";
 
 @Component({
   selector: 'app-reg-page',
@@ -7,17 +9,28 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./reg-page.component.scss']
 })
 export class RegPageComponent implements OnInit {
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+  ) {
+  }
 
-  constructor(private http:HttpClient) { }
+  loginForm = this.formBuilder.group({
+    email: '',
+    password: '',
+    password2: '',
+  });
 
   ngOnInit(): void {
   }
 
-  sendRequest(user:[email:string, username:string, pass1:string, pass2:string]){
-    console.log(user)
-    this.http.post('https://myrewards-e3b0c-default-rtdb.firebaseio.com/Users.json',user).subscribe((res)=>{
-      console.log(res);
-    })
+  onSubmit(): void {
+    const email = this.loginForm.value.email!;
+    const password = this.loginForm.value.password!;
+    this.authService.signUp(email, password)
+      .then(value => console.log('signed up'))
+      .catch(reason => console.warn('error'));
   }
+
 
 }

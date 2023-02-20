@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {FormBuilder} from '@angular/forms';
+import {AuthService} from "../../shared/services/auth.service";
 
 @Component({
   selector: 'app-login-page',
@@ -10,17 +11,25 @@ import {Router} from "@angular/router";
 export class LoginPageComponent implements OnInit {
 
 
-
-  constructor(private _router: Router) {
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+  ) {
   }
 
-
+  loginForm = this.formBuilder.group({
+    email: '',
+    password: ''
+  });
 
   ngOnInit(): void {
   }
 
-goToHome(){
-    this._router.navigate(['home'])
-}
+  onSubmit(): void {
+    const email = this.loginForm.value.email!;
+    const password = this.loginForm.value.password!;
+    this.authService.signIn(email, password);
 
+  }
 }
