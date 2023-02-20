@@ -1,15 +1,23 @@
 {
   "hosting": {
-    "public": "public",
-    "source": "./myrewards-e3b0c",
+    "public": "dist/my-rewards",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
     ]
   },
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
+  },
+  "functions": {
+    "source": "functions"
   }
 }
