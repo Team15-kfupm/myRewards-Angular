@@ -1,0 +1,173 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 50px 10px 0 0;
+
+}
+
+
+.head {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.charts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  width: 100%;
+}
+
+.gen-charts {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.gen-charts app-chart-card {
+  margin-right: 26px;
+  margin-left: 26px;
+}
+
+.reg-charts {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+
+  margin-top: 50px;
+}
+
+.reg-charts app-chart-card {
+  width: 395px;
+  height: 100%;
+  margin-left: 26px;
+  margin-right: 26px;
+
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.redeem {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+
+  height: 50%;
+
+  margin-top: 50px;
+  padding: 20px;
+}
+
+.redeem span {
+
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 32px;
+
+  color: #000000;
+
+}
+
+.txtField {
+  display: flex;
+  flex-direction: column;
+}
+
+.txtField input {
+  width: 200px;
+  height: 45px;
+
+  padding: 5px;
+
+  background: #F8F8F8;
+  border-radius: 8px;
+  border: none;
+
+  outline: none;
+}
+
+app-sidenav {
+  float: left;
+  width: 300px;
+  height: 100%;
+}
+
+.side {
+  height: 100%;
+}
+
+
+@media screen and (max-width: 1200px) {
+
+
+  app-sidenav {
+    display: none;
+  }
+
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .redeem {
+    margin-left: 0
+  }
+
+}
+
+
+@media screen and (max-width: 820px) {
+
+
+  .container {
+
+    justify-content: center;
+    align-items: center;
+  }
+
+  app-sidenav {
+    display: none;
+  }
+
+  .wrapper {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+
+  }
+
+  .gen-charts {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+
+  .reg-charts {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  app-chart-card {
+    margin-top: 20px;
+    padding: 0;
+  }
+
+  .redeem {
+    margin-left: 0
+  }
+  app-sidenav {
+    display: none;
+  }
+}
+

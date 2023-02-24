@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {FormBuilder} from "@angular/forms";
-import {AuthService} from "../../shared/services/auth.service";
+import {AuthService} from "../../../shared/services/auth.service";
 
 @Component({
   selector: 'app-reg-page',

@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {OffersService} from "../../services/offers.service";
-import {Offer} from "../../models/offer";
+import {OffersService} from "../../../services/offers.service";
+import {Offer} from "../../../models/offer";
 
 @Component({
   selector: 'app-offer-form',
