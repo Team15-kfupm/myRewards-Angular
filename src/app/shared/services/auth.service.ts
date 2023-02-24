@@ -1,69 +1,61 @@
-import {Injectable, isDevMode, NgZone} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
-import {
-  AngularFirestore,
-} from '@angular/fire/compat/firestore';
-import {TimeoutError} from "rxjs";
+import {AngularFirestore,} from '@angular/fire/compat/firestore';
+import {User} from "../../models/user";
+import {map, Observable, of, switchMap} from "rxjs";
+import firebase from "firebase/compat";
+import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  user: any
+  user$: Observable<User | null>;
 
   constructor(
     private fireAuth: AngularFireAuth,
-    private firestore: AngularFirestore,
+    private fireStore: AngularFirestore
   ) {
-    this.fireAuth.authState.subscribe((user) => {
-      if (user) {
-        this.user = user;
-        localStorage.setItem('user', JSON.stringify(this.user)); // store the user in the localStorage
-      } else {
-        localStorage.setItem('user', 'null');
-        JSON.parse(localStorage.getItem('user')!);
-      }
-    })
+    this.user$ = this.fireAuth.authState.pipe(
+      switchMap((user) => {
+        if (user) {
+          return this.getUserById(user.uid);
+        } else {
+          return of(null);
+        }
+      })
+    );
   }
 
   async signIn(email: string, password: string) {
-    try {
-      await this.fireAuth.signInWithEmailAndPassword(email, password);
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 1000)
-    } catch (reason) {
-      // todo: add errors
+    const result = await this.fireAuth.signInWithEmailAndPassword(email, password);
+    if (!result.user)
+      throw new Error('User sign-in failed');
+  }
+
+  async signUp(email: string, password: string /*, customProperty:string*/) {
+    const result = await this.fireAuth.createUserWithEmailAndPassword(email, password);
+    if (result.user) {
+      const customUser: User = {
+        uid: result.user.uid,
+        email: result.user.email ?? '',
+      };
+      return this.fireStore.collection('users').doc(result.user.uid).set(customUser);
     }
+    throw new Error('User creation failed');
   }
 
-  async signUp(email: string, password: string) {
-    try {
-      await this.fireAuth.createUserWithEmailAndPassword(email, password);
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 1000);
-    } catch (reason) {
-
-    }
+  async signOut() {
+    return this.fireAuth.signOut();
   }
 
-  signOut() {
-    this.fireAuth.signOut().then(value => {
-      localStorage.removeItem('user');
-    })
+  private getUserById(uid: string): Observable<User> {
+    const docRef = this.fireStore.collection('users').doc(uid);
+    return docRef.get().pipe(
+      map((doc: DocumentSnapshot<unknown>) => {
+        return doc.data() as User;
+      })
+    );
   }
-
-  isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
-    console.log(user);
-    if (isDevMode()) {
-      return user !== null;
-    } else {
-      return user !== null && user.emailVerified !== false;
-    }
-  }
-
-
 }

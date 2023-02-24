@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from "../../shared/services/auth.service";
 
 
 @Component({
@@ -26,10 +27,15 @@ export class DashboardComponent implements OnInit {
     {title: 'Redeemed Offers in this week', type: 'line', percentage: 50},
   ]
 
-  constructor() {
+  constructor(
+    private auth: AuthService,
+  ) {
   }
 
   ngOnInit(): void {
+    this.auth.user$.subscribe((user) => {
+      console.log(user);
+    });
   }
 
 

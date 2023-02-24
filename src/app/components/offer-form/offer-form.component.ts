@@ -2,6 +2,9 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {OffersService} from "../../services/offers.service";
 import {Offer} from "../../models/offer";
+import {AuthService} from "../../shared/services/auth.service";
+import {Observable} from "rxjs";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-offer-form',
@@ -27,9 +30,15 @@ export class OfferFormComponent implements OnInit {
     startDate: '',
     validityPeriod: 0
   }
+  user$: Observable<User | null>;
 
-  constructor(private offersService: OffersService,
-              private dialogRef: MatDialogRef<OfferFormComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(
+    private offersService: OffersService,
+    private authService: AuthService,
+    private dialogRef: MatDialogRef<OfferFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.user$ = authService.user$;
+
   }
 
   ngOnInit(): void {
