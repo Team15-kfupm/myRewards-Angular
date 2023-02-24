@@ -2,31 +2,29 @@ import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {AngularFirestore,} from '@angular/fire/compat/firestore';
 import {User} from "../../models/user";
-import {map, Observable, of, switchMap} from "rxjs";
-import firebase from "firebase/compat";
-import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  user$: Observable<User | null>;
+  private user: User | null = null;
 
   constructor(
     private fireAuth: AngularFireAuth,
-    private fireStore: AngularFirestore
+    private fireStore: AngularFirestore,
   ) {
-    this.user$ = this.fireAuth.authState.pipe(
-      switchMap((user) => {
-        if (user) {
-          return this.getUserById(user.uid);
-        } else {
-          return of(null);
+    this.fireAuth.authState.subscribe(user => {
+      if (user) {
+        this.user =    {
+          uid: user.uid,
+          email: user.email ?? '',
         }
-      })
-    );
+      }
+    });
+
   }
+
 
   async signIn(email: string, password: string) {
     const result = await this.fireAuth.signInWithEmailAndPassword(email, password);
@@ -50,12 +48,7 @@ export class AuthService {
     return this.fireAuth.signOut();
   }
 
-  private getUserById(uid: string): Observable<User> {
-    const docRef = this.fireStore.collection('users').doc(uid);
-    return docRef.get().pipe(
-      map((doc: DocumentSnapshot<unknown>) => {
-        return doc.data() as User;
-      })
-    );
+  getCurrentUser(): User | null {
+    return this.user;
   }
 }

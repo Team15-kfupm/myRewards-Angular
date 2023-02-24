@@ -33,9 +33,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.auth.user$.subscribe((user) => {
-      console.log(user);
-    });
+
   }
 
 

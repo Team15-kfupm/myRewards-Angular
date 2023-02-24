@@ -2,14 +2,17 @@ import {Injectable} from '@angular/core';
 import {Offer} from "../models/offer";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
+import {AuthService} from "../shared/services/auth.service";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class OffersService {
-
-  constructor(private firestore: AngularFirestore, private storage: AngularFireStorage) {
+  constructor(
+    private firestore: AngularFirestore,
+    private storage: AngularFireStorage,
+    private authService: AuthService) {
   }
 
   /**
@@ -31,6 +34,7 @@ export class OffersService {
     if (image != null) {
 
       offer.id = this.firestore.createId();
+      offer.uid = this.authService.getCurrentUser()?.uid;
       let storageRef = this.storage.ref('offers/').child(offer.id);
       const snapshot = await storageRef.put(image);
       const url = await snapshot.ref.getDownloadURL();
