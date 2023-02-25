@@ -22,6 +22,7 @@ export class PromoCodeService {
       status = doc.get('code') == code;
       if (status) {
         //Todo Remove the code from the collection
+        this.firestore.collection('/temp-claim').doc(doc.id).delete()
       }
 
       //console.log(doc.id, " => ", doc.data(), doc.get('code'));
