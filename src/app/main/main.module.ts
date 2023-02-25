@@ -17,8 +17,10 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatInputModule} from "@angular/material/input";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import { MainComponent } from './main.component';
+import {MainComponent} from './main.component';
 import {MainRoutingModule} from "./main-routing.module";
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -48,6 +50,8 @@ import {MainRoutingModule} from "./main-routing.module";
     MatDialogModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatCardModule,
+    MatExpansionModule,
   ]
 })
 export class MainModule {

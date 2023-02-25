@@ -1,18 +1,59 @@
-<div class="container">
+<!--<div class="container">-->
 
-  <img src="{{offer.image}}">
+<!--  <img src="{{offer.image}}">-->
 
-  <div class="row">
+<!--  <div class="row">-->
 
-    <div class="info">
-      <h3>{{offer.title}}</h3>
-      <p>{{offer.description}}</p>
-    </div>
+<!--    <div class="info">-->
+<!--      <h3>{{offer.title}}</h3>-->
+<!--      <p>{{offer.description}}</p>-->
+<!--    </div>-->
 
-    <div class="action">
-      <button (click)="deleteOffer(offer.id)" class="delete">Delete</button>
-      <button (click)="onEdit(offer)" class="edit">Edit</button>
-    </div>
+<!--    <div class="action">-->
+<!--      <button (click)="deleteOffer(offer.id)" class="delete">Delete</button>-->
+<!--      <button (click)="onEdit(offer)" class="edit">Edit</button>-->
+<!--      <button (click)="generateCode()" class="code">Generate Code</button>-->
+<!--    </div>-->
 
-  </div>
-</div>
+<!--  </div>-->
+
+<!--  <div class="code">{{code}}</div>-->
+<!--</div>-->
+
+
+<mat-card class="card">
+
+  <img mat-card-image src="{{offer.image}}">
+  <mat-card-content>
+    <mat-card-title>{{offer.title}}</mat-card-title>
+    <mat-card-subtitle>Starts at {{offer.startDate}}</mat-card-subtitle>
+    <p>
+      {{offer.description}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions class="action">
+    <button (click)="deleteOffer(offer.id)" class="delete">Delete</button>
+    <button (click)="onEdit(offer)" class="edit">Edit</button>
+    <!--    <button (click)="generateCode()" class="code">Generate Code</button>-->
+  </mat-card-actions>
+
+  <mat-card-footer>
+    <mat-accordion>
+      <mat-expansion-panel expanded="true" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Redeem Code
+          </mat-panel-title>
+          <mat-panel-description>
+            Enter the code to redeem the offer
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="row">
+          <input [(ngModel)]="code" class="code" placeholder="Enter the Code" type="text">
+          <button (click)="validateCode(code)" class="code-btn">Redeem Offer</button>
+        </div>
+        <div>{{status}}</div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-footer>
+</mat-card>
