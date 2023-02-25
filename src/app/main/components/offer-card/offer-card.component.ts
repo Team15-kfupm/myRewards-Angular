@@ -3,6 +3,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {OfferFormComponent} from "../offer-form/offer-form.component";
 import {Offer} from "../../../models/offer";
 import {OffersService} from "../../../services/offers.service";
+import {PromoCodeService} from "../../../shared/services/promo-code.service";
 
 @Component({
   selector: 'app-offer-card',
@@ -20,7 +21,12 @@ export class OfferCardComponent implements OnInit {
     image: '',
   };
 
-  constructor(public dialog: MatDialog, private offersService: OffersService) {
+
+  status: string = "";
+
+  code: string = "";
+
+  constructor(public dialog: MatDialog, private offersService: OffersService, private codeService: PromoCodeService) {
   }
 
   ngOnInit(): void {
@@ -39,4 +45,12 @@ export class OfferCardComponent implements OnInit {
   }
 
 
+  async validateCode(code: string) {
+
+    if (await this.codeService.validateCode(code)) {
+      this.status = "The code is valid"
+    } else
+      this.status = "The code is not valid"
+
+  }
 }
