@@ -10,7 +10,7 @@ import {OfferFormComponent} from "./components/offer-form/offer-form.component";
 import {OfferCardComponent} from "./components/offer-card/offer-card.component";
 import {TextfieldComponent} from "../shared/components/textfield/textfield.component";
 import {ChartLineComponent} from "../shared/components/chart-line/chart-line.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
@@ -21,6 +21,8 @@ import {MainComponent} from './main.component';
 import {MainRoutingModule} from "./main-routing.module";
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
+import {MatMenuModule} from "@angular/material/menu";
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -36,23 +38,26 @@ import {MatCardModule} from '@angular/material/card';
     TextfieldComponent,
     ChartLineComponent,
     MainComponent,
+    ProfileComponent,
   ],
   exports: [
     SidenavComponent
   ],
-  imports: [
-    CommonModule,
-    MainRoutingModule,
-    FormsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDialogModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    MatCardModule,
-    MatExpansionModule,
-  ]
+    imports: [
+        CommonModule,
+        MainRoutingModule,
+        FormsModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDialogModule,
+        MatInputModule,
+        MatProgressSpinnerModule,
+        MatCardModule,
+        MatExpansionModule,
+        MatMenuModule,
+        ReactiveFormsModule,
+    ]
 })
 export class MainModule {
 }

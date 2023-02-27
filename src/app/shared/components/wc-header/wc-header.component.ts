@@ -1,4 +1,5 @@
-import { Component, OnInit,Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-wc-header',
@@ -9,9 +10,16 @@ export class WcHeaderComponent implements OnInit {
 
   @Input() name = 'Ahmed';
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) {
+  }
 
   ngOnInit(): void {
+  }
+
+  async openProfile() {
+    await this.router.navigate(['/profile'])
   }
 
 }
