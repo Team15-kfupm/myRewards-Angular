@@ -1,21 +1,25 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {DashboardComponent} from "./components/dashboard/dashboard.component";
-import {LoginPageComponent} from "./components/login-page/login-page.component";
-import {RegPageComponent} from "./components/reg-page/reg-page.component";
-import {OffersPageComponent} from "./components/offers-page/offers-page.component";
+import {LoginPageComponent} from "./authentication/components/login-page/login-page.component";
+import {RegPageComponent} from "./authentication/components/reg-page/reg-page.component";
 import {canActivate, redirectLoggedInTo, redirectUnauthorizedTo} from "@angular/fire/compat/auth-guard";
 
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['sign-in']);
-  const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['auth']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['']);
 
 const routes: Routes = [
-  {path: 'home', component: DashboardComponent, ...canActivate(redirectUnauthorizedToLogin)},
-  {path: 'sign-in', component: LoginPageComponent, ...canActivate(redirectLoggedInToHome)},
-  {path: 'sign-up', component: RegPageComponent},
-  {path: 'offers', component: OffersPageComponent, ...canActivate(redirectUnauthorizedToLogin)},
-  {path: '**', redirectTo: '/home', pathMatch: 'full'},
+  {
+    path: '',
+    loadChildren: () => import('./main/main.module').then(m => m.MainModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule),
+    ...canActivate(redirectLoggedInToHome)
+  },
+  {path: '**', redirectTo: '/', pathMatch: 'full'},
 ];
 
 @NgModule({

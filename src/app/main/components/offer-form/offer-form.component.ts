@@ -3,6 +3,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {OffersService} from "../../services/offers.service";
 import {Offer} from "../../models/offer";
 import {AuthService} from "../../shared/services/auth.service";
+import {OffersService} from "../../../services/offers.service";
+import {Offer} from "../../../models/offer";
 
 @Component({
   selector: 'app-offer-form',
@@ -38,8 +40,6 @@ export class OfferFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('test')
-    console.log(this.authService.getCurrentUser())
 
     this.edit = this.data != null;
     if (this.edit) {
