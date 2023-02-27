@@ -21,6 +21,7 @@ import {MainComponent} from './main.component';
 import {MainRoutingModule} from "./main-routing.module";
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
+import { RedeemPageComponent } from './components/redeem-page/redeem-page.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import {MatCardModule} from '@angular/material/card';
     TextfieldComponent,
     ChartLineComponent,
     MainComponent,
+    RedeemPageComponent,
   ],
   exports: [
     SidenavComponent

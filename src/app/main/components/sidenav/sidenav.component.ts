@@ -30,6 +30,11 @@ export class SidenavComponent implements OnInit {
 
     return this._router.url == "/offers";
   }
+
+  iAmInRedeem():boolean{
+
+    return this._router.url == "/redeem";
+  }
   signOut() {
     this.authService.signOut();
     window.location.href = '/';

@@ -1,0 +1,32 @@
+/* my-component.component.css */
+.input-container {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border: 2px solid #d3d3d3;
+  border-radius: 2rem;
+  background-color: #fff;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.input-container:focus-within,
+.input-container:hover {
+  border-color: #8d8d8d;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.input-container > input[type="text"] {
+  flex: 1;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #333;
+  background-color: transparent;
+  outline: none;
+}
+
+.input-container > input[type="text"]::placeholder {
+  color: #8d8d8d;
+  font-weight: 400;
+}
