@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "../../../shared/services/auth.service";
 
@@ -11,30 +11,37 @@ export class SidenavComponent implements OnInit {
 
   constructor(
     private _router: Router,
-    private authService: AuthService) { }
+    private authService: AuthService) {
+  }
 
   ngOnInit(): void {
 
   }
 
-  goTo(route: string){
+  goTo(route: string) {
     this._router.navigate([route]).then(r => console.log(r))
   }
 
-  iAmInHome():boolean{
+  iAmInHome(): boolean {
 
     return this._router.url == "/home";
   }
 
-  iAmInOffers():boolean{
+  iAmInOffers(): boolean {
 
     return this._router.url == "/offers";
   }
 
-  iAmInRedeem():boolean{
+  iAmInRedeem(): boolean {
 
     return this._router.url == "/redeem";
   }
+
+  iAmInLog(): boolean {
+
+    return this._router.url == "/log";
+  }
+
   signOut() {
     this.authService.signOut();
     window.location.href = '/';

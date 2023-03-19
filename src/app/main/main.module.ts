@@ -21,7 +21,9 @@ import {MainComponent} from './main.component';
 import {MainRoutingModule} from "./main-routing.module";
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
-import { RedeemPageComponent } from './components/redeem-page/redeem-page.component';
+import {RedeemPageComponent} from './components/redeem-page/redeem-page.component';
+import {LogTableComponent} from './components/log-table/log-table.component';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { RedeemPageComponent } from './components/redeem-page/redeem-page.compon
     ChartLineComponent,
     MainComponent,
     RedeemPageComponent,
+    LogTableComponent,
+
   ],
   exports: [
     SidenavComponent
@@ -54,6 +58,7 @@ import { RedeemPageComponent } from './components/redeem-page/redeem-page.compon
     MatProgressSpinnerModule,
     MatCardModule,
     MatExpansionModule,
+    MatTableModule,
   ]
 })
 export class MainModule {
