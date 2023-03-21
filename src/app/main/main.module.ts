@@ -21,6 +21,9 @@ import {MainComponent} from './main.component';
 import {MainRoutingModule} from "./main-routing.module";
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
+import {RedeemPageComponent} from './components/redeem-page/redeem-page.component';
+import {LogTableComponent} from './components/log-table/log-table.component';
+import {MatTableModule} from '@angular/material/table';
 import {MatMenuModule} from "@angular/material/menu";
 import { ProfileComponent } from './components/profile/profile.component';
 
@@ -38,26 +41,30 @@ import { ProfileComponent } from './components/profile/profile.component';
     TextfieldComponent,
     ChartLineComponent,
     MainComponent,
+    RedeemPageComponent,
+    LogTableComponent,
+
     ProfileComponent,
   ],
   exports: [
     SidenavComponent
   ],
-    imports: [
-        CommonModule,
-        MainRoutingModule,
-        FormsModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatIconModule,
-        MatDialogModule,
-        MatInputModule,
-        MatProgressSpinnerModule,
-        MatCardModule,
-        MatExpansionModule,
-        MatMenuModule,
-        ReactiveFormsModule,
-    ]
+  imports: [
+    CommonModule,
+    MainRoutingModule,
+    FormsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatTableModule,
+    MatMenuModule,
+    ReactiveFormsModule,
+  ]
 })
 export class MainModule {
 }
