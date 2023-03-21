@@ -34,7 +34,7 @@ export class OffersService {
     if (image != null) {
 
       offer.id = this.firestore.createId();
-      offer.uid = this.authService.getCurrentUser()?.uid;
+      offer.uid = await this.authService.getCurrentUser().then(user => user!.uid);
       let storageRef = this.storage.ref('offers/').child(offer.id);
       const snapshot = await storageRef.put(image);
       const url = await snapshot.ref.getDownloadURL();

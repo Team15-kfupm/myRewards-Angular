@@ -6,6 +6,7 @@ import {OffersPageComponent} from "./components/offers-page/offers-page.componen
 import {RedeemPageComponent} from "./components/redeem-page/redeem-page.component";
 import {LogTableComponent} from "./components/log-table/log-table.component";
 import {ProfileComponent} from "./components/profile/profile.component";
+import {ProfileResolver} from "./components/profile/profile.resolver";
 
 
 const routes: Routes = [{
@@ -13,8 +14,10 @@ const routes: Routes = [{
   children: [
     {path: '', component: DashboardComponent},
     {path: 'offers', component: OffersPageComponent},
-    {path: 'profile', component: ProfileComponent},
-
+    {
+      path: 'profile', component: ProfileComponent,
+      resolve: {profile: ProfileResolver}
+    },
     {path: 'redeem', component: RedeemPageComponent},
     {path: 'log', component: LogTableComponent},
   ]

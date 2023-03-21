@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder} from "@angular/forms";
+import {ProfileService} from "../../../services/profile.service";
+import {Profile} from "../../../models/profile";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-forms-page',
@@ -7,30 +10,34 @@ import {FormBuilder} from "@angular/forms";
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  userDetailsForm = this.formBuilder.group({
-    fullName: '',
-  })
+  private profile$!: Profile;
 
   accountDetailsForm = this.formBuilder.group({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    organizationName: '',
   });
+
   constructor(
     private formBuilder: FormBuilder,
+    private profileService: ProfileService,
+    private activatedRoute: ActivatedRoute
   ) {
   }
 
 
   ngOnInit(): void {
+    console.log("ProfileComponent.ngOnInit()");
+    this.profile$ = this.activatedRoute.snapshot.data['profile'];
+    this.accountDetailsForm.setValue({
+      organizationName: this.profile$.organizationName!
+    });
   }
 
-  onSubmitAccountDetails(value: any) {
-    console.log(value);
+  async onSubmitAccountDetails(value: any) {
+    Object.assign(this.profile$, value);
+    await this.profileService.updateProfile(value)
   }
 
-   onSubmitUserDetails(value: any){
+  onSubmitUserDetails(value: any) {
     console.log(value);
   }
 }

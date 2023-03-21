@@ -16,7 +16,7 @@ export class AuthService {
   ) {
     this.fireAuth.authState.subscribe(user => {
       if (user) {
-        this.user =    {
+        this.user = {
           uid: user.uid,
           email: user.email ?? '',
         }
@@ -48,7 +48,18 @@ export class AuthService {
     return this.fireAuth.signOut();
   }
 
-  getCurrentUser(): User | null {
-    return this.user;
+  async getCurrentUser() {
+    // return this.user;
+    return await this.fireAuth.currentUser
+      .then(user => {
+        if (user) {
+          return {
+            uid: user.uid,
+            email: user.email ?? '',
+          } as User;
+        } else {
+          return null;
+        }
+      });
   }
 }
