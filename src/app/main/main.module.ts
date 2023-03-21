@@ -10,7 +10,7 @@ import {OfferFormComponent} from "./components/offer-form/offer-form.component";
 import {OfferCardComponent} from "./components/offer-card/offer-card.component";
 import {TextfieldComponent} from "../shared/components/textfield/textfield.component";
 import {ChartLineComponent} from "../shared/components/chart-line/chart-line.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
@@ -24,6 +24,8 @@ import {MatCardModule} from '@angular/material/card';
 import {RedeemPageComponent} from './components/redeem-page/redeem-page.component';
 import {LogTableComponent} from './components/log-table/log-table.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatMenuModule} from "@angular/material/menu";
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -42,6 +44,7 @@ import {MatTableModule} from '@angular/material/table';
     RedeemPageComponent,
     LogTableComponent,
 
+    ProfileComponent,
   ],
   exports: [
     SidenavComponent
@@ -59,6 +62,8 @@ import {MatTableModule} from '@angular/material/table';
     MatCardModule,
     MatExpansionModule,
     MatTableModule,
+    MatMenuModule,
+    ReactiveFormsModule,
   ]
 })
 export class MainModule {

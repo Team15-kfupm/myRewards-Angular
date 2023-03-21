@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {FormBuilder} from "@angular/forms";
 import {AuthService} from "../../../shared/services/auth.service";
 
@@ -28,7 +27,7 @@ export class RegPageComponent implements OnInit {
     const email = this.loginForm.value.email!;
     const password = this.loginForm.value.password!;
     this.authService.signUp(email, password)
-      .then(value => console.log('signed up'))
+      .then(value => window.location.href = '/')
       .catch(reason => console.warn('error'));
   }
 

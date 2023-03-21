@@ -1,69 +1,65 @@
-import {Injectable, isDevMode, NgZone} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
-import {
-  AngularFirestore,
-} from '@angular/fire/compat/firestore';
-import {TimeoutError} from "rxjs";
+import {AngularFirestore,} from '@angular/fire/compat/firestore';
+import {User} from "../../models/user";
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  user: any
+  private user: User | null = null;
 
   constructor(
     private fireAuth: AngularFireAuth,
-    private firestore: AngularFirestore,
+    private fireStore: AngularFirestore,
   ) {
-    this.fireAuth.authState.subscribe((user) => {
+    this.fireAuth.authState.subscribe(user => {
       if (user) {
-        this.user = user;
-        localStorage.setItem('user', JSON.stringify(this.user)); // store the user in the localStorage
-      } else {
-        localStorage.setItem('user', 'null');
-        JSON.parse(localStorage.getItem('user')!);
+        this.user = {
+          uid: user.uid,
+          email: user.email ?? '',
+        }
       }
-    })
+    });
+
   }
+
 
   async signIn(email: string, password: string) {
-    try {
-      await this.fireAuth.signInWithEmailAndPassword(email, password);
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 1000)
-    } catch (reason) {
-      // todo: add errors
+    const result = await this.fireAuth.signInWithEmailAndPassword(email, password);
+    if (!result.user)
+      throw new Error('User sign-in failed');
+  }
+
+  async signUp(email: string, password: string /*, customProperty:string*/) {
+    const result = await this.fireAuth.createUserWithEmailAndPassword(email, password);
+    if (result.user) {
+      const customUser: User = {
+        uid: result.user.uid,
+        email: result.user.email ?? '',
+      };
+      return this.fireStore.collection('users').doc(result.user.uid).set(customUser);
     }
+    throw new Error('User creation failed');
   }
 
-  async signUp(email: string, password: string) {
-    try {
-      await this.fireAuth.createUserWithEmailAndPassword(email, password);
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 1000);
-    } catch (reason) {
-
-    }
+  async signOut() {
+    return this.fireAuth.signOut();
   }
 
-  signOut() {
-    this.fireAuth.signOut().then(value => {
-      localStorage.removeItem('user');
-    })
+  async getCurrentUser() {
+    // return this.user;
+    return await this.fireAuth.currentUser
+      .then(user => {
+        if (user) {
+          return {
+            uid: user.uid,
+            email: user.email ?? '',
+          } as User;
+        } else {
+          return null;
+        }
+      });
   }
-
-  isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
-    console.log(user);
-    if (isDevMode()) {
-      return user !== null;
-    } else {
-      return user !== null && user.emailVerified !== false;
-    }
-  }
-
-
 }
