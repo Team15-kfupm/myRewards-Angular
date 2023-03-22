@@ -5,6 +5,8 @@ import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {OffersPageComponent} from "./components/offers-page/offers-page.component";
 import {RedeemPageComponent} from "./components/redeem-page/redeem-page.component";
 import {LogTableComponent} from "./components/log-table/log-table.component";
+import {NewDashboardComponent} from "./components/new-dashboard/new-dashboard.component";
+import {TailwindChartComponentPie} from "./components/tailwind-chart-pie/tailwind-chart.component-pie";
 
 
 const routes: Routes = [{
@@ -14,6 +16,8 @@ const routes: Routes = [{
     {path: 'offers', component: OffersPageComponent},
     {path: 'redeem', component: RedeemPageComponent},
     {path: 'log', component: LogTableComponent},
+    {path: 'new', component: NewDashboardComponent},
+    {path: 'pie', component: TailwindChartComponentPie},
   ]
 }];
 

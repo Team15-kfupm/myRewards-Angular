@@ -22,6 +22,7 @@ import {AuthenticationModule} from "./authentication/authentication.module";
     MainModule,
     AuthenticationModule
   ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

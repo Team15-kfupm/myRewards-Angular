@@ -24,6 +24,13 @@ import {MatCardModule} from '@angular/material/card';
 import {RedeemPageComponent} from './components/redeem-page/redeem-page.component';
 import {LogTableComponent} from './components/log-table/log-table.component';
 import {MatTableModule} from '@angular/material/table';
+import {NewDashboardComponent} from './components/new-dashboard/new-dashboard.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatMenuModule} from '@angular/material/menu';
+import {LayoutModule} from '@angular/cdk/layout';
+import {TailwindChartComponentPie} from './components/tailwind-chart-pie/tailwind-chart.component-pie';
+import {LineChartTailwindComponent} from './components/line-chart-tailwind/line-chart-tailwind.component';
+import { DoughnutChartComponent } from './components/doughnut-chart/doughnut-chart.component';
 
 
 @NgModule({
@@ -41,6 +48,10 @@ import {MatTableModule} from '@angular/material/table';
     MainComponent,
     RedeemPageComponent,
     LogTableComponent,
+    NewDashboardComponent,
+    TailwindChartComponentPie,
+    LineChartTailwindComponent,
+    DoughnutChartComponent,
 
   ],
   exports: [
@@ -59,6 +70,10 @@ import {MatTableModule} from '@angular/material/table';
     MatCardModule,
     MatExpansionModule,
     MatTableModule,
+    MatGridListModule,
+    MatMenuModule,
+    LayoutModule,
+
   ]
 })
 export class MainModule {
