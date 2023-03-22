@@ -31,6 +31,7 @@ import {LayoutModule} from '@angular/cdk/layout';
 import {TailwindChartComponentPie} from './components/tailwind-chart-pie/tailwind-chart.component-pie';
 import {LineChartTailwindComponent} from './components/line-chart-tailwind/line-chart-tailwind.component';
 import { DoughnutChartComponent } from './components/doughnut-chart/doughnut-chart.component';
+import { StatCardComponent } from './components/stat-card/stat-card.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { DoughnutChartComponent } from './components/doughnut-chart/doughnut-cha
     TailwindChartComponentPie,
     LineChartTailwindComponent,
     DoughnutChartComponent,
+    StatCardComponent,
 
   ],
   exports: [

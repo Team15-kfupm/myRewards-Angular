@@ -10,7 +10,7 @@ export class DoughnutChartComponent implements OnInit {
 
 
   dataDoughnut = {
-    labels: ["JavaScript", "Python", "Ruby"],
+    labels: ["Offer 1", "Offer 2", "Offer 3"],
     datasets: [
       {
         label: "My First Dataset",

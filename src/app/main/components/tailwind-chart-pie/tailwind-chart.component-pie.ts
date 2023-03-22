@@ -12,11 +12,11 @@ export class TailwindChartComponentPie implements OnInit {
 
   data = {
     maintainAspectRatio: false,
-    labels: ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-'],
+    labels: ['Offer 1', 'Offer 2', 'Offer 3'],
     datasets: [
       {
         label: 'Dataset 1',
-        data: [20, 20, 20, 20, 20, 50, 90, 80],
+        data: [50, 20, 96],
         backgroundColor: [
           "rgb(133, 105, 241)",
           "rgb(164, 101, 241)",
