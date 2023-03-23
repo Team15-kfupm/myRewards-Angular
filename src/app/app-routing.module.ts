@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'redirect',
     children: [],
-    canActivate: [RedirectAuthGuard],
+    data: {
+      authGuardPipe: redirectUnauthorizedToLogin
+
+    },
+    canActivate: [AngularFireAuthGuard, RedirectAuthGuard],
   },
   {
     path: '',
