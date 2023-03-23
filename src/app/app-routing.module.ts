@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {ActivatedRouteSnapshot, RouterModule, Routes} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {
   AngularFireAuthGuard,
   canActivate,
@@ -7,6 +7,7 @@ import {
   redirectUnauthorizedTo
 } from "@angular/fire/compat/auth-guard";
 import {RedirectAuthGuard} from "./core/guards/redirect-auth-guard.service";
+import {RoleBasedGuard} from "./core/guards/role-based.guard";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['auth']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['redirect']);
@@ -30,7 +31,7 @@ const routes: Routes = [
       roles: ['bo'],
       authGuardPipe: redirectUnauthorizedToLogin
     },
-    canActivate: [AngularFireAuthGuard],
+    canActivate: [AngularFireAuthGuard, RoleBasedGuard],
   },
   {
     path: 'cashier',
@@ -39,7 +40,7 @@ const routes: Routes = [
       roles: ['cashier'],
       authGuardPipe: redirectUnauthorizedToLogin
     },
-    canActivate: [AngularFireAuthGuard],
+    canActivate: [AngularFireAuthGuard, RoleBasedGuard],
   },
 
   {path: '**', redirectTo: '/', pathMatch: 'full'},
