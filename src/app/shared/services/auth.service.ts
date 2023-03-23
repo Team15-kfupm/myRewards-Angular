@@ -30,7 +30,7 @@ export class AuthService {
       const customUser: User = {
         uid: result.user.uid,
         email: result.user.email ?? '',
-        roles: ['bo']
+        role: 'bo',
       };
       return this.fireStore.collection('users').doc(result.user.uid).set(customUser);
     }
