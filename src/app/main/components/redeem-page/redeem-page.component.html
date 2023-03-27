@@ -1,8 +1,8 @@
-  <div class="input-container">
-    <i class="material-icons text-gray-400 mr-2">search</i>
-    <input type="text" placeholder="Search" [(ngModel)]="promoCode"/>
-  </div>
-  <button type="submit" (click)="applyPromoCode(promoCode)">Apply</button>
+<div class="input-container">
+  <i class="material-icons text-gray-400 mr-2">Enter Code</i>
+  <input [(ngModel)]="promoCode" placeholder="Search" type="text"/>
+</div>
+<button (click)="applyPromoCode(promoCode)" type="submit">Apply</button>
 
 
-  <div>{{planName}}</div>
+<div>{{planName}}</div>

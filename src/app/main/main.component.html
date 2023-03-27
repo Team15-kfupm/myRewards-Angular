@@ -1,13 +1,15 @@
-<app-sidenav></app-sidenav>
+<div class="flex flex-col lg:flex-row">
+  <!-- Side nav -->
+
+  <app-sidenav class=""></app-sidenav>
 
 
-<div class="container">
+  <!-- Page content -->
+  <div class="flex-1 pt-9">
+    <div class="head">
+      <app-wc-header [name]="'Ali'"></app-wc-header>
+    </div>
 
-  <div class="head">
-    <app-wc-header [name]="'Ali'"></app-wc-header>
+    <router-outlet></router-outlet>
   </div>
-
-  <router-outlet></router-outlet>
-
 </div>
-
