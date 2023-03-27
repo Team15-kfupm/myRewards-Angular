@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {AuthService} from "../../shared/services/auth.service";
+import {AuthService} from "../services/auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +34,7 @@ export class RedirectAuthGuard implements CanActivate {
       .then(user => {
         if (user === null) return '';
         return user.role;
-      });
+      }).catch(_ => '');
   }
 
   private async checkRole(roles: string[]): Promise<boolean> {

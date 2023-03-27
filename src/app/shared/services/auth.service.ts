@@ -3,6 +3,7 @@ import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {AngularFirestore,} from '@angular/fire/compat/firestore';
 import {User} from "../../models/user";
 import {first, lastValueFrom} from "rxjs";
+import {AngularFireFunctions} from "@angular/fire/compat/functions";
 
 
 @Injectable({
@@ -13,10 +14,16 @@ export class AuthService {
   constructor(
     private fireAuth: AngularFireAuth,
     private fireStore: AngularFirestore,
+    private fireFunctions: AngularFireFunctions,
   ) {
 
   }
 
+  async signInWithCustomToken(token: string) {
+    const result = await this.fireAuth.signInWithCustomToken(token);
+    if (!result.user)
+      throw new Error('User sign-in failed');
+  }
 
   async signIn(email: string, password: string) {
     const result = await this.fireAuth.signInWithEmailAndPassword(email, password);
@@ -24,17 +31,12 @@ export class AuthService {
       throw new Error('User sign-in failed');
   }
 
-  async signUp(email: string, password: string /*, customProperty:string*/) {
-    const result = await this.fireAuth.createUserWithEmailAndPassword(email, password);
-    if (result.user) {
-      const customUser: User = {
-        uid: result.user.uid,
-        email: result.user.email ?? '',
-        role: 'bo',
-      };
-      return this.fireStore.collection('users').doc(result.user.uid).set(customUser);
-    }
-    throw new Error('User creation failed');
+  async signUp(email: string, password: string) {
+    // const result = await this.fireAuth.createUserWithEmailAndPassword(email, password);
+    const result = await lastValueFrom(this.fireFunctions.httpsCallable('registerOwner')({email, password}));
+    if (!result.success)
+      throw new Error('Owner sign-up failed');
+    return true;
   }
 
   async signOut() {
@@ -56,7 +58,9 @@ export class AuthService {
     return await lastValueFrom(this.fireStore
       .collection('users').doc(user?.uid).get())
       .then(snapshot => {
-        return snapshot.data() as User;
+        const user = snapshot.data() as User;
+        user.uid = snapshot.id;
+        return user;
       })
   }
 

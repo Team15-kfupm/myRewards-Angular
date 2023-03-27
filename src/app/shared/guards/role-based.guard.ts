@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {AuthService} from "../../shared/services/auth.service";
+import {AuthService} from "../services/auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class RoleBasedGuard implements CanActivate {
         if (!value)
           this.router.navigate(['redirect']).then();
         return value
-      })
+      });
   }
 
 
@@ -35,6 +35,6 @@ export class RoleBasedGuard implements CanActivate {
       .then(user => {
         if (user === null) return '';
         return user.role;
-      });
+      })
   }
 }
