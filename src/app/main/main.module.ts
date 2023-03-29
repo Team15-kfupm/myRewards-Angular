@@ -22,7 +22,6 @@ import {MainRoutingModule} from "./main-routing.module";
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
 import {RedeemPageComponent} from './components/redeem-page/redeem-page.component';
-import {LogTableComponent} from './components/log-table/log-table.component';
 import {MatTableModule} from '@angular/material/table';
 import {NewDashboardComponent} from './components/new-dashboard/new-dashboard.component';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -30,8 +29,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import {LayoutModule} from '@angular/cdk/layout';
 import {TailwindChartComponentPie} from './components/tailwind-chart-pie/tailwind-chart.component-pie';
 import {LineChartTailwindComponent} from './components/line-chart-tailwind/line-chart-tailwind.component';
-import { DoughnutChartComponent } from './components/doughnut-chart/doughnut-chart.component';
-import { StatCardComponent } from './components/stat-card/stat-card.component';
+import {DoughnutChartComponent} from './components/doughnut-chart/doughnut-chart.component';
+import {StatCardComponent} from './components/stat-card/stat-card.component';
 
 
 @NgModule({
@@ -48,7 +47,6 @@ import { StatCardComponent } from './components/stat-card/stat-card.component';
     ChartLineComponent,
     MainComponent,
     RedeemPageComponent,
-    LogTableComponent,
     NewDashboardComponent,
     TailwindChartComponentPie,
     LineChartTailwindComponent,
