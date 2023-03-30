@@ -4,6 +4,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import {CashierComponent} from "./cashier.component";
 import {CashierRoutingModule} from "./cashier-routing.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 
@@ -16,6 +17,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     CommonModule,
     CashierRoutingModule,
     ReactiveFormsModule,
+    MatProgressSpinnerModule,
   ]
 })
 export class CashierModule { }

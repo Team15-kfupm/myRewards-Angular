@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder} from "@angular/forms";
+import {Component} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {CashierService} from "../services/cashier.service";
 
 @Component({
@@ -7,28 +7,68 @@ import {CashierService} from "../services/cashier.service";
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent {
+  emailForm: FormGroup;
+  otpForm: FormGroup;
+  showOTPForm = false;
+  checkingEmail = false;
+  private waitingTime = 3;
+  timer: number = 0;
+  endTime: Date = new Date();
+
   constructor(
-    private cashierService: CashierService,
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
+    private cashierService: CashierService
   ) {
+    this.emailForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]]
+    });
+
+    this.otpForm = this.fb.group({
+      otp: new FormControl({value: '', disabled: true}, Validators.required),
+    });
+
   }
 
-  loginForm = this.formBuilder.group({
-    password: ''
-  });
-
-  ngOnInit(): void {
+  onEmailSubmit() {
+    if (this.emailForm.valid) {
+      this.checkingEmail = true;
+      setTimeout(() => {
+        this.startCounter();
+        this.startOTPVerification();
+      }, 2000);
+    }
   }
 
-  async onSubmit(): Promise<void> {
-    const passphrase = this.loginForm.value.password!;
-    await this.cashierService.login(passphrase)
-      .then(value => {
-        console.log('success')
-        // this.router.navigate(['/redirect'])
-      })
-      .catch(reason => console.log(reason));
+  onOTPSubmit() {
+    if (this.otpForm.valid) {
+      // Perform actions after OTP form is submitted
+      console.log('OTP form submitted');
+    }
   }
+
+  private startOTPVerification() {
+    this.checkingEmail = false;
+    this.showOTPForm = true;
+    this.emailForm.disable();
+    this.otpForm.enable();
+  }
+
+  private startCounter() {
+    console.log('Starting counter')
+    this.endTime = new Date(new Date().getTime() + this.waitingTime * 60 * 1000);
+    this.timer = this.endTime.getTime() - new Date().getTime();
+    const intervalId = setInterval(() => {
+      const remainingTime = this.endTime.getTime() - new Date().getTime();
+      if (remainingTime <= 0) {
+        this.emailForm.enable();
+        this.timer = 0;
+        clearInterval(intervalId);
+      } else {
+        this.timer = remainingTime;
+      }
+    }, 1000);
+  }
+
 
 }
