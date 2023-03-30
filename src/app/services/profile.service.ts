@@ -21,7 +21,7 @@ export class ProfileService {
       .catch(err => console.log(err));
 
     return await lastValueFrom(
-      this.firestore.collection('users').doc(user!.uid).get()
+      this.firestore.collection('owners').doc(user!.uid).get()
     ).then((doc) => {
       console.log("ProfileService.getProfile() doc: ", doc.data());
       const profile = doc.data() as Profile;
@@ -34,7 +34,7 @@ export class ProfileService {
     const user = await this.authService.getCurrentUser()
       .then(user => user)
       .catch(err => console.log(err));
-    await this.firestore.collection('users')
+    await this.firestore.collection('owners')
       .doc(user!.uid).update(data)
       .then(() => {
         console.log("Document successfully updated!");
