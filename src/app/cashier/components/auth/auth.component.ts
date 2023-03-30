@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {CashierService} from "../services/cashier.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-auth',
@@ -18,7 +19,8 @@ export class AuthComponent {
 
   constructor(
     private fb: FormBuilder,
-    private cashierService: CashierService
+    private cashierService: CashierService,
+    private router: Router,
   ) {
     this.emailForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]]
@@ -47,8 +49,8 @@ export class AuthComponent {
       console.log('OTP form submitted');
       await this.cashierService
         .loginWithOTP(this.emailForm.value.email, this.otpForm.value.otp)
-        .then(() => console.log('Logged in'))
-        .catch(() => console.log('Failed to log in'));
+        .then(value => this.router.navigate(['/redirect']))
+        .catch(reason => console.error(reason));
     }
   }
 
