@@ -40,11 +40,11 @@ const routes: Routes = [
   {
     path: 'cashier',
     loadChildren: () => import('./cashier/cashier.module').then(m => m.CashierModule),
-    // data: {
-    //   roles: ['cashier'],
-    //   authGuardPipe: redirectUnauthorizedToLogin
-    // },
-    // canActivate: [AngularFireAuthGuard, RoleBasedGuard],
+    data: {
+      roles: ['cashier'],
+      authGuardPipe: redirectUnauthorizedToLogin
+    },
+    canActivate: [AngularFireAuthGuard, RoleBasedGuard],
   },
 
   {path: '**', redirectTo: '/', pathMatch: 'full'},

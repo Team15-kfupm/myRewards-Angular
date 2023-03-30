@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AuthService} from "../../../shared/services/auth.service";
+import {AuthService} from "../../shared/services/auth.service";
 import {AngularFireFunctions} from "@angular/fire/compat/functions";
 import {lastValueFrom} from "rxjs";
 

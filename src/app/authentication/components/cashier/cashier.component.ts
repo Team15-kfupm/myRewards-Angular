@@ -1,14 +1,14 @@
 import {Component} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {CashierService} from "../services/cashier.service";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {CashierService} from "../../services/cashier.service";
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  selector: 'app-cashier',
+  templateUrl: './cashier.component.html',
+  styleUrls: ['./cashier.component.scss']
 })
-export class AuthComponent {
+export class CashierComponent {
   emailForm: FormGroup;
   otpForm: FormGroup;
   showOTPForm = false;

@@ -143,12 +143,25 @@ async function CustomCashierLogin(ownerEmail: string) {
 export const generateCashierOTP = functions.https.onCall(async (data: { email: string }, context) => {
   try {
     const otp = Math.floor(100000 + randomBytes(3).readUIntBE(0, 3) % 900000).toString(); // generate a random 6-digit number
-    await firestore.collection('temps/otp/cashiers')
-      .doc().set({
-        email: data.email,
-        otp: otp,
-        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      });
+    const querySnapshot = await firestore.collection('temps/otp/cashiers')
+      .where('email', '==', data.email)
+      .limit(1)
+      .get()
+    if (querySnapshot.empty) {
+      await firestore.collection('temps/otp/cashiers')
+        .doc().set({
+          email: data.email,
+          otp: otp,
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+    } else {
+      await firestore.collection('temps/otp/cashiers')
+        .doc(querySnapshot.docs[0].id).set({
+          otp: otp,
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+    }
+
     return {success: true};
   } catch (error) {
     console.error(error);
