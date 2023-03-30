@@ -31,6 +31,33 @@ export class CashierService {
     }
   }
 
+  async loginWithOTP(email: string, otp: string): Promise<void> {
+    try {
+      await lastValueFrom(
+        this.fns.httpsCallable('cashierLoginWithOTP')({email: email, otp: otp})
+      ).then(async userCredentialToken => {
+        console.log(userCredentialToken)
+        if (userCredentialToken) {
+          await this.authService.signInWithCustomToken(userCredentialToken.cashierCredential);
+        } else {
+          throw new Error('no userCredentialToken');
+        }
+      });
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async generateOTP(email: string): Promise<void> {
+    try {
+      await lastValueFrom(
+        this.fns.httpsCallable('generateCashierOTP')({email: email}))
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 
   async logout(): Promise<void> {
     await this.authService.signOut();

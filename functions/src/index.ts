@@ -1,6 +1,7 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import {v4 as uuidv4} from 'uuid';
+import {randomBytes} from 'crypto';
 
 admin.initializeApp({
   serviceAccountId: 'myrewards-e3b0c@appspot.gserviceaccount.com'
@@ -102,38 +103,88 @@ async function registerCashier(ownerUid: string) {
   }
 }
 
-export const cashierLogin = functions.https.onCall(async (data: { passphrase: string }, context) => {
+async function CustomCashierLogin(ownerEmail: string) {
   try {
-    const querySnapshot = await firestore.collection('owners')
-      .where('passphrase', '==', data.passphrase)
+    const querySnapshot = await firestore.collection('users')
+      .where('email', '==', ownerEmail)
+      .where('role', '==', 'bo')
       .limit(1)
       .get();
 
     if (querySnapshot.empty) {
-      return {success: false, error: "Incorrect passphrase"};
+      return {success: false, error: "Does not exist"};
     }
 
-    const owner: Owner = querySnapshot.docs[0].data() as Owner;
+    const ownerUid = querySnapshot.docs[0].id;
     const cashierQuerySnapshot = await firestore.collection('cashiers')
-      .where('ownerUid', '==', owner.ownerUid)
+      .where('ownerUid', '==', ownerUid)
       .limit(1)
       .get();
 
     if (cashierQuerySnapshot.empty) {
-      const result = await registerCashier(owner.ownerUid);
+      const result = await registerCashier(ownerUid);
       if (result.success) {
         const cashierCredential = await admin.auth().createCustomToken(result.uid!);
         return {success: true, cashierCredential};
       } else {
-        return {success: false,error: "Cannot create new cashier"};
+        return {success: false, error: "Cannot create new cashier"};
       }
     }
 
     const cashier = cashierQuerySnapshot.docs[0].data();
     const cashierCredential = await admin.auth().createCustomToken(cashier.cashierUid);
-    return {success: true,cashierCredential};
+    return {success: true, cashierCredential};
   } catch (error) {
     console.error(error);
-    return {success: false,error: "User not found"};
+    return {success: false, error: "User not found"};
+  }
+}
+
+export const generateCashierOTP = functions.https.onCall(async (data: { email: string }, context) => {
+  try {
+    const otp = Math.floor(100000 + randomBytes(3).readUIntBE(0, 3) % 900000).toString(); // generate a random 6-digit number
+    await firestore.collection('temps/otp/cashiers')
+      .doc().set({
+        email: data.email,
+        otp: otp,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+    return {success: true};
+  } catch (error) {
+    console.error(error);
+    return {success: false, error: "User not found"};
+  }
+});
+
+export const scheduledDeleteOutDatedCashierOTP = functions.pubsub
+  .schedule('every 30 minutes').onRun(async (context) => {
+    const querySnapshot = await firestore.collection('temps/otp/cashiers')
+      .where('createdAt', '<',
+        new Date(admin.firestore.Timestamp.now().toDate().getTime() - 3 * 60 * 1000
+        ));
+    querySnapshot.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        doc.ref.delete();
+      });
+    });
+  });
+
+export const cashierLoginWithOTP = functions.https.onCall(async (data: { email: string, otp: string }, context) => {
+  try {
+    const querySnapshot = await firestore.collection('temps/otp/cashiers')
+      .where('email', '==', data.email)
+      .where('otp', '==', data.otp)
+      .limit(1)
+      .get();
+
+    if (querySnapshot.empty) {
+      return {success: false, error: "Incorrect OTP"};
+    } else if (querySnapshot.docs[0].data().createdAt.toDate().getTime() < new Date(admin.firestore.Timestamp.now().toDate().getTime() - 3 * 60 * 1000).getTime()) {
+      return {success: false, error: "OTP is expired"};
+    }
+    return await CustomCashierLogin(data.email);
+  } catch (error) {
+    console.error(error);
+    return {success: false, error: "Where is an error with the OTP verification system"};
   }
 });

@@ -33,17 +33,22 @@ export class AuthComponent {
   onEmailSubmit() {
     if (this.emailForm.valid) {
       this.checkingEmail = true;
-      setTimeout(() => {
-        this.startCounter();
-        this.startOTPVerification();
-      }, 2000);
+      this.cashierService.generateOTP(this.emailForm.value.email)
+        .then(() => {
+          this.startCounter();
+          this.startOTPVerification();
+        })
     }
   }
 
-  onOTPSubmit() {
+  async onOTPSubmit() {
     if (this.otpForm.valid) {
       // Perform actions after OTP form is submitted
       console.log('OTP form submitted');
+      await this.cashierService
+        .loginWithOTP(this.emailForm.value.email, this.otpForm.value.otp)
+        .then(() => console.log('Logged in'))
+        .catch(() => console.log('Failed to log in'));
     }
   }
 
