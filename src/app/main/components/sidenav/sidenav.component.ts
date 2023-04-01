@@ -24,7 +24,7 @@ export class SidenavComponent implements OnInit {
 
   iAmInHome(): boolean {
 
-    return this._router.url == "/home";
+    return this._router.url == " ";
   }
 
   iAmInOffers(): boolean {

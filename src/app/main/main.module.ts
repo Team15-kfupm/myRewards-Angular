@@ -27,10 +27,10 @@ import {NewDashboardComponent} from './components/new-dashboard/new-dashboard.co
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatMenuModule} from '@angular/material/menu';
 import {LayoutModule} from '@angular/cdk/layout';
-import {TailwindChartComponentPie} from './components/tailwind-chart-pie/tailwind-chart.component-pie';
-import {LineChartTailwindComponent} from './components/line-chart-tailwind/line-chart-tailwind.component';
-import {DoughnutChartComponent} from './components/doughnut-chart/doughnut-chart.component';
-import {StatCardComponent} from './components/stat-card/stat-card.component';
+import {TailwindChartComponentPie} from './components/charts/tailwind-chart-pie/tailwind-chart.component-pie';
+import {LineChartTailwindComponent} from './components/charts/line-chart-tailwind/line-chart-tailwind.component';
+import {DoughnutChartComponent} from './components/charts/doughnut-chart/doughnut-chart.component';
+import {StatCardComponent} from './components/charts/stat-card/stat-card.component';
 
 
 @NgModule({

@@ -4,7 +4,7 @@ import {MainComponent} from "./main.component";
 import {OffersPageComponent} from "./components/offers-page/offers-page.component";
 import {RedeemPageComponent} from "./components/redeem-page/redeem-page.component";
 import {NewDashboardComponent} from "./components/new-dashboard/new-dashboard.component";
-import {TailwindChartComponentPie} from "./components/tailwind-chart-pie/tailwind-chart.component-pie";
+import {TailwindChartComponentPie} from "./components/charts/tailwind-chart-pie/tailwind-chart.component-pie";
 
 
 const routes: Routes = [{

@@ -12,9 +12,6 @@
         <mat-card-content class="dashboard-card-content">
           <app-doughnut-chart *ngIf="card.id ==3"></app-doughnut-chart>
           <app-tailwind-chart-pie *ngIf="card.id == 2"></app-tailwind-chart-pie>
-          <ng-container *ngIf="card.id ==4">
-            <app-chart-pie [color]="'blue'" [percentage]="50"></app-chart-pie>
-          </ng-container>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
