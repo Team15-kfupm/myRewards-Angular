@@ -1,17 +1,18 @@
-<div class="add">
-  <button (click)="openDialog()">Add Offer</button>
-</div>
-
-<div class="wrapper">
-
-
-  <div *ngIf='showSpinner' class="spinner">
-
-    <mat-spinner></mat-spinner>
+<div class="container">
+  <div class="add">
+    <button (click)="openDialog()">Add Offer</button>
   </div>
 
-  <div *ngIf='!showSpinner' class="offers-grid">
-    <app-offer-card *ngFor="let offer of offers" [offer]="offer"></app-offer-card>
-  </div>
+  <div class="wrapper">
 
+    <div *ngIf='showSpinner' class="spinner">
+
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <div *ngIf='!showSpinner' class="offers-grid">
+      <app-offer-card *ngFor="let offer of offers" [offer]="offer"></app-offer-card>
+    </div>
+
+  </div>
 </div>

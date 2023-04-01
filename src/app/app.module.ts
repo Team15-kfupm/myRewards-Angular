@@ -24,6 +24,7 @@ import {CashierModule} from "./cashier/cashier.module";
     AuthenticationModule,
     CashierModule,
   ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

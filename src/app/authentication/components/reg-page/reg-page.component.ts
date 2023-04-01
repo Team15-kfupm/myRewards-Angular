@@ -8,22 +8,23 @@ import {AuthService} from "../../../shared/services/auth.service";
   styleUrls: ['./reg-page.component.scss']
 })
 export class RegPageComponent implements OnInit {
-  constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
-  ) {
-  }
-
   loginForm = this.formBuilder.group({
     email: '',
     password: '',
     password2: '',
   });
 
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+  ) {
+  }
+
   ngOnInit(): void {
   }
 
   onSubmit(): void {
+    console.log('Called !')
     const email = this.loginForm.value.email!;
     const password = this.loginForm.value.password!;
     this.authService.signUp(email, password)
