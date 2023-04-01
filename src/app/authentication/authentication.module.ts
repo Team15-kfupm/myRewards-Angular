@@ -6,6 +6,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AuthenticationComponent } from './authentication.component';
 import {RouterOutlet} from "@angular/router";
 import {AuthenticationRoutingModule} from "./authentication-routing.module";
+import { CashierComponent } from './components/cashier/cashier.component';
 
 
 
@@ -14,6 +15,7 @@ import {AuthenticationRoutingModule} from "./authentication-routing.module";
     LoginPageComponent,
     RegPageComponent,
     AuthenticationComponent,
+    CashierComponent,
   ],
   imports: [
     CommonModule,

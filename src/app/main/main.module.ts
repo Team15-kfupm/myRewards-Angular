@@ -10,7 +10,7 @@ import {OfferFormComponent} from "./components/offer-form/offer-form.component";
 import {OfferCardComponent} from "./components/offer-card/offer-card.component";
 import {TextfieldComponent} from "../shared/components/textfield/textfield.component";
 import {ChartLineComponent} from "../shared/components/chart-line/chart-line.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
@@ -23,6 +23,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
 import {RedeemPageComponent} from './components/redeem-page/redeem-page.component';
 import {MatTableModule} from '@angular/material/table';
+
 import {NewDashboardComponent} from './components/new-dashboard/new-dashboard.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatMenuModule} from '@angular/material/menu';
@@ -31,6 +32,10 @@ import {TailwindChartComponentPie} from './components/charts/tailwind-chart-pie/
 import {LineChartTailwindComponent} from './components/charts/line-chart-tailwind/line-chart-tailwind.component';
 import {DoughnutChartComponent} from './components/charts/doughnut-chart/doughnut-chart.component';
 import {StatCardComponent} from './components/charts/stat-card/stat-card.component';
+
+import {MatMenuModule} from "@angular/material/menu";
+import { ProfileComponent } from './components/profile/profile.component';
+
 
 
 @NgModule({
@@ -53,6 +58,7 @@ import {StatCardComponent} from './components/charts/stat-card/stat-card.compone
     DoughnutChartComponent,
     StatCardComponent,
 
+    ProfileComponent,
   ],
   exports: [
     SidenavComponent
@@ -73,6 +79,8 @@ import {StatCardComponent} from './components/charts/stat-card/stat-card.compone
     MatGridListModule,
     MatMenuModule,
     LayoutModule,
+    MatMenuModule,
+    ReactiveFormsModule,
 
   ]
 })

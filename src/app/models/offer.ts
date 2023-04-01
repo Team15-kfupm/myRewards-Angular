@@ -1,7 +1,9 @@
-import {Timestamp} from "rxjs";
-
-export class Offer {
-
-
-  constructor(public id:string, public title:string,public description:string, public image:string, public startDate:string, public validityPeriod:number){}
+export interface Offer {
+  id: string,
+  uid?: string,
+  title: string,
+  description: string,
+  image: string,
+  startDate: string,
+  validityPeriod: number
 }

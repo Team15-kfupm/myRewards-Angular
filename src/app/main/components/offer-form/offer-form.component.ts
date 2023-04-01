@@ -1,7 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {OffersService} from "../../../services/offers.service";
 import {Offer} from "../../../models/offer";
+import {OffersService} from "../../../services/offers.service";
+import {AuthService} from "../../../shared/services/auth.service";
 
 @Component({
   selector: 'app-offer-form',
@@ -28,8 +29,12 @@ export class OfferFormComponent implements OnInit {
     validityPeriod: 0
   }
 
-  constructor(private offersService: OffersService,
-              private dialogRef: MatDialogRef<OfferFormComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(
+    private offersService: OffersService,
+    private dialogRef: MatDialogRef<OfferFormComponent>,
+    private authService: AuthService,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+
   }
 
   ngOnInit(): void {

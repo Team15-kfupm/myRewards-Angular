@@ -7,6 +7,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {CoreModule} from "./core/core.module";
 import {MainModule} from "./main/main.module";
 import {AuthenticationModule} from "./authentication/authentication.module";
+import {CashierModule} from "./cashier/cashier.module";
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {AuthenticationModule} from "./authentication/authentication.module";
     HttpClientModule,
     CoreModule,
     MainModule,
-    AuthenticationModule
+    AuthenticationModule,
+    CashierModule,
   ],
   exports: [],
   bootstrap: [AppComponent]

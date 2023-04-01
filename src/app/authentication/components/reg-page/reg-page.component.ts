@@ -28,8 +28,8 @@ export class RegPageComponent implements OnInit {
     const email = this.loginForm.value.email!;
     const password = this.loginForm.value.password!;
     this.authService.signUp(email, password)
-      .then(value => console.log('signed up'))
-      .catch(reason => console.warn('error'));
+      .then(_ => window.location.href = '/')
+      .catch(_ => console.error('error'));
   }
 
 
