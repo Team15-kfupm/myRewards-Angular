@@ -26,7 +26,6 @@ import {MatTableModule} from '@angular/material/table';
 
 import {NewDashboardComponent} from './components/new-dashboard/new-dashboard.component';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {MatMenuModule} from '@angular/material/menu';
 import {LayoutModule} from '@angular/cdk/layout';
 import {TailwindChartComponentPie} from './components/charts/tailwind-chart-pie/tailwind-chart.component-pie';
 import {LineChartTailwindComponent} from './components/charts/line-chart-tailwind/line-chart-tailwind.component';
@@ -34,8 +33,7 @@ import {DoughnutChartComponent} from './components/charts/doughnut-chart/doughnu
 import {StatCardComponent} from './components/charts/stat-card/stat-card.component';
 
 import {MatMenuModule} from "@angular/material/menu";
-import { ProfileComponent } from './components/profile/profile.component';
-
+import {ProfileComponent} from './components/profile/profile.component';
 
 
 @NgModule({
