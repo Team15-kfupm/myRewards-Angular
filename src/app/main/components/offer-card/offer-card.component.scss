@@ -12,91 +12,40 @@
 }
 
 img {
-  max-width: 400px;
-  height: auto;
+  min-height: 300px;
+  min-width: 100%;
 }
 
-.row {
-  display: flex;
-  padding: 10px;
-  justify-content: space-between;
-
+.bckg {
+  background-color: #34495E;
 }
 
-.info {
-  color: white;
-}
-
-.info h3 {
-  font-size: 24px;
-  color: white;
-}
-
-.info p {
-  font-size: 14px;
-}
-
-.action {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-button {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  border-radius: 4px;
-  border: none;
-  color: white;
-
-  width: 80px;
-  height: 30px;
-
-  cursor: pointer;
-}
-
-
-.delete {
-  background: #D63031;
-}
-
-.edit {
-  background: #0984E3;
-}
-
-
-.card {
-  max-width: 400px;
-}
-
-
-.row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #34495E;
-}
-
-.code {
-  border: none;
-  padding: 15px;
-  height: 30px;
-  background: #FFFFFF;
-  border-radius: 8px;
-}
-
-.code-btn {
-
-  height: 30px;
-  background: #34495E;
-  color: white;
-  padding: 30px;
-  border: 1px solid;
-}
+//.row {
+//  display: flex;
+//  padding: 10px;
+//  justify-content: space-between;
+//
+//}
+//
+//.info {
+//  color: white;
+//}
+//
+//.info h3 {
+//  font-size: 24px;
+//  color: white;
+//}
+//
+//.info p {
+//  font-size: 14px;
+//}
+//
+//.action {
+//  display: flex;
+//  flex-direction: row;
+//  justify-content: space-evenly;
+//  align-items: center;
+//}
 
 
 
