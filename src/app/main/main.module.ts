@@ -23,6 +23,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
 import {RedeemPageComponent} from './components/redeem-page/redeem-page.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+
 
 import {NewDashboardComponent} from './components/new-dashboard/new-dashboard.component';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -76,6 +79,8 @@ import {ProfileComponent} from './components/profile/profile.component';
     MatTableModule,
     MatGridListModule,
     MatMenuModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     LayoutModule,
     MatMenuModule,
     ReactiveFormsModule,

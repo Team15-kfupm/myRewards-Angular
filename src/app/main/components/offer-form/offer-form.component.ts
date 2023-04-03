@@ -2,12 +2,13 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Offer} from "../../../models/offer";
 import {OffersService} from "../../../services/offers.service";
-import {AuthService} from "../../../shared/services/auth.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-offer-form',
   templateUrl: './offer-form.component.html',
-  styleUrls: ['./offer-form.component.scss']
+  styleUrls: ['./offer-form.component.scss'],
+  providers: [DatePipe]
 })
 export class OfferFormComponent implements OnInit {
 
@@ -18,7 +19,8 @@ export class OfferFormComponent implements OnInit {
   image: any = '';
   description = ''
   startDate = ''
-  validityPeriod = 0
+  endDate = ''
+
 
   offerObj: Offer = {
     id: '',
@@ -26,13 +28,14 @@ export class OfferFormComponent implements OnInit {
     description: '',
     image: '',
     startDate: '',
-    validityPeriod: 0
+    endDate: ''
   }
+
+  today = new Date();
 
   constructor(
     private offersService: OffersService,
     private dialogRef: MatDialogRef<OfferFormComponent>,
-    private authService: AuthService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
   }
@@ -46,9 +49,10 @@ export class OfferFormComponent implements OnInit {
       this.image = this.data.image;
       this.description = this.data.description;
       this.startDate = this.data.startDate;
-      this.validityPeriod = this.data.validityPeriod;
+      this.endDate = this.data.endDate;
     }
 
+    console.info('Today Date ' + this.today)
 
   }
 
@@ -58,11 +62,11 @@ export class OfferFormComponent implements OnInit {
     this.title = '';
     this.description = '';
     this.startDate = '';
-    this.validityPeriod = 0;
+    this.endDate = '';
   }
 
   onSubmit() {
-    if (this.title == '' || this.description == '' || this.startDate == '' || this.validityPeriod == 0) {
+    if (this.title == '' || this.description == '' || this.startDate == '') {
       alert('Fill all the fields')
       return
     }
@@ -71,20 +75,12 @@ export class OfferFormComponent implements OnInit {
     this.offerObj.title = this.title;
     this.offerObj.description = this.description;
     this.offerObj.startDate = this.startDate;
-    this.offerObj.validityPeriod = this.validityPeriod;
+    this.offerObj.endDate = this.endDate;
 
 
     this.offersService.addOffer(this.offerObj, this.image).then(r => console.log(r));
     this.resetAll();
     this.dialogRef.close()
-  }
-
-
-  close() {
-    this.resetAll();
-    this.edit = false;
-    this.dialogRef.close()
-
   }
 
 
@@ -94,7 +90,7 @@ export class OfferFormComponent implements OnInit {
       description: this.description,
       image: this.image,
       startDate: this.startDate,
-      validityPeriod: this.validityPeriod
+      endDate: this.endDate
     }).then(r => console.log(r))
     this.dialogRef.close()
 

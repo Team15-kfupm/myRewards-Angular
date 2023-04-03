@@ -5,5 +5,5 @@ export interface Offer {
   description: string,
   image: string,
   startDate: string,
-  validityPeriod: number
+  endDate: string
 }

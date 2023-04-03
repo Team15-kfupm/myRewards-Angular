@@ -1,34 +1,111 @@
-<form *ngIf="!edit">
-  <h2>Create New Offer</h2>
-  <div class="textField"><input [(ngModel)]="title" name="title" placeholder="Title" type="text"></div>
-  <div class="textField"><input [(ngModel)]="description" name="description" placeholder="Description" type="text">
+<!--<form *ngIf="!edit">-->
+<!--  <h2>Create New Offer</h2>-->
+<!--  <div class="textField"><input [(ngModel)]="title" name="title" placeholder="Title" type="text"></div>-->
+<!--  <div class="textField"><input [(ngModel)]="description" name="description" placeholder="Description" type="text">-->
+<!--  </div>-->
+<!--  <div class="textField"><input [(ngModel)]="startDate" name="startDate" placeholder="Start Date" type="date"></div>-->
+<!--  <div class="textField"><input [(ngModel)]="validityPeriod" name="validityPeriod" placeholder="validity period"-->
+<!--                                type="text"></div>-->
+
+
+<!--  <input (change)="onChange($event)" type="file">-->
+<!--  <div class="actions">-->
+<!--    <button (click)="onSubmit()" class="submit-btn" type="submit">Submit</button>-->
+<!--    <button (click)="close()" class="close-btn">Close</button>-->
+<!--  </div>-->
+<!--</form>-->
+
+<!--&lt;!&ndash;  for Edit&ndash;&gt;-->
+
+<!--<form *ngIf="edit">-->
+<!--  <h2>Edit Offer</h2>-->
+<!--  <div class="textField"><input [(ngModel)]="title" name="title" placeholder="Title" type="text"></div>-->
+<!--  <div class="textField"><input [(ngModel)]="description" name="description" placeholder="Description" type="text">-->
+<!--  </div>-->
+<!--  <div class="textField"><input [(ngModel)]="startDate" name="startDate" placeholder="Start Date" type="date"></div>-->
+<!--  <div class="textField"><input [(ngModel)]="validityPeriod" name="validityPeriod" placeholder="validity period"-->
+<!--                                type="text"></div>-->
+
+<!--  <div class="actions">-->
+<!--    <button (click)="onSave()" *ngIf="edit" class="submit-btn" type="submit">Save</button>-->
+<!--    <button (click)="close()" class="close-btn">Close</button>-->
+<!--  </div>-->
+<!--</form>-->
+
+
+<div class="bg-white rounded  p-4 px-4 md:p-8 ">
+  <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+    <div class="text-gray-600">
+      <p class="font-medium text-lg">Create New Offer</p>
+      <p *ngIf="edit" class="font-medium text-lg">Edit Offer</p>
+      <p>Please fill out all the fields.</p>
+    </div>
+
+    <div class="lg:col-span-2">
+      <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+
+        <div class="md:col-span-5">
+          <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input [(ngModel)]="title" matInput placeholder="Enter Title">
+          </mat-form-field>
+
+        </div>
+
+        <div class="md:col-span-5">
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea [(ngModel)]="description" matInput placeholder="Enter Description"></textarea>
+          </mat-form-field>
+
+        </div>
+
+
+        <div class="md:col-span-5">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input [(ngModel)]="startDate" [min]="today" matStartDate placeholder="Start date">
+              <input [(ngModel)]="endDate" matEndDate placeholder="End date">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-date-range-picker #picker [startAt]="today"></mat-date-range-picker>
+            <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+          </mat-form-field>
+        </div>
+
+
+        <div class="md:col-span-5">
+          <label
+            class="w-full flex flex-col items-center px-4 py-6 bg-sec text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue">
+            <svg class="w-8 h-8" fill="#ffffff" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"/>
+            </svg>
+            <span class="mt-2 text-base leading-normal text-white">Select a Picture</span>
+            <input (change)="onChange($event)" accept="image/*" class="hidden" type='file'/>
+          </label>
+
+
+        </div>
+
+
+        <div class="md:col-span-5 text-right">
+          <div class="inline-flex items-end">
+            <button (click)="onSubmit()" *ngIf="!edit"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Submit
+            </button>
+
+            <button (click)="onSave()" *ngIf="edit"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Save
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
-  <div class="textField"><input [(ngModel)]="startDate" name="startDate" placeholder="Start Date" type="date"></div>
-  <div class="textField"><input [(ngModel)]="validityPeriod" name="validityPeriod" placeholder="validity period"
-                                type="text"></div>
-
-
-  <input (change)="onChange($event)" type="file">
-  <div class="actions">
-    <button (click)="onSubmit()" class="submit-btn" type="submit">Submit</button>
-    <button (click)="close()" class="close-btn">Close</button>
-  </div>
-</form>
-
-<!--  for Edit-->
-
-<form *ngIf="edit">
-  <h2>Edit Offer</h2>
-  <div class="textField"><input [(ngModel)]="title" name="title" placeholder="Title" type="text"></div>
-  <div class="textField"><input [(ngModel)]="description" name="description" placeholder="Description" type="text">
-  </div>
-  <div class="textField"><input [(ngModel)]="startDate" name="startDate" placeholder="Start Date" type="date"></div>
-  <div class="textField"><input [(ngModel)]="validityPeriod" name="validityPeriod" placeholder="validity period"
-                                type="text"></div>
-
-  <div class="actions">
-    <button (click)="onSave()" *ngIf="edit" class="submit-btn" type="submit">Save</button>
-    <button (click)="close()" class="close-btn">Close</button>
-  </div>
-</form>
-
+</div>

@@ -1,23 +1,40 @@
-form {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
+//form {
+//  display: flex;
+//  justify-content: flex-start;
+//  align-items: center;
+//  flex-direction: column;
+//}
+//
+//input {
+//  background-color: #FAFAFA;
+//  border: none;
+//  border-radius: 8px;
+//
+//  padding: 13px 20px;
+//
+//  outline: none;
+//  width: 250px;
+//}
+//
+//input {
+//  margin-top: 20px;
+//}
+.bg-sec {
+  background-color: #00CEC9;
 }
 
-input {
-  background-color: #FAFAFA;
-  border: none;
-  border-radius: 8px;
-
-  padding: 13px 20px;
-
-  outline: none;
-  width: 250px;
+.prim-color {
+  color: #34495E;
 }
 
-input {
-  margin-top: 20px;
+mat-form-field {
+  width: 100%;
+}
+
+.date-picker-field .mat-form-field-suffix {
+  top: 0;
+  right: 0;
+  margin-top: 5px;
 }
 
 .actions {
