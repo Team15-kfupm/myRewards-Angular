@@ -3,6 +3,8 @@ import {Offer} from "../models/offer";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {AuthService} from "../shared/services/auth.service";
+import {OffersPathService} from "./offers-path.service";
+import {Observable} from "rxjs";
 
 
 @Injectable({
@@ -12,7 +14,8 @@ export class OffersService {
   constructor(
     private firestore: AngularFirestore,
     private storage: AngularFireStorage,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private offersPathService: OffersPathService) {
   }
 
   /**
@@ -20,8 +23,17 @@ export class OffersService {
    * @name getOffers
    * @description returns all offers from the firestore
    * **/
-  getOffers() {
-    return this.firestore.collection('/offers').snapshotChanges();
+
+  getOffers(): Observable<any> {
+    return new Observable((observer) => {
+      this.getUserUid().then((uid) => {
+        const collection = this.firestore.collection(this.offersPathService.getOffersPath(uid));
+        const subscription = collection.snapshotChanges().subscribe(observer);
+        return () => subscription.unsubscribe();
+      }).catch((error) => {
+        observer.error(error);
+      });
+    });
   }
 
   /**
@@ -30,23 +42,23 @@ export class OffersService {
    * @description  adds Offer object to Offers collection in firestore
    * @return Promise<boolean>
    * **/
-  async addOffer(offer: Offer, image: any): Promise<boolean> {
-    if (image != null) {
-
-      offer.id = this.firestore.createId();
-      offer.uid = await this.authService.getCurrentUser().then(user => user!.uid);
-      let storageRef = this.storage.ref('offers/').child(offer.id);
-      const snapshot = await storageRef.put(image);
-      const url = await snapshot.ref.getDownloadURL();
-      offer.image = url;
-      await this.firestore.collection('/offers').add(offer).then(r => {
-        console.log('sent to the db !')
-      });
-      return true;
-    } else
+  async addOffer(offer: Offer, image: File): Promise<boolean> {
+    if (!image) {
       return false;
-  }
+    }
 
+    const uid = await this.getUserUid();
+    offer.id = this.firestore.createId();
+    offer.uid = uid;
+
+    const url = await this.uploadImageAndGetUrl(offer.id, image);
+    offer.image = url;
+
+    await this.firestore
+      .collection(this.offersPathService.getOffersPath(uid))
+      .add(offer);
+    return true;
+  }
 
   /**
    * @author Ali Amin
@@ -55,9 +67,11 @@ export class OffersService {
    * @return Promise<void>
    * **/
   async updateOffer(id: string, updates: any): Promise<void> {
-    console.log("Updating " + id)
-    await this.firestore.collection('offers').doc(id).update(updates);
+    const uid = await this.getUserUid();
 
+    await this.firestore
+      .doc(this.offersPathService.getOfferPath(uid, id))
+      .update(updates);
   }
 
   /**
@@ -68,18 +82,26 @@ export class OffersService {
    * **/
 
   async deleteOffer(id: string): Promise<void> {
-    console.log("Deleting... " + id);
+    const uid = await this.getUserUid();
 
-    //Deleting Image
-    // const storage = getStorage();
-    // let deleteRef = ref(storage, 'offers/' + id);
-    // deleteObject(deleteRef).then(() => {
-    //   console.log("Deleted image successfully " + id);
-    // }).catch(err => {
-    //   console.log('Error ' + err);
-    // });
+    await this.firestore
+      .doc(this.offersPathService.getOfferPath(uid, id))
+      .delete();
+  }
 
-    await this.firestore.collection('offers').doc(id).delete()
+  private async getUserUid(): Promise<string> {
+    const user = await this.authService.getCurrentUser();
+    const uid = user?.uid;
+    if (!uid) {
+      throw new Error('User not authenticated');
+    }
+    return uid;
+  }
+
+  private async uploadImageAndGetUrl(id: string, image: File) {
+    const storageRef = this.storage.ref(`offers/${id}`);
+    const snapshot = await storageRef.put(image);
+    return snapshot.ref.getDownloadURL();
   }
 
 }
