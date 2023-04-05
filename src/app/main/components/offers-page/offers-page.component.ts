@@ -28,18 +28,19 @@ export class OffersPageComponent implements OnInit {
   }
 
   getAllOffers() {
-    this.offersService.getOffers().subscribe(res => {
-      this.showSpinner = false;
-      this.offers = res.map((e: any) => {
-        const data = e.payload.doc.data();
-        data.id = e.payload.doc.id;
-        return data;
-
-      })
-    }, error => {
-      console.log(error)
+    this.offersService.getOffers().subscribe({
+      next: (res) => {
+        this.showSpinner = false;
+        this.offers = res.map((e: any) => {
+          const data = e.payload.doc.data();
+          data.id = e.payload.doc.id;
+          return data;
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
-
   }
 
   openDialog() {
