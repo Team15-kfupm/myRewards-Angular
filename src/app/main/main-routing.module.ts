@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {MainComponent} from "./main.component";
 import {OffersPageComponent} from "./components/offers-page/offers-page.component";
-import {RedeemPageComponent} from "./components/redeem-page/redeem-page.component";
+import {RedeemPageComponent} from "../shared/components/redeem-page/redeem-page.component";
 
 import {NewDashboardComponent} from "./components/new-dashboard/new-dashboard.component";
 import {TailwindChartComponentPie} from "./components/charts/tailwind-chart-pie/tailwind-chart.component-pie";
