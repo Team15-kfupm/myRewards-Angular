@@ -21,12 +21,9 @@ import {MainComponent} from './main.component';
 import {MainRoutingModule} from "./main-routing.module";
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
-import {RedeemPageComponent} from './components/redeem-page/redeem-page.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
-
-
 import {NewDashboardComponent} from './components/new-dashboard/new-dashboard.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {LayoutModule} from '@angular/cdk/layout';
@@ -52,17 +49,15 @@ import {ProfileComponent} from './components/profile/profile.component';
     TextfieldComponent,
     ChartLineComponent,
     MainComponent,
-    RedeemPageComponent,
     NewDashboardComponent,
     TailwindChartComponentPie,
     LineChartTailwindComponent,
     DoughnutChartComponent,
     StatCardComponent,
-
     ProfileComponent,
   ],
   exports: [
-    SidenavComponent
+    SidenavComponent,
   ],
   imports: [
     CommonModule,

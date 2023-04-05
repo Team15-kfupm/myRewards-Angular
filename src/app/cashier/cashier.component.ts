@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from "../shared/services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cashier',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CashierComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {
+  }
 
   ngOnInit(): void {
   }
 
+  async logout() {
+    await this.authService.signOut()
+      .then(() => {
+        console.log("User signed out");
+        this.router.navigate(['/redirect'])
+      })
+    ;
+  }
 }

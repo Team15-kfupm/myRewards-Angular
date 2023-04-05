@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Offer} from "../../../models/offer";
-import {FormBuilder} from "@angular/forms";
-import {PromoCodeService} from "../../../shared/services/promo-code.service";
+import {PromoCodeService} from "../../services/promo-code.service";
 
 @Component({
-  selector: 'app-redeem-page',
+  selector: 'redeem-page',
   templateUrl: './redeem-page.component.html',
   styleUrls: ['./redeem-page.component.scss']
 })
@@ -15,7 +14,7 @@ export class RedeemPageComponent implements OnInit {
 
   planName = "";
 
-  constructor(private promocodeService: PromoCodeService) {
+  constructor(private promoCodeService: PromoCodeService) {
 
   }
 
@@ -23,7 +22,7 @@ export class RedeemPageComponent implements OnInit {
   }
 
   applyPromoCode(code : string) {
-    this.promocodeService.validateCode(code).then((status) => {
+    this.promoCodeService.validateCode(code).then((status) => {
       console.log(status)
 
       this.planName = "The plan name is "+status
