@@ -26,48 +26,159 @@
 <!--</div>-->
 
 
-<div class="min-h-screen flex flex-col justify-center sm:py-12 primary-color">
-  <div class="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
-    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm"
-          class="grey-color shadow w-full rounded-lg divide-y divide-gray-200">
-      <h1 class="font-bold text-center text-2xl p-10">MyRewards</h1>
-      <div class="px-5 py-7">
-        <label class="font-semibold text-sm text-gray-600 pb-1 block">E-mail</label>
-        <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" formControlName="email" placeholder="Email"
-               type="text"/>
-        <label class="font-semibold text-sm text-gray-600 pb-1 block">Password</label>
-        <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" formControlName="password"
-               placeholder="Password"
-               type="password"/>
+<!--<div class="min-h-screen flex flex-col justify-center sm:py-12 primary-color">-->
+<!--  <div class="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">-->
+<!--    <form (ngSubmit)="onSubmit()" [formGroup]="regForm"-->
+<!--          class="grey-color shadow w-full rounded-lg divide-y divide-gray-200">-->
+<!--      <h1 class="font-bold text-center text-2xl p-10">MyRewards</h1>-->
+<!--      <div class="px-5 py-7">-->
+<!--        <label class="font-semibold text-sm text-gray-600 pb-1 block">E-mail</label>-->
+<!--        <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" formControlName="email" placeholder="Email"-->
+<!--               type="text"/>-->
+<!--        <mat-error>{{ getEmailErrorMessage() }}</mat-error>-->
+<!--        <label class="font-semibold text-sm text-gray-600 pb-1 block">Password</label>-->
+<!--        <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" formControlName="password"-->
+<!--               placeholder="Password"-->
+<!--               type="password"/>-->
+<!--        <mat-error>{{ getPasswordErrorMessage() }}</mat-error>-->
 
-        <label class="font-semibold text-sm text-gray-600 pb-1 block">Confirm Password</label>
-        <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" formControlName="password"
-               placeholder="Confirm Password"
-               type="password"/>
-        <button
-          class="transition duration-200 secondary-color hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
-          type="submit">
-          <span class="inline-block mr-2">Sign Up</span>
-          <svg class="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-               xmlns="http://www.w3.org/2000/svg">
-            <path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-          </svg>
-        </button>
-      </div>
-      <div class="py-5">
-        <div class="flex flex-col justify-center items-center px-4">
 
-          <div class="text-center sm:text-left whitespace-nowrap">
-            <button
-              class="transition duration-200  px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset"
-              routerLink="sign-in">
-              <span class="inline-block">Have an Account ? Sign in</span>
-            </button>
-          </div>
+<!--        <label class="font-semibold text-sm text-gray-600 pb-1 block">Confirm Password</label>-->
+<!--        <input class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" formControlName="password2"-->
+<!--               placeholder="Confirm Password"-->
+<!--               type="password"/>-->
 
+<!--        <mat-error>{{getPassword2ErrorMessage()}}</mat-error>-->
+<!--        <button-->
+<!--          [disabled]="!isFormValid()"-->
+<!--          class="transition duration-200 secondary-color hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"-->
+<!--          type="submit"-->
+<!--        >-->
+<!--          <span class="inline-block mr-2">Sign Up</span>-->
+<!--          <svg class="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"-->
+<!--               xmlns="http://www.w3.org/2000/svg">-->
+<!--            <path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>-->
+<!--          </svg>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <div class="py-5">-->
+<!--        <div class="flex flex-col justify-center items-center px-4">-->
+
+<!--          <div class="text-center sm:text-left whitespace-nowrap">-->
+<!--            <button-->
+<!--              class="transition duration-200  px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset"-->
+<!--              routerLink="sign-in">-->
+<!--              <span class="inline-block">Have an Account ? Sign in</span>-->
+<!--            </button>-->
+<!--          </div>-->
+
+<!--        </div>-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<div class="relative min-h-screen flex ">
+  <div
+    class="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-white">
+    <div
+      class="sm:w-1/2 xl:w-3/5 h-full hidden md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover relative">
+      <div class="absolute bg-gradient-to-b bg-gradient-to-r from-cyan-900 to-teal-300 opacity-75 inset-0 z-0"></div>
+      <div class="w-full  max-w-md z-10">
+        <div class="sm:text-4xl xl:text-5xl font-bold leading-tight mb-6">Join MyRewards Now !</div>
+        <div class="sm:text-sm xl:text-md text-gray-200 font-normal"> The Perfect Way to manage your offers and get the
+          data
         </div>
       </div>
-    </form>
+      <!---remove custom style-->
+      <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+    <div
+      class="md:flex md:items-center md:justify-center w-full sm:w-auto md:h-full w-2/5 xl:w-2/5 p-8  md:p-10 lg:p-14 sm:rounded-lg md:rounded-none bg-white">
+      <div class="max-w-md w-full space-y-8">
+        <div class="text-center">
+          <h2 class="mt-6 text-3xl font-bold text-gray-900">
+            Join Us
+          </h2>
+          <p class="mt-2 text-sm text-gray-500">Be part of our family and manage your business</p>
+        </div>
+        <form (ngSubmit)="onSubmit()" [formGroup]="regForm" class="mt-8 space-y-6">
+
+          <div class="relative">
+            <div *ngIf="!regForm.controls.email.invalid" class="absolute right-3 mt-8">
+              <svg class="h-6 w-6 text-green-500" fill="none"
+                   stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="2"></path>
+              </svg>
+            </div>
+
+            <!--            Email             -->
+            <label class="ml-3 text-sm font-bold text-gray-700 tracking-wide">Email</label>
+            <input
+              class=" w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
+              formControlName="email"
+              placeholder="mail@gmail.com" type="email">
+            <mat-error>{{ getEmailErrorMessage() }}</mat-error>
+          </div>
+
+
+          <!--          Password        -->
+          <div class="mt-8 content-center">
+            <label class="ml-3 text-sm font-bold text-gray-700 tracking-wide">
+              Password
+            </label>
+            <input
+              class="w-full content-center text-base px-4 py-2 border-b rounded-2xl border-gray-300 focus:outline-none focus:border-indigo-500"
+              formControlName="password" placeholder="Enter your password" type="password">
+
+            <mat-error>{{ getPasswordErrorMessage() }}</mat-error>
+
+          </div>
+
+          <!--         Confirm Password        -->
+          <div class="mt-8 content-center">
+            <label class="ml-3 text-sm font-bold text-gray-700 tracking-wide">
+              Confirm Password
+            </label>
+            <input
+              class="w-full content-center text-base px-4 py-2 border-b rounded-2xl border-gray-300 focus:outline-none focus:border-indigo-500"
+              formControlName="password2" placeholder="Confirm your password" type="password">
+
+            <mat-error>{{ getPassword2ErrorMessage() }}</mat-error>
+
+          </div>
+
+
+          <div>
+            <button
+              [disabled]="!isFormValid()"
+              class="w-full flex justify-center bg-gradient-to-r  from-cyan-700 to-teal-300   hover:bg-gradient-to-l hover:from-cyan-500 hover:to-teal-600 text-gray-100 p-4  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
+              type="submit">
+              Sign up
+            </button>
+          </div>
+          <p class="flex flex-col items-center justify-center mt-10 text-center text-md text-gray-500">
+            <span>Have an account?</span>
+            <a
+              class="text-indigo-400 hover:text-blue-500 no-underline hover:underline cursor-pointer transition ease-in duration-300"
+              routerLink="sign-in">Sign in</a>
+          </p>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 
