@@ -31,6 +31,12 @@ mat-form-field {
   width: 100%;
 }
 
+button:disabled {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
+  cursor: not-allowed;
+}
+
 .date-picker-field .mat-form-field-suffix {
   top: 0;
   right: 0;

@@ -36,47 +36,54 @@
 <div class="bg-white rounded  p-4 px-4 md:p-8 ">
   <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
     <div class="text-gray-600">
-      <p class="font-medium text-lg">Create New Offer</p>
+      <p *ngIf="!edit" class="font-medium text-lg">Create New Offer</p>
       <p *ngIf="edit" class="font-medium text-lg">Edit Offer</p>
       <p>Please fill out all the fields.</p>
     </div>
 
     <div class="lg:col-span-2">
-      <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+      <div [formGroup]="offerForm" class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
 
         <div class="md:col-span-5">
           <mat-form-field appearance="outline">
             <mat-label>Title</mat-label>
-            <input [(ngModel)]="title" matInput placeholder="Enter Title">
-          </mat-form-field>
+            <input [(ngModel)]="title" formControlName="title" matInput maxlength="50" minlength="3" name="title"
+                   placeholder="Enter Title"
+                   required>
 
+            <mat-error>{{getTitleErrorMessage()}}</mat-error>
+
+          </mat-form-field>
         </div>
 
         <div class="md:col-span-5">
           <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
-            <textarea [(ngModel)]="description" matInput placeholder="Enter Description"></textarea>
+            <textarea [(ngModel)]="description" formControlName="description" matInput maxlength="500" minlength="10"
+                      name="description"
+                      placeholder="Enter Description" required></textarea>
+            <mat-error>{{getDescriptionErrorMessage()}}</mat-error>
           </mat-form-field>
-
         </div>
 
-
         <div class="md:col-span-5">
-
           <mat-form-field appearance="outline">
             <mat-label>Enter a date range</mat-label>
-            <mat-date-range-input [rangePicker]="picker">
-              <input [(ngModel)]="startDate" [min]="today" matStartDate placeholder="Start date">
-              <input [(ngModel)]="endDate" matEndDate placeholder="End date">
+            <mat-date-range-input [rangePicker]="picker" required>
+              <input [(ngModel)]="startDate" [min]="today" formControlName="startDate" matStartDate
+                     placeholder="Start date">
+              <input [(ngModel)]="endDate" formControlName="endDate" matEndDate placeholder="End date">
             </mat-date-range-input>
             <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
             <mat-date-range-picker #picker [startAt]="today"></mat-date-range-picker>
             <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+
+            <mat-error>{{getDatesErrorMessage()}}</mat-error>
           </mat-form-field>
         </div>
 
 
-        <div class="md:col-span-5">
+        <div *ngIf="!edit" class="md:col-span-5">
           <label
             class="w-full flex flex-col items-center px-4 py-6 bg-sec text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue">
             <svg class="w-8 h-8" fill="#ffffff" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -84,9 +91,12 @@
                 d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"/>
             </svg>
             <span class="mt-2 text-base leading-normal text-white">Select a Picture</span>
-            <input (change)="onChange($event)" accept="image/*" class="hidden" type='file'/>
+            <input (change)="onChange($event)" accept="image/*" class="hidden" formControlName="image" required
+                   type='file'/>
           </label>
 
+          <p>File Selected {{fileName}}</p>
+          <mat-error>{{getPictureErrorMessage()}}</mat-error>
 
         </div>
 
@@ -94,6 +104,7 @@
         <div class="md:col-span-5 text-right">
           <div class="inline-flex items-end">
             <button (click)="onSubmit()" *ngIf="!edit"
+                    [disabled]="!isFormValid() && fileName == ''"
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               Submit
             </button>
