@@ -35,12 +35,11 @@ export class OffersPageComponent implements OnInit {
         this.offers = res.map((e: any) => {
           const data = e.payload.doc.data();
           data.id = e.payload.doc.id;
-          const startDateClean = new Date(data.startDate);
-          const endDateClean = new Date(data.endDate);
-          let dateOnly = startDateClean.toISOString().substr(0, 10);
-          data.startDate = dateOnly
-          dateOnly = endDateClean.toISOString().substr(0, 10)
-          data.endDate = dateOnly
+
+          //clean the date
+          data.startDate = this.dateSanitizing(data.startDate)
+          data.endDate = this.dateSanitizing(data.endDate)
+
           return data;
         });
         this.no_Offers = this.offers.length === 0;
@@ -56,5 +55,12 @@ export class OffersPageComponent implements OnInit {
     this.dialog.open(OfferFormComponent, {
       data: null
     });
+  }
+
+  dateSanitizing(date: string) {
+    const cleanDate = new Date(date);
+    let dateOnly = cleanDate.toISOString().substr(0, 10);
+    return dateOnly
+
   }
 }
