@@ -90,6 +90,30 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.slide-in-right {
+  position: relative;
+  right: -100%;
+  animation: slideIn 1s ease-in-out forwards;
+}
+
+@keyframes slideIn-right {
+  to {
+    right: 0;
+  }
+}
+
+.slide-in {
+  position: relative;
+  left: -100%;
+  animation: slideIn 1s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+  to {
+    left: 0;
+  }
+}
+
 
 /*remove custom style*/
 .circles {
@@ -202,4 +226,18 @@ button:disabled {
     border-radius: 50%;
   }
 
+}
+
+.animate-width {
+
+  width: 50%;
+  transition: width 0.5s ease-in-out;
+}
+
+#my-element {
+  transition: opacity 0.3s ease-in-out; /* Add a transition to the opacity property */
+}
+
+#my-element.visible {
+  opacity: 1; /* Set opacity to 1 to display the element */
 }

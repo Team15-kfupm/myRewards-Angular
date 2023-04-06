@@ -55,6 +55,7 @@ import {ProfileComponent} from './components/profile/profile.component';
     DoughnutChartComponent,
     StatCardComponent,
     ProfileComponent,
+
   ],
   exports: [
     SidenavComponent,
