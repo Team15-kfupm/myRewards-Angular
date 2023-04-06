@@ -25,11 +25,12 @@ export class PromoCodeService {
     let offer_id = querySnapshot.docs[0].data()['offer_id'];
     this.firestore.collection('offers').doc(offer_id).get().subscribe(res => {
       info = (res.data() as Offer).title
+      let offer = res.data() as Offer;
     })
 
     return await lastValueFrom(this.firestore.collection('offers')
       .doc(offer_id).get()).then(value => {
-      return (value.data() as Offer).title + " and the description "+ (value.data() as Offer).description;
+      return (value.data() as Offer).title + " and the description " + (value.data() as Offer).description;
     })
 
     // querySnapshot.forEach((doc) => {

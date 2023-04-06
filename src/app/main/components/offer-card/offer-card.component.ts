@@ -22,6 +22,7 @@ export class OfferCardComponent implements OnInit {
     title: '',
     image: '',
     worthPoints: 0,
+    numOfRedeem: 0,
   };
 
 

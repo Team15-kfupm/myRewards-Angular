@@ -7,4 +7,5 @@ export interface Offer {
   startDate: string,
   endDate: string,
   worthPoints: number,
+  numOfRedeem: number,
 }

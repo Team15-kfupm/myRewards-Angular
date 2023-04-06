@@ -43,7 +43,8 @@ export class OfferFormComponent implements OnInit {
     image: '',
     startDate: '',
     endDate: '',
-    worthPoints: 0
+    worthPoints: 0,
+    numOfRedeem: 0,
   }
   today = new Date();
 
