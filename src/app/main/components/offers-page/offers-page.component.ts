@@ -17,12 +17,15 @@ export class OffersPageComponent implements OnInit {
   description: string = '';
   image: string = '';
 
+  no_Offers: boolean = false
+
   constructor(public dialog: MatDialog, private offersService: OffersService) {
   }
 
 
   ngOnInit(): void {
     this.getAllOffers()
+
   }
 
   getAllOffers() {
@@ -34,11 +37,13 @@ export class OffersPageComponent implements OnInit {
           data.id = e.payload.doc.id;
           return data;
         });
+        this.no_Offers = this.offers.length === 0;
       },
       error: (err) => {
         console.log(err);
       },
     });
+
   }
 
   openDialog() {
