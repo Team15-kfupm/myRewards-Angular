@@ -3,10 +3,12 @@ import {Router} from "@angular/router";
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {AuthService} from "../../../shared/services/auth.service";
 
+
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.scss'],
+
 })
 export class LoginPageComponent implements OnInit {
 

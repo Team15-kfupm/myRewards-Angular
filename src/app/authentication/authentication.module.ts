@@ -17,6 +17,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     RegPageComponent,
     AuthenticationComponent,
     CashierComponent,
+
   ],
   imports: [
     CommonModule,
