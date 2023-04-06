@@ -19,9 +19,9 @@ export class OffersPageComponent implements OnInit {
 
   no_Offers: boolean = false
 
+
   constructor(public dialog: MatDialog, private offersService: OffersService) {
   }
-
 
   ngOnInit(): void {
     this.getAllOffers()
@@ -35,6 +35,12 @@ export class OffersPageComponent implements OnInit {
         this.offers = res.map((e: any) => {
           const data = e.payload.doc.data();
           data.id = e.payload.doc.id;
+          const startDateClean = new Date(data.startDate);
+          const endDateClean = new Date(data.endDate);
+          let dateOnly = startDateClean.toISOString().substr(0, 10);
+          data.startDate = dateOnly
+          dateOnly = endDateClean.toISOString().substr(0, 10)
+          data.endDate = dateOnly
           return data;
         });
         this.no_Offers = this.offers.length === 0;

@@ -34,7 +34,7 @@ export class OfferFormComponent implements OnInit {
   startDate = ''
   endDate = ''
   worthPoints = 0
-  fileName: string = ''
+  fileName: string = '';
 
   offerObj: Offer = {
     id: '',
@@ -70,7 +70,7 @@ export class OfferFormComponent implements OnInit {
       this.worthPoints = this.data.worthPoints;
     }
 
-    console.info('Today Date ' + this.today)
+    console.info('Today Date ' + this.fileName)
 
   }
 
@@ -114,7 +114,10 @@ export class OfferFormComponent implements OnInit {
       startDate: this.startDate,
       endDate: this.endDate,
       worthPoints: this.worthPoints
-    }).then(r => console.log(r))
+    }).then(r => {
+      this.openSnackBar('Changes Saved !')
+      console.log(r)
+    })
     this.dialogRef.close()
 
   }
@@ -205,7 +208,7 @@ export class OfferFormComponent implements OnInit {
 
   isFormValid(): boolean {
 
-    return this.offerForm.valid
+    return this.offerForm.valid && this.fileName != ''
   }
 
 }
