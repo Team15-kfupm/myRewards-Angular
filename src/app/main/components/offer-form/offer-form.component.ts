@@ -4,6 +4,7 @@ import {Offer} from "../../../models/offer";
 import {OffersService} from "../../../services/offers.service";
 import {DatePipe} from "@angular/common";
 import {FormBuilder, Validators} from "@angular/forms";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-offer-form',
@@ -20,6 +21,7 @@ export class OfferFormComponent implements OnInit {
     description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
     startDate: ['', Validators.required],
     endDate: ['', Validators.required],
+    worthPoints: [0, Validators.required],
     image: [Validators.required]
 
   });
@@ -31,6 +33,7 @@ export class OfferFormComponent implements OnInit {
   description = ''
   startDate = ''
   endDate = ''
+  worthPoints = 0
   fileName: string = ''
 
   offerObj: Offer = {
@@ -39,7 +42,8 @@ export class OfferFormComponent implements OnInit {
     description: '',
     image: '',
     startDate: '',
-    endDate: ''
+    endDate: '',
+    worthPoints: 0
   }
   today = new Date();
 
@@ -48,6 +52,7 @@ export class OfferFormComponent implements OnInit {
     private fb: FormBuilder,
     private offersService: OffersService,
     private dialogRef: MatDialogRef<OfferFormComponent>,
+    private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
   }
@@ -62,6 +67,7 @@ export class OfferFormComponent implements OnInit {
       this.description = this.data.description;
       this.startDate = this.data.startDate;
       this.endDate = this.data.endDate;
+      this.worthPoints = this.data.worthPoints;
     }
 
     console.info('Today Date ' + this.today)
@@ -75,6 +81,7 @@ export class OfferFormComponent implements OnInit {
     this.description = '';
     this.startDate = '';
     this.endDate = '';
+    this.worthPoints = 0;
   }
 
   onSubmit() {
@@ -84,9 +91,16 @@ export class OfferFormComponent implements OnInit {
     this.offerObj.description = this.offerForm.controls.description.value!.toString();
     this.offerObj.startDate = this.offerForm.controls.startDate.value!.toString();
     this.offerObj.endDate = this.offerForm.controls.endDate.value!.toString();
+    this.offerObj.worthPoints = this.offerForm.controls.worthPoints.value!;
 
 
-    this.offersService.addOffer(this.offerObj, this.image).then(r => console.log(r));
+    this.offersService.addOffer(this.offerObj, this.image).then(r => {
+      this.openSnackBar('Added !')
+      console.log(r)
+    }).catch(err => {
+      this.openSnackBar('Something Went Wrong !');
+      console.error(err)
+    });
     this.resetAll();
     this.dialogRef.close()
   }
@@ -98,7 +112,8 @@ export class OfferFormComponent implements OnInit {
       description: this.description,
       image: this.image,
       startDate: this.startDate,
-      endDate: this.endDate
+      endDate: this.endDate,
+      worthPoints: this.worthPoints
     }).then(r => console.log(r))
     this.dialogRef.close()
 
@@ -180,6 +195,12 @@ export class OfferFormComponent implements OnInit {
     }
 
     return '';
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Ok', {
+      duration: 2000,
+    });
   }
 
   isFormValid(): boolean {

@@ -5,5 +5,6 @@ export interface Offer {
   description: string,
   image: string,
   startDate: string,
-  endDate: string
+  endDate: string,
+  worthPoints: number,
 }

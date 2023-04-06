@@ -23,8 +23,6 @@ export class OffersPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllOffers()
-
-
   }
 
   getAllOffers() {

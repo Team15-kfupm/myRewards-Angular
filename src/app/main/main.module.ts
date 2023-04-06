@@ -31,9 +31,11 @@ import {TailwindChartComponentPie} from './components/charts/tailwind-chart-pie/
 import {LineChartTailwindComponent} from './components/charts/line-chart-tailwind/line-chart-tailwind.component';
 import {DoughnutChartComponent} from './components/charts/doughnut-chart/doughnut-chart.component';
 import {StatCardComponent} from './components/charts/stat-card/stat-card.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import {MatMenuModule} from "@angular/material/menu";
 import {ProfileComponent} from './components/profile/profile.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 
 @NgModule({
@@ -55,6 +57,7 @@ import {ProfileComponent} from './components/profile/profile.component';
     DoughnutChartComponent,
     StatCardComponent,
     ProfileComponent,
+    ConfirmationDialogComponent,
 
   ],
   exports: [
@@ -78,6 +81,7 @@ import {ProfileComponent} from './components/profile/profile.component';
     MatDatepickerModule,
     MatNativeDateModule,
     LayoutModule,
+    MatSnackBarModule,
     MatMenuModule,
     ReactiveFormsModule,
 

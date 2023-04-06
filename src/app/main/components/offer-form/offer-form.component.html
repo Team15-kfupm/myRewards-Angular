@@ -68,6 +68,18 @@
 
         <div class="md:col-span-5">
           <mat-form-field appearance="outline">
+            <mat-label>Worth Points</mat-label>
+            <input [(ngModel)]="worthPoints" formControlName="worthPoints"
+                   matInput
+                   name="worthPoints"
+                   placeholder="Enter how many points your offer worth"
+                   required type="number">
+            <!--            <mat-error>{{getDescriptionErrorMessage()}}</mat-error>-->
+          </mat-form-field>
+        </div>
+
+        <div class="md:col-span-5">
+          <mat-form-field appearance="outline">
             <mat-label>Enter a date range</mat-label>
             <mat-date-range-input [rangePicker]="picker" required>
               <input [(ngModel)]="startDate" [min]="today" formControlName="startDate" matStartDate
