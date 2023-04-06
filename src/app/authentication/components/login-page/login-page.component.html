@@ -109,6 +109,7 @@
         <li></li>
       </ul>
     </div>
+
     <div
       class="md:flex md:items-center md:justify-center w-full sm:w-auto md:h-full w-2/5 xl:w-2/5 p-8  md:p-10 lg:p-14 sm:rounded-lg md:rounded-none bg-white slide-in-right">
       <div class="max-w-md w-full space-y-8">
@@ -118,7 +119,15 @@
           </h2>
           <p class="mt-2 text-sm text-gray-500">Please sign in to your account</p>
         </div>
-        <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="mt-8 space-y-6">
+        <app-cashier *ngIf="cashier"></app-cashier>
+        <p *ngIf="cashier" class="flex flex-col items-center justify-center mt-10 text-center text-md text-gray-500">
+          <span>Are you an Owner ?</span>
+          <a
+            (click)="toggleCashier()"
+            class="text-indigo-400 hover:text-blue-500 no-underline hover:underline cursor-pointer transition ease-in duration-300"
+          >Sign in as an Owner</a>
+        </p>
+        <form (ngSubmit)="onSubmit()" *ngIf="!cashier" [formGroup]="loginForm" class="mt-8 space-y-6">
 
           <div class="relative">
             <div *ngIf="!loginForm.controls.email.invalid" class="absolute right-3 mt-8">
@@ -176,6 +185,15 @@
               class="text-indigo-400 hover:text-blue-500 no-underline hover:underline cursor-pointer transition ease-in duration-300"
               routerLink="sign-up">Sign
               up</a>
+          </p>
+
+
+          <p *ngIf="!cashier" class="flex flex-col items-center justify-center mt-10 text-center text-md text-gray-500">
+            <span>Are you a Cashier</span>
+            <a
+              (click)="toggleCashier()"
+              class="text-indigo-400 hover:text-blue-500 no-underline hover:underline cursor-pointer transition ease-in duration-300"
+            >Sign in as Cashier</a>
           </p>
         </form>
       </div>

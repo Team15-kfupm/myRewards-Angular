@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Chart} from "chart.js/auto";
+import {OffersService} from "../../../../services/offers.service";
+import {Offer} from "../../../../models/offer";
 
 @Component({
   selector: 'app-doughnut-chart',
@@ -9,8 +11,11 @@ import {Chart} from "chart.js/auto";
 export class DoughnutChartComponent implements OnInit {
 
 
+  offers: Offer[] = []
+  offersLabels: string[] = []
+  offersData: number[] = []
   dataDoughnut = {
-    labels: ["Offer 1", "Offer 2", "Offer 3"],
+    labels: this.getLabels(this.offers),
     datasets: [
       {
         label: "My First Dataset",
@@ -27,15 +32,81 @@ export class DoughnutChartComponent implements OnInit {
 
   doughnutChart!: Chart
 
-  constructor() {
+  constructor(private offersService: OffersService) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
 
-    this.doughnutChart = new Chart("chartDoughnut", {
-      type: "doughnut",
-      data: this.dataDoughnut,
+    await this.getAllOffers()
+
+    // this.doughnutChart = new Chart("chartDoughnut", {
+    //   type: "doughnut",
+    //   data: this.dataDoughnut,
+    // });
+  }
+
+
+  getAllOffers() {
+    this.offersService.getOffers().subscribe({
+      next: (res) => {
+        this.offers = res.map((e: any) => {
+          const data = e.payload.doc.data();
+          data.id = e.payload.doc.id;
+          return data;
+        });
+        // this.no_Offers = this.offers.length === 0;
+        this.offersLabels = this.getLabels(this.offers);
+        this.offersData = this.getData(this.offers);
+
+        this.dataDoughnut = {
+          labels: this.offersLabels,
+          datasets: [
+            {
+              label: "My First Dataset",
+              data: this.offersData,
+              backgroundColor: [
+                "rgb(133, 105, 241)",
+                "rgb(164, 101, 241)",
+                "rgb(101, 143, 241)",
+              ],
+              hoverOffset: 4,
+            },
+          ],
+        };
+
+        this.doughnutChart = new Chart("chartDoughnut", {
+          type: "doughnut",
+          data: this.dataDoughnut,
+        });
+
+        console.log(this.offersLabels);
+
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
+  }
+
+  getLabels(offers: Offer[]) {
+
+    let offersLabels: string[] = []
+
+    offers.forEach(offer => {
+      offersLabels.push(offer.title)
+    })
+
+    return offersLabels
+  }
+
+
+  getData(offers: Offer[]) {
+    let offerData: number[] = []
+
+    offers.forEach(e =>
+      offerData.push(e.numOfRedeem))
+
+    return offerData;
   }
 
 }

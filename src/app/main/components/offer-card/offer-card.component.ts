@@ -3,7 +3,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {OfferFormComponent} from "../offer-form/offer-form.component";
 import {Offer} from "../../../models/offer";
 import {OffersService} from "../../../services/offers.service";
-import firebase from "firebase/compat";
+import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 
 @Component({
@@ -20,12 +21,14 @@ export class OfferCardComponent implements OnInit {
     endDate: '',
     title: '',
     image: '',
+    worthPoints: 0,
+    numOfRedeem: 0,
   };
 
 
   code: string = "";
 
-  constructor(public dialog: MatDialog, private offersService: OffersService) {
+  constructor(public dialog: MatDialog, private offersService: OffersService, private snackBar: MatSnackBar,) {
   }
 
   ngOnInit(): void {
@@ -49,9 +52,29 @@ export class OfferCardComponent implements OnInit {
       console.log('Deleted successfully')).catch(err => console.log('Error during delete ' + err));
   }
 
-
-  parsingDate() {
-    this.offer.startDate = this.offer.startDate.split('T')[0];
-    this.offer.endDate = this.offer.endDate.split('T')[0];
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Ok', {
+      duration: 2000,
+    });
   }
+
+  openConfirmationDialog(id: string) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.offersService.deleteOffer(id).then(r => {
+            console.log('Deleted successfully', r);
+            this.openSnackBar('Deleted !');
+          }
+        ).catch(err => {
+          console.log('Error during delete ' + err);
+          this.openSnackBar('Sorry Something Went wrong')
+        });
+      } else {
+        dialogRef.close()
+      }
+    });
+  }
+
 }

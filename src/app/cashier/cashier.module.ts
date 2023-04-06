@@ -11,6 +11,9 @@ import {SharedModule} from "../shared/shared.module";
   declarations: [
     CashierComponent
   ],
+  exports: [
+    CashierComponent
+  ],
   imports: [
     CommonModule,
     CashierRoutingModule,

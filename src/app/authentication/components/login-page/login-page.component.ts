@@ -19,6 +19,7 @@ export class LoginPageComponent implements OnInit {
   });
 
   reason = ""
+  cashier: boolean = false;
 
   constructor(
     private router: Router,
@@ -80,8 +81,8 @@ export class LoginPageComponent implements OnInit {
     return this.loginForm.valid;
   }
 
-  sent(): void {
-    console.log('Sent')
+  toggleCashier(): void {
+    this.cashier = !this.cashier;
   }
 
 }

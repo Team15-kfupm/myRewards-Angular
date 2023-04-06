@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="!no_Offers" class="container">
   <div class="add">
     <button (click)="openDialog()">Add Offer</button>
   </div>
@@ -19,5 +19,16 @@
       <app-offer-card *ngFor="let offer of offers" [offer]="offer"></app-offer-card>
     </div>
 
+  </div>
+</div>
+
+
+<div *ngIf="no_Offers" class="flex flex-col justify-center items-center h-screen ease-in duration-100 ">
+  <div class="flex flex-col items-center justify-center">
+    <p class="text-3xl md:text-4xl lg:text-5xl text-gray-800 mt-12">There are no Offers</p>
+    <p class="md:text-lg lg:text-xl text-gray-600 mt-8">You can add a new offer by clicking the button below </p>
+    <div class="add">
+      <button (click)="openDialog()">Add Offer</button>
+    </div>
   </div>
 </div>
