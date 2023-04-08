@@ -58,6 +58,7 @@
         placeholder="Enter your OTP Number"
         type="text"
       />
+      <mat-error *ngIf="otpIsWrong">OTP code is wrong</mat-error>
     </div>
     <p class="text-gray-500 text-sm mb-4">Note: The OTP has been sent to your email address.</p>
     <button
