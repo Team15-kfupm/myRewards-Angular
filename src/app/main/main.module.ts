@@ -35,7 +35,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import {MatMenuModule} from "@angular/material/menu";
 import {ProfileComponent} from './components/profile/profile.component';
-import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import {ConfirmationDialogComponent} from './components/confirmation-dialog/confirmation-dialog.component';
+import {SpinnerComponent} from '../shared/components/spinner/spinner.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     StatCardComponent,
     ProfileComponent,
     ConfirmationDialogComponent,
+    SpinnerComponent,
 
   ],
   exports: [

@@ -18,7 +18,8 @@
   </div>
   <button
     [disabled]="timer"
-    class="w-full flex justify-center bg-gradient-to-r  from-cyan-700 to-teal-300   hover:bg-gradient-to-l hover:from-cyan-500 hover:to-teal-600 text-gray-100 p-4  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
+    class="w-full flex justify-center items-center bg-gradient-to-r  from-cyan-700 to-teal-300   hover:bg-gradient-to-l hover:from-cyan-500 hover:to-teal-600 text-gray-100 p-4  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
+    style="height: 3rem"
     type="submit">
     <div *ngIf="!checkingEmail">
       <div *ngIf="!showOTPForm">
@@ -58,6 +59,7 @@
         placeholder="Enter your OTP Number"
         type="text"
       />
+      <mat-error *ngIf="otpIsWrong">OTP code is wrong</mat-error>
     </div>
     <p class="text-gray-500 text-sm mb-4">Note: The OTP has been sent to your email address.</p>
     <button

@@ -13,9 +13,10 @@ export class CashierComponent {
   otpForm: FormGroup;
   showOTPForm = false;
   checkingEmail = false;
-  private waitingTime = 3;
   timer: number = 0;
   endTime: Date = new Date();
+  otpIsWrong: boolean = false;
+  private waitingTime = 3;
 
   constructor(
     private fb: FormBuilder,
@@ -47,10 +48,15 @@ export class CashierComponent {
     if (this.otpForm.valid) {
       // Perform actions after OTP form is submitted
       console.log('OTP form submitted');
+      this.otpIsWrong = false;
       await this.cashierService
         .loginWithOTP(this.emailForm.value.email, this.otpForm.value.otp)
         .then(value => this.router.navigate(['/redirect']))
-        .catch(reason => console.error(reason));
+        .catch(reason => {
+          console.error('Error wrong code')
+          this.otpIsWrong = true;
+          console.error(reason)
+        });
     }
   }
 

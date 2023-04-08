@@ -23,12 +23,15 @@ body {
 .wrapper {
   display: flex;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: center;
 
   height: 100%;
   width: calc(100vw - 480px);
 }
 
+.center {
+  align-items: center;
+}
 
 .side {
   display: flex;

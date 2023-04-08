@@ -10,17 +10,17 @@
     </svg>
   </div>
   <ul>
-    <div class="item">
+    <div (click)="goTo('home')" class="item">
       <svg fill="none" height="45" viewBox="0 0 48 45" width="48" xmlns="http://www.w3.org/2000/svg">
         <path
           [ngClass]="{enabled:iAmInHome()}"
           d="M18 31.875V28.125M24 31.875V24.375M30 31.875V20.625M34 39.375H14C12.9391 39.375 11.9217 38.9799 11.1716 38.2766C10.4214 37.5734 10 36.6196 10 35.625V9.375C10 8.38044 10.4214 7.42661 11.1716 6.72335C11.9217 6.02009 12.9391 5.625 14 5.625H25.172C25.7024 5.62511 26.211 5.82272 26.586 6.17437L37.414 16.3256C37.7891 16.6772 37.9999 17.154 38 17.6512V35.625C38 36.6196 37.5786 37.5734 36.8284 38.2766C36.0783 38.9799 35.0609 39.375 34 39.375Z"
           stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
       </svg>
-      <li (click)="goTo('home')" [ngClass]="{enabled:iAmInHome()}">Dashboard</li>
+      <li [ngClass]="{enabled:iAmInHome()}">Dashboard</li>
     </div>
 
-    <div class="item">
+    <div (click)="goTo('offers')" class="item">
       <svg fill="none" height="45" viewBox="0 0 45 45" width="45" xmlns="http://www.w3.org/2000/svg">
         <path
           [ngClass]="{'enabled':iAmInOffers()}"
@@ -30,10 +30,10 @@
       </svg>
 
 
-      <li (click)="goTo('offers')" [ngClass]="{'enabled':iAmInOffers()}">Offers</li>
+      <li [ngClass]="{'enabled':iAmInOffers()}">Offers</li>
     </div>
 
-    <div class="item">
+    <div (click)="goTo('redeem')" class="item">
       <svg fill="none" height="45" viewBox="0 0 63 39" width="45" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_33_73)">
           <path
@@ -49,16 +49,16 @@
       </svg>
 
 
-      <li (click)="goTo('redeem')" [ngClass]="{'enabled':iAmInRedeem()}">Redeem</li>
+      <li [ngClass]="{'enabled':iAmInRedeem()}">Redeem</li>
     </div>
 
-    <div class="item">
+    <div (click)="signOut()" class="item">
       <svg fill="none" height="45" viewBox="0 0 45 45" width="45" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M17.5368 30.375V34.3125C17.5368 35.3568 17.9551 36.3583 18.6997 37.0967C19.4444 37.8352 20.4543 38.25 21.5074 38.25L35.4044 38.25C36.4575 38.25 37.4674 37.8352 38.212 37.0967C38.9567 36.3583 39.375 35.3568 39.375 34.3125L39.375 10.6875C39.375 9.64321 38.9567 8.64169 38.212 7.90327C37.4674 7.16484 36.4575 6.75 35.4044 6.75L21.5074 6.75C20.4543 6.75 19.4444 7.16484 18.6997 7.90327C17.9551 8.64169 17.5368 9.64321 17.5368 10.6875V14.625M29.4485 22.5L5.625 22.5M5.625 22.5L11.5809 28.4062M5.625 22.5L11.5809 16.5937"
           stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
       </svg>
-      <li (click)="signOut()">Logout</li>
+      <li>Logout</li>
     </div>
 
   </ul>
