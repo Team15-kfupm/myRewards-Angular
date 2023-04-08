@@ -14,6 +14,8 @@ export class DoughnutChartComponent implements OnInit {
   offers: Offer[] = []
   offersLabels: string[] = []
   offersData: number[] = []
+
+  loaded = false;
   dataDoughnut = {
     labels: this.getLabels(this.offers),
     datasets: [
@@ -37,16 +39,15 @@ export class DoughnutChartComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
 
-    await this.getAllOffers()
 
-    // this.doughnutChart = new Chart("chartDoughnut", {
-    //   type: "doughnut",
-    //   data: this.dataDoughnut,
-    // });
+    await this.getAllOffers().then(e => {
+      this.loaded = true
+    })
+
   }
 
 
-  getAllOffers() {
+  async getAllOffers() {
     this.offersService.getOffers().subscribe({
       next: (res) => {
         this.offers = res.map((e: any) => {
@@ -62,7 +63,7 @@ export class DoughnutChartComponent implements OnInit {
           labels: this.offersLabels,
           datasets: [
             {
-              label: "My First Dataset",
+              label: "Offers that has been redeemed",
               data: this.offersData,
               backgroundColor: [
                 "rgb(133, 105, 241)",
@@ -73,13 +74,11 @@ export class DoughnutChartComponent implements OnInit {
             },
           ],
         };
+        this.createChart()
 
-        this.doughnutChart = new Chart("chartDoughnut", {
-          type: "doughnut",
-          data: this.dataDoughnut,
-        });
 
         console.log(this.offersLabels);
+
 
       },
       error: (err) => {
@@ -87,6 +86,16 @@ export class DoughnutChartComponent implements OnInit {
       },
     });
   }
+
+
+  createChart() {
+    this.doughnutChart = new Chart("chartDoughnut", {
+      type: "doughnut",
+      data: this.dataDoughnut,
+    });
+    this.loaded = true;
+  }
+
 
   getLabels(offers: Offer[]) {
 
