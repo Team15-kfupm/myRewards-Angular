@@ -56,3 +56,14 @@ li {
 }
 
 
+.slide-in {
+  position: relative;
+  left: -100%;
+  animation: slideIn 1s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+  to {
+    left: 0;
+  }
+}
