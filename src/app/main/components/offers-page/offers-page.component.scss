@@ -76,7 +76,7 @@ body {
 @media screen and (max-width: 1200px) {
   .offers-grid {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto;
     row-gap: 50px;
   }
 
