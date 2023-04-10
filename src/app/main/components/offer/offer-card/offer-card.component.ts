@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {OfferFormComponent} from "../offer-form/offer-form.component";
-import {Offer} from "../../../models/offer";
-import {OffersService} from "../../../services/offers.service";
-import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
+import {Offer} from "../../../../models/offer";
+import {OffersService} from "../../../../services/offers.service";
+import {ConfirmationDialogComponent} from "../../../../shared/confirmation-dialog/confirmation-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 

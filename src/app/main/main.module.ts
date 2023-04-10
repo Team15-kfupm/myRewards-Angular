@@ -1,13 +1,13 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
-import {SidenavComponent} from "./components/sidenav/sidenav.component";
+import {SidenavComponent} from "../shared/sidenav/sidenav.component";
 import {WcHeaderComponent} from "../shared/components/wc-header/wc-header.component";
 import {ChartCardComponent} from "../shared/components/chart-card/chart-card.component";
 import {ChartPieComponent} from "../shared/components/chart-pie/chart-pie.component";
-import {OffersPageComponent} from "./components/offers-page/offers-page.component";
-import {OfferFormComponent} from "./components/offer-form/offer-form.component";
-import {OfferCardComponent} from "./components/offer-card/offer-card.component";
+import {OffersPageComponent} from "./components/offer/offers-page/offers-page.component";
+import {OfferFormComponent} from "./components/offer/offer-form/offer-form.component";
+import {OfferCardComponent} from "./components/offer/offer-card/offer-card.component";
 import {TextfieldComponent} from "../shared/components/textfield/textfield.component";
 import {ChartLineComponent} from "../shared/components/chart-line/chart-line.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -32,12 +32,14 @@ import {LineChartTailwindComponent} from './components/charts/line-chart-tailwin
 import {DoughnutChartComponent} from './components/charts/doughnut-chart/doughnut-chart.component';
 import {StatCardComponent} from './components/charts/stat-card/stat-card.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSelectModule} from '@angular/material/select';
 
 import {MatMenuModule} from "@angular/material/menu";
 import {ProfileComponent} from './components/profile/profile.component';
-import {ConfirmationDialogComponent} from './components/confirmation-dialog/confirmation-dialog.component';
+import {ConfirmationDialogComponent} from '../shared/confirmation-dialog/confirmation-dialog.component';
 import {SpinnerComponent} from '../shared/components/spinner/spinner.component';
-import { HamburgerComponent } from './components/hamburger/hamburger.component';
+import {HamburgerComponent} from '../shared/hamburger/hamburger.component';
+import {AdminPageComponent} from '../admin-page/admin-page.component';
 
 
 @NgModule({
@@ -62,6 +64,7 @@ import { HamburgerComponent } from './components/hamburger/hamburger.component';
     ConfirmationDialogComponent,
     SpinnerComponent,
     HamburgerComponent,
+    AdminPageComponent,
 
   ],
   exports: [
@@ -83,6 +86,7 @@ import { HamburgerComponent } from './components/hamburger/hamburger.component';
     MatGridListModule,
     MatMenuModule,
     MatDatepickerModule,
+    MatSelectModule,
     MatNativeDateModule,
     LayoutModule,
     MatSnackBarModule,
