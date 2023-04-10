@@ -37,6 +37,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {ProfileComponent} from './components/profile/profile.component';
 import {ConfirmationDialogComponent} from './components/confirmation-dialog/confirmation-dialog.component';
 import {SpinnerComponent} from '../shared/components/spinner/spinner.component';
+import { HamburgerComponent } from './components/hamburger/hamburger.component';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import {SpinnerComponent} from '../shared/components/spinner/spinner.component';
     ProfileComponent,
     ConfirmationDialogComponent,
     SpinnerComponent,
+    HamburgerComponent,
 
   ],
   exports: [
