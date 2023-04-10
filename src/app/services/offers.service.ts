@@ -89,7 +89,7 @@ export class OffersService {
       .delete();
   }
 
-  private async getUserUid(): Promise<string> {
+  async getUserUid(): Promise<string> {
     const user = await this.authService.getCurrentUser();
     const uid = user?.uid;
     if (!uid) {
