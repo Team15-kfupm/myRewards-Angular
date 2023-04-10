@@ -25,18 +25,18 @@ export class PromoCodeService {
     let info: string = "";
     console.log(storeId)
 
-    const q = query(collection(this.firestore.firestore, '/temp-claim'), where('code', '==', code))
+    const q = query(collection(this.firestore.firestore, '/temp-claim'), where('code', '==', code), where('store_id', '==', storeId))
     const querySnapshot = await getDocs(q);
-    if (querySnapshot.docs.length == 0) throw Error('Error');
+    if (querySnapshot.docs.length == 0) throw Error('Error nothing');
     let offer_id = querySnapshot.docs[0].data()['offer_id'];
-    console.log(offer_id)
-    // this.firestore.collection('stores').doc(storeId).collection('offers').doc(offer_id).get().subscribe(res => {
-    //
-    //   info = (res.data() as Offer).title
-    //   let offer = res.data() as Offer;
-    // })
+    console.log('Here is ' + offer_id)
+    this.firestore.collection('stores').doc(storeId).collection('offers').doc(offer_id).get().subscribe(res => {
 
-    this.firestore.collection('stores').doc(storeId).get().subscribe(e => {
+      info = (res.data() as Offer).title
+      let offer = res.data() as Offer;
+    })
+
+    this.firestore.collection('stores').doc(storeId).collection('offers').doc(offer_id).get().subscribe(e => {
 
       console.log(e.exists)
     });
