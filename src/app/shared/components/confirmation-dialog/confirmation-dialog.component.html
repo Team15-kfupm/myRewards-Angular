@@ -1,8 +1,8 @@
 <h2 mat-dialog-title>Confirmation</h2>
 <div mat-dialog-content>
-  Are you sure you want to delete?
+  Are you sure you want to {{data}}?
 </div>
 <div mat-dialog-actions>
   <button (click)="dialogRef.close(false)" mat-button>Cancel</button>
-  <button (click)="dialogRef.close(true)" color="warn" mat-button>Delete</button>
+  <button (click)="dialogRef.close(true)" color="warn" mat-button>{{data}}</button>
 </div>

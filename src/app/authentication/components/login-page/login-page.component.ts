@@ -32,6 +32,23 @@ export class LoginPageComponent implements OnInit {
     this.isFormValid()
   }
 
+  async onSubmit(): Promise<void> {
+    this.reason = "";
+    const email = this.loginForm.value.email!;
+    const password = this.loginForm.value.password!;
+    await this.authService.signIn(email, password)
+      .then(value => {
+        console.log("Logged in", value)
+        this.router.navigate(['/redirect'])
+      })
+      .catch(reason => {
+        console.log(reason)
+        if (reason) {
+          this.reason = "Password or Email is not valid"
+        }
+      });
+  }
+
   getEmailErrorMessage(): string {
     if (this.loginForm.controls.email.touched) {
       if (this.loginForm.controls.email.hasError('required')) {
@@ -59,23 +76,6 @@ export class LoginPageComponent implements OnInit {
 
   }
 
-
-  async onSubmit(): Promise<void> {
-    this.reason = "";
-    const email = this.loginForm.value.email!;
-    const password = this.loginForm.value.password!;
-    await this.authService.signIn(email, password)
-      .then(value => {
-        console.log("Logged in", value)
-        this.router.navigate(['/redirect'])
-      })
-      .catch(reason => {
-        console.log(reason)
-        if (reason) {
-          this.reason = "Password or Email is not valid"
-        }
-      });
-  }
 
   isFormValid(): boolean {
     return this.loginForm.valid;

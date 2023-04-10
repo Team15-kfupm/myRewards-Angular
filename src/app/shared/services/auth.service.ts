@@ -31,9 +31,9 @@ export class AuthService {
       throw new Error('User sign-in failed');
   }
 
-  async signUp(email: string, password: string) {
+  async signUp(email: string, password: string, storeName: string) {
     // const result = await this.fireAuth.createUserWithEmailAndPassword(email, password);
-    const result = await lastValueFrom(this.fireFunctions.httpsCallable('registerOwner')({email, password}));
+    const result = await lastValueFrom(this.fireFunctions.httpsCallable('registerOwner')({email, password, storeName}));
     if (!result.success)
       throw new Error('Owner sign-up failed');
     return true;
@@ -41,12 +41,6 @@ export class AuthService {
 
   async signOut() {
     return this.fireAuth.signOut();
-  }
-
-  private getUser() {
-    return this.fireAuth.authState.pipe(
-      first()
-    )
   }
 
   async getCurrentUser() {
@@ -62,6 +56,12 @@ export class AuthService {
         user.uid = snapshot.id;
         return user;
       })
+  }
+
+  private getUser() {
+    return this.fireAuth.authState.pipe(
+      first()
+    )
   }
 
 }

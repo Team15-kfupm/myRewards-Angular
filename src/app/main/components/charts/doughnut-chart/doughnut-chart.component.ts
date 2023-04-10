@@ -113,7 +113,7 @@ export class DoughnutChartComponent implements OnInit {
     let offerData: number[] = []
 
     offers.forEach(e =>
-      offerData.push(e.numOfRedeem))
+      offerData.push(e.num_of_redeem))
 
     return offerData;
   }
