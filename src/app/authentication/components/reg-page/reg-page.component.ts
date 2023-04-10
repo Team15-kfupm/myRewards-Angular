@@ -10,6 +10,7 @@ import {AuthService} from "../../../shared/services/auth.service";
 export class RegPageComponent implements OnInit {
   regForm = this.formBuilder.group({
     email: new FormControl('', [Validators.required, Validators.email]),
+    storeName: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     password2: new FormControl('', [Validators.required]),
   });
@@ -28,8 +29,9 @@ export class RegPageComponent implements OnInit {
   onSubmit(): void {
     console.log('Called !')
     const email = this.regForm.value.email!;
+    const storeName = this.regForm.value.storeName!;
     const password = this.regForm.value.password!;
-    this.authService.signUp(email, password)
+    this.authService.signUp(email, password, storeName)
       .then(_ => window.location.href = '/')
       .catch(_ => console.error('error'));
   }
@@ -43,6 +45,18 @@ export class RegPageComponent implements OnInit {
       }
 
       return this.regForm.controls.email.hasError('email') ? 'Not a valid email' : '';
+    } else
+      return '';
+
+  }
+
+  getStoreNameErrorMessage(): string {
+    if (this.regForm.controls.storeName.touched) {
+      if (this.regForm.controls.storeName.hasError('required')) {
+        return 'You must enter a store name';
+      } else
+        return ''
+
     } else
       return '';
 
