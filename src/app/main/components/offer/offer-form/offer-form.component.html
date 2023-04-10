@@ -69,7 +69,7 @@
         <div class="md:col-span-5">
           <mat-form-field appearance="outline">
             <mat-label>Worth Points</mat-label>
-            <input [(ngModel)]="worthPoints" formControlName="worthPoints"
+            <input [(ngModel)]="worth_points" formControlName="worthPoints"
                    matInput
                    name="worthPoints"
                    placeholder="Enter how many points your offer worth"
@@ -85,9 +85,9 @@
           <mat-form-field appearance="outline">
             <mat-label>Enter a date range</mat-label>
             <mat-date-range-input [rangePicker]="picker" required>
-              <input [(ngModel)]="startDate" [min]="today" formControlName="startDate" matStartDate
+              <input [(ngModel)]="start_date" [min]="today" formControlName="startDate" matStartDate
                      placeholder="Start date">
-              <input [(ngModel)]="endDate" formControlName="endDate" matEndDate placeholder="End date">
+              <input [(ngModel)]="end_date" formControlName="endDate" matEndDate placeholder="End date">
             </mat-date-range-input>
             <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
             <mat-date-range-picker #picker [startAt]="today"></mat-date-range-picker>

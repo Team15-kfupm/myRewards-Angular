@@ -4,8 +4,8 @@ export interface Offer {
   title: string,
   description: string,
   image: string,
-  startDate: string,
-  endDate: string,
-  worthPoints: number,
-  numOfRedeem: number,
+  start_date: string,
+  end_date: string,
+  worth_points: number,
+  num_of_redeem: number,
 }

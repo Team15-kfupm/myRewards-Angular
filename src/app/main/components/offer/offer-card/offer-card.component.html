@@ -1,0 +1,135 @@
+<!--<div class="container">-->
+
+<!--  <img src="{{offer.image}}">-->
+
+<!--  <div class="row">-->
+
+<!--    <div class="info">-->
+<!--      <h3>{{offer.title}}</h3>-->
+<!--      <p>{{offer.description}}</p>-->
+<!--    </div>-->
+
+<!--    <div class="action">-->
+<!--      <button (click)="deleteOffer(offer.id)" class="delete">Delete</button>-->
+<!--      <button (click)="onEdit(offer)" class="edit">Edit</button>-->
+<!--      <button (click)="generateCode()" class="code">Generate Code</button>-->
+<!--    </div>-->
+
+<!--  </div>-->
+
+<!--  <div class="code">{{code}}</div>-->
+<!--</div>-->
+
+
+<!--<mat-card class="card">-->
+
+<!--  <img mat-card-image src="{{offer.image}}">-->
+<!--  <mat-card-content>-->
+<!--    <mat-card-title>{{offer.title}}</mat-card-title>-->
+<!--    <mat-card-subtitle>Starts at {{offer.startDate}}</mat-card-subtitle>-->
+<!--    <p>-->
+<!--      {{offer.description}}-->
+<!--    </p>-->
+<!--  </mat-card-content>-->
+<!--  <mat-card-actions class="action">-->
+<!--    <button (click)="deleteOffer(offer.id)" class="delete">Delete</button>-->
+<!--    <button (click)="onEdit(offer)" class="edit">Edit</button>-->
+<!--    &lt;!&ndash;    <button (click)="generateCode()" class="code">Generate Code</button>&ndash;&gt;-->
+<!--  </mat-card-actions>-->
+
+<!--</mat-card>-->
+
+
+<!--<div class="shadow-md border border-gray-200 rounded-lg max-w-sm bckg">-->
+
+<!--  <img alt="" class="rounded-t-lg bg-auto" src="{{offer.image}}">-->
+
+<!--  <div class=" p-5">-->
+
+<!--    <h3 class="text-gray-900 font-bold text-2xl tracking-tight mb-2 dark:text-white">{{offer.title}}</h3>-->
+
+<!--    <p class="font-normal text-gray-700 mb-3 dark:text-gray-400 h-10">{{offer.startDate}} till {{offer.endDate}}</p>-->
+<!--    <p class="font-normal text-gray-700 mb-3 dark:text-gray-400 h-10">{{offer.description}}</p>-->
+<!--    <h3 class="font-normal text-gray-700 mb-3 dark:text-gray-400 h-10">Your offer worth {{offer.worthPoints}}-->
+<!--      points</h3>-->
+
+<!--    <div class=" flex justify-center items-center">-->
+<!--      <button-->
+<!--        (click)="onEdit(offer)"-->
+<!--        class="text-white bg-blue-500 hover:bg-blue-800 focus:ring-4  font-medium rounded-l-lg text-sm px-3 py-2 text-center inline-flex justify-center items-center flex-1">-->
+<!--        Edit-->
+<!--      </button>-->
+
+<!--      <button-->
+<!--        (click)="openConfirmationDialog(offer.id)"-->
+<!--        class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 font-medium rounded-r-lg text-sm px-3 py-2 text-center inline-flex items-center justify-center flex-1">-->
+<!--        Delete-->
+<!--      </button>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--</div>-->
+
+
+<div class="w-full bckg shadow-lg rounded-xl p-6">
+  <div class="flex flex-col ">
+
+    <div class="h-62 w-full mb-3">
+      <img alt="Offer's Image" class="rounded-t-lg bg-auto" src="{{offer.image}}">
+    </div>
+    <div class="flex-auto justify-evenly">
+      <div class="flex flex-wrap ">
+        <div class="flex items-center w-full justify-between min-w-0 ">
+          <h2
+            class="text-lg mr-auto text-white ">{{offer.title}}</h2>
+          <div class="flex items-center bg-green-400 text-white text-xs px-2 py-1 ml-3 rounded-lg ">
+            Not Expired
+          </div>
+        </div>
+      </div>
+      <div class="text-xl text-white font-semibold mt-1 mb-10 h-14">{{offer.description}}</div>
+      <div
+        class="flex inline-flex justify-between items-center text-md text-white font-semibold mt-1 mb-1 p-2 bg-[#2563eb] rounded-lg">
+        <svg height="30px" viewBox="0 0 44 44" width="30px"
+             xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <path d="M22,44C9.869,44,0,34.131,0,22S9.869,0,22,0s22,9.869,22,22S34.131,44,22,44z"
+                    style="fill:#F0C419;"/>
+              <path d="M22.745,32h-1.491C20.009,32,19,30.991,19,29.745V13.255C19,12.009,20.009,11,21.255,11h1.491
+                C23.991,11,25,12.009,25,13.255v16.491C25,30.991,23.991,32,22.745,32z" style="fill:#FBD490;"/>
+              <path d="M22,44C9.869,44,0,34.131,0,22S9.869,0,22,0s22,9.869,22,22S34.131,44,22,44z"
+                    style="fill:#F0C419;"/>
+              <path d="M22.745,32h-1.491C20.009,32,19,30.991,19,29.745V13.255C19,12.009,20.009,11,21.255,11h1.491
+                C23.991,11,25,12.009,25,13.255v16.491C25,30.991,23.991,32,22.745,32z" style="fill:#FBD490;"/>
+            </g>
+          </svg>
+        &nbsp;&nbsp;&nbsp;Your offer worth {{offer.worth_points}} Points
+      </div>
+      <div class="lg:flex  py-4  text-sm text-white">
+        <div class="flex-1 inline-flex items-center  mb-3">
+          <div class="flex-none px-2 py-2 text-md flex items-center text-white font-bold bg-[#00CEC9] rounded-lg">
+            From {{offer.start_date}}
+
+            Until {{offer.end_date}}
+          </div>
+        </div>
+
+      </div>
+
+      <div class=" flex justify-center items-center">
+        <button
+          (click)="onEdit(offer)"
+          class="text-white bg-blue-500 hover:bg-blue-800 focus:ring-4  font-medium rounded-l-lg text-sm px-3 py-2 text-center inline-flex justify-center items-center flex-1">
+          Edit
+        </button>
+
+        <button
+          (click)="openConfirmationDialog(offer.id)"
+          class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 font-medium rounded-r-lg text-sm px-3 py-2 text-center inline-flex items-center justify-center flex-1">
+          Delete
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

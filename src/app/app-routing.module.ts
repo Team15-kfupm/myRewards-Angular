@@ -8,12 +8,14 @@ import {
 } from "@angular/fire/compat/auth-guard";
 import {RedirectAuthGuard} from "./shared/guards/redirect-auth-guard.service";
 import {RoleBasedGuard} from "./shared/guards/role-based.guard";
+import {AdminPageComponent} from "./admin-page/admin-page.component";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['auth']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['redirect']);
 
 
 const routes: Routes = [
+  {path: 'admin', component: AdminPageComponent},
   {
     path: 'auth',
     loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule),

@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {OfferFormComponent} from "../offer-form/offer-form.component";
-import {OffersService} from "../../../services/offers.service";
-import {Offer} from "../../../models/offer";
+import {OffersService} from "../../../../services/offers.service";
+import {Offer} from "../../../../models/offer";
+import firebase from "firebase/compat";
+import Timestamp = firebase.firestore.Timestamp;
 
 @Component({
   selector: 'app-offers-page',
@@ -36,9 +38,10 @@ export class OffersPageComponent implements OnInit {
           const data = e.payload.doc.data();
           data.id = e.payload.doc.id;
 
+
           //clean the date
-          data.startDate = this.dateSanitizing(data.startDate)
-          data.endDate = this.dateSanitizing(data.endDate)
+          data.start_date = this.dateSanitizing(data.start_date)
+          data.end_date = this.dateSanitizing(data.end_date)
 
           return data;
         });
@@ -57,9 +60,9 @@ export class OffersPageComponent implements OnInit {
     });
   }
 
-  dateSanitizing(date: string) {
-    const cleanDate = new Date(date);
-    let dateOnly = cleanDate.toISOString().substr(0, 10);
+  dateSanitizing(date: Timestamp) {
+    let dateOnly = date.toDate().toISOString().substr(0, 10);
+    console.log('Date is ' + dateOnly)
     return dateOnly
 
   }
