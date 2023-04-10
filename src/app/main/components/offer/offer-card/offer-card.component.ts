@@ -3,7 +3,9 @@ import {MatDialog} from "@angular/material/dialog";
 import {OfferFormComponent} from "../offer-form/offer-form.component";
 import {Offer} from "../../../../models/offer";
 import {OffersService} from "../../../../services/offers.service";
-import {ConfirmationDialogComponent} from "../../../../shared/confirmation-dialog/confirmation-dialog.component";
+import {
+  ConfirmationDialogComponent
+} from "../../../../shared/components/confirmation-dialog/confirmation-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 
@@ -17,12 +19,12 @@ export class OfferCardComponent implements OnInit {
   @Input() offer: Offer = {
     id: '',
     description: '',
-    startDate: '',
-    endDate: '',
+    start_date: '',
+    end_date: '',
     title: '',
     image: '',
-    worthPoints: 0,
-    numOfRedeem: 0,
+    worth_points: 0,
+    num_of_redeem: 0,
   };
 
 
@@ -47,11 +49,6 @@ export class OfferCardComponent implements OnInit {
     });
   }
 
-  deleteOffer(id: string): void {
-    this.offersService.deleteOffer(id).then(r =>
-      console.log('Deleted successfully')).catch(err => console.log('Error during delete ' + err));
-  }
-
   openSnackBar(message: string) {
     this.snackBar.open(message, 'Ok', {
       duration: 2000,
@@ -59,7 +56,7 @@ export class OfferCardComponent implements OnInit {
   }
 
   openConfirmationDialog(id: string) {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: 'delete'});
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {

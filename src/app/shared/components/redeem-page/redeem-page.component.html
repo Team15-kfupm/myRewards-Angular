@@ -58,8 +58,11 @@
       <h2 class="text-gray-800 text-3xl font-semibold">Here will be shown the validation result</h2>
       <p class="mt-2 text-gray-600">{{planName}}</p>
     </div>
-    <div class="flex justify-end mt-4">
-      <a class="text-xl font-medium secondary-color-font" href="#">Redeem Now</a>
+    <div class="flex justify-end mt-4 ">
+      <button (click)="redeem(promoCode)" [disabled]="!can_redeem"
+              class="text-xl font-medium secondary-color-font disabled:cursor-not-allowed">
+        Redeem Now
+      </button>
     </div>
   </div>
 

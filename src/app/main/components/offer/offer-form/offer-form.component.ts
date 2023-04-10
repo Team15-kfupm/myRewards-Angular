@@ -31,9 +31,9 @@ export class OfferFormComponent implements OnInit {
   title = ''
   image: any = '';
   description = ''
-  startDate = ''
-  endDate = ''
-  worthPoints = 0
+  start_date = ''
+  end_date = ''
+  worth_points = 0
   fileName: string = '';
 
   offerObj: Offer = {
@@ -41,10 +41,10 @@ export class OfferFormComponent implements OnInit {
     title: '',
     description: '',
     image: '',
-    startDate: '',
-    endDate: '',
-    worthPoints: 0,
-    numOfRedeem: 0,
+    start_date: '',
+    end_date: '',
+    worth_points: 0,
+    num_of_redeem: 0,
   }
   today = new Date();
 
@@ -66,9 +66,9 @@ export class OfferFormComponent implements OnInit {
       this.title = this.data.title;
       this.image = this.data.image;
       this.description = this.data.description;
-      this.startDate = this.data.startDate;
-      this.endDate = this.data.endDate;
-      this.worthPoints = this.data.worthPoints;
+      this.start_date = this.data.start_date;
+      this.end_date = this.data.end_date;
+      this.worth_points = this.data.worth_points;
     }
 
     console.info('Today Date ' + this.fileName)
@@ -80,9 +80,9 @@ export class OfferFormComponent implements OnInit {
     this.id = '';
     this.title = '';
     this.description = '';
-    this.startDate = '';
-    this.endDate = '';
-    this.worthPoints = 0;
+    this.start_date = '';
+    this.end_date = '';
+    this.worth_points = 0;
   }
 
   onSubmit() {
@@ -90,9 +90,9 @@ export class OfferFormComponent implements OnInit {
     this.offerObj.id = this.id;
     this.offerObj.title = this.offerForm.controls.title.value!.toString();
     this.offerObj.description = this.offerForm.controls.description.value!.toString();
-    this.offerObj.startDate = this.offerForm.controls.startDate.value!.toString();
-    this.offerObj.endDate = this.offerForm.controls.endDate.value!.toString();
-    this.offerObj.worthPoints = this.offerForm.controls.worthPoints.value!;
+    this.offerObj.start_date = this.offerForm.controls.startDate.value!.toString();
+    this.offerObj.end_date = this.offerForm.controls.endDate.value!.toString();
+    this.offerObj.worth_points = this.offerForm.controls.worthPoints.value!;
 
 
     this.offersService.addOffer(this.offerObj, this.image).then(r => {
@@ -112,9 +112,9 @@ export class OfferFormComponent implements OnInit {
       title: this.title,
       description: this.description,
       image: this.image,
-      startDate: this.startDate,
-      endDate: this.endDate,
-      worthPoints: this.worthPoints
+      start_date: this.start_date,
+      end_date: this.end_date,
+      worth_points: this.worth_points
     }).then(r => {
       this.openSnackBar('Changes Saved !')
       console.log(r)

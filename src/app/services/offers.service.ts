@@ -71,7 +71,7 @@ export class OffersService {
 
     await this.firestore
       .doc(this.offersPathService.getOfferPath(uid, id))
-      .update(updates);
+      .update({updates});
   }
 
   /**
@@ -98,12 +98,19 @@ export class OffersService {
     return uid;
   }
 
+  async incrementChoice(id: string, num: number) {
+    const uid = await this.getUserUid();
+
+    await this.firestore
+      .doc(this.offersPathService.getOfferPath(uid, id))
+      .update({num_of_redeem: num});
+  }
+
   private async uploadImageAndGetUrl(id: string, image: File) {
     const storageRef = this.storage.ref(`offers/${id}`);
     const snapshot = await storageRef.put(image);
     return snapshot.ref.getDownloadURL();
   }
-
 }
 
 

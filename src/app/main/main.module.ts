@@ -36,7 +36,7 @@ import {MatSelectModule} from '@angular/material/select';
 
 import {MatMenuModule} from "@angular/material/menu";
 import {ProfileComponent} from './components/profile/profile.component';
-import {ConfirmationDialogComponent} from '../shared/confirmation-dialog/confirmation-dialog.component';
+import {ConfirmationDialogComponent} from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 import {SpinnerComponent} from '../shared/components/spinner/spinner.component';
 import {HamburgerComponent} from '../shared/hamburger/hamburger.component';
 import {AdminPageComponent} from '../admin-page/admin-page.component';
