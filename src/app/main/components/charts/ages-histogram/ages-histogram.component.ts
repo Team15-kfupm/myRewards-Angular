@@ -66,7 +66,7 @@ export class AgesHistogramComponent implements OnInit {
           datasets: this.getAllData(this.offers),
         };
 
-        console.log('offers data', this.offersData[0][0])
+
         this.createChart()
 
 
@@ -81,8 +81,6 @@ export class AgesHistogramComponent implements OnInit {
 
   createChart() {
 
-
-    console.log('creating chart')
     this.histogram = new Chart("histogram", {
       type: "bar",
       data:this.dataHist
