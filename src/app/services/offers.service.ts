@@ -72,8 +72,8 @@ export class OffersService {
     const uid = await this.getUserUid();
 
     await this.firestore
-      .doc(this.offersPathService.getOfferPath(uid, id))
-      .update({updates});
+      .collection(this.offersPathService.getOffersPath(uid)).doc(id)
+      .update(updates);
   }
 
   /**

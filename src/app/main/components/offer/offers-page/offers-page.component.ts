@@ -60,10 +60,14 @@ export class OffersPageComponent implements OnInit {
     });
   }
 
-  dateSanitizing(date: Timestamp) {
-    let dateOnly = date.toDate().toISOString().substr(0, 10);
-    console.log('Date is ' + dateOnly)
-    return dateOnly
+  dateSanitizing(date:any) {
+    const dateObj = new Date(date);
+    const year = dateObj.getFullYear();
+    const month = dateObj.getMonth() + 1; // Months are zero-indexed, so we add 1 to get the correct month number
+    const day = dateObj.getDate();
+    const formattedDate = `${day}/${month}/${year}`;
+
+    return formattedDate
 
   }
 }

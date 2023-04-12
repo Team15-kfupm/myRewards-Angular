@@ -55,6 +55,7 @@ export class AgesHistogramComponent implements OnInit {
     this.offersService.getOffers().subscribe({
       next: (res) => {
         this.offers = res.map((e: any) => {
+          console.log('ages array ', e.payload.doc.data().ages,e.payload.doc.data().title)
           this.offersData.push(e.payload.doc.data().ages);
           const data = e.payload.doc.data();
           data.id = e.payload.doc.id;
@@ -107,7 +108,7 @@ export class AgesHistogramComponent implements OnInit {
 
         data.push({
           label:offer.title,
-          data:this.offersData[index]
+          data:this.getHistogramData(this.offersData[index],this.bins)
         })
       }
     )

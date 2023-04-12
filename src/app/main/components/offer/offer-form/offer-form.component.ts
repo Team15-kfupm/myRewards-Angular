@@ -109,11 +109,11 @@ export class OfferFormComponent implements OnInit {
 
   onSave() {
     this.offersService.updateOffer(this.id, {
-      title: this.title,
-      description: this.description,
+      title: this.offerForm.controls.title.value,
+      description: this.offerForm.controls.description.value,
       image: this.image,
-      start_date: this.start_date,
-      end_date: this.end_date,
+      start_date: this.offerForm.controls.startDate.value!.toString(),
+      end_date: this.offerForm.controls.endDate.value!.toString(),
       worth_points: this.worth_points
     }).then(r => {
       this.openSnackBar('Changes Saved !')
