@@ -13,8 +13,11 @@ export class OffersPathService {
   public getOffersPath(storeId: string): string {
     return `${this.STORES_PATH}/${storeId}/offers`;
   }
-
   public getOfferPath(storeId: string, offerId: string): string {
     return `${this.getOffersPath(storeId)}/${offerId}`;
+  }
+
+  public getRedeemedOfferPath(storeId: string, offerId: string): string {
+    return `${this.getOfferPath(storeId,offerId)}/redeems`;
   }
 }

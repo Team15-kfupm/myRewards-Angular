@@ -5,6 +5,7 @@ import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {AuthService} from "../shared/services/auth.service";
 import {OffersPathService} from "./offers-path.service";
 import {Observable} from "rxjs";
+import {Redeem} from "../models/redeem";
 
 
 @Injectable({
@@ -57,6 +58,7 @@ export class OffersService {
     await this.firestore
       .collection(this.offersPathService.getOffersPath(uid))
       .add(offer);
+
     return true;
   }
 
@@ -70,8 +72,8 @@ export class OffersService {
     const uid = await this.getUserUid();
 
     await this.firestore
-      .doc(this.offersPathService.getOfferPath(uid, id))
-      .update({updates});
+      .collection(this.offersPathService.getOffersPath(uid)).doc(id)
+      .update(updates);
   }
 
   /**
@@ -110,6 +112,14 @@ export class OffersService {
     const storageRef = this.storage.ref(`offers/${id}`);
     const snapshot = await storageRef.put(image);
     return snapshot.ref.getDownloadURL();
+  }
+
+
+  async getRedeemData(offer: Offer) {
+    const uid = await this.getUserUid();
+    console.log(offer.id);
+
+    return this.firestore.collection(this.offersPathService.getRedeemedOfferPath(uid, offer.id)).get();
   }
 }
 

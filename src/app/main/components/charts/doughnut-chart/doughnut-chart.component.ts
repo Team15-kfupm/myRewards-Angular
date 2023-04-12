@@ -14,6 +14,8 @@ export class DoughnutChartComponent implements OnInit {
   offers: Offer[] = []
   offersLabels: string[] = []
   offersData: number[] = []
+  doughnutChart!: Chart
+
 
   loaded = false;
   dataDoughnut = {
@@ -32,7 +34,7 @@ export class DoughnutChartComponent implements OnInit {
     ],
   };
 
-  doughnutChart!: Chart
+
 
   constructor(private offersService: OffersService) {
   }
@@ -75,9 +77,6 @@ export class DoughnutChartComponent implements OnInit {
           ],
         };
         this.createChart()
-
-
-        console.log(this.offersLabels);
 
 
       },
