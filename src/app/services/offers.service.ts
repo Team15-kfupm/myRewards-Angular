@@ -5,7 +5,8 @@ import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {AuthService} from "../shared/services/auth.service";
 import {OffersPathService} from "./offers-path.service";
 import {Observable} from "rxjs";
-import {Redeem} from "../models/redeem";
+import firebase from "firebase/compat";
+
 
 
 @Injectable({
@@ -25,10 +26,11 @@ export class OffersService {
    * @description returns all offers from the firestore
    * **/
 
-  getOffers(): Observable<any> {
+   getOffers(): Observable<any> {
     return new Observable((observer) => {
-      this.getUserUid().then((uid) => {
-        const collection = this.firestore.collection(this.offersPathService.getOffersPath(uid));
+      this.getStoreId().then((storeId) => {
+        console.log(storeId);
+        const collection = this.firestore.collection(this.offersPathService.getOffersPath(storeId));
         const subscription = collection.snapshotChanges().subscribe(observer);
         return () => subscription.unsubscribe();
       }).catch((error) => {
@@ -56,7 +58,7 @@ export class OffersService {
     offer.image = url;
 
     await this.firestore
-      .collection(this.offersPathService.getOffersPath(uid))
+      .collection(this.offersPathService.getOffersPath(await this.getStoreId()))
       .add(offer);
 
     return true;
@@ -72,7 +74,7 @@ export class OffersService {
     const uid = await this.getUserUid();
 
     await this.firestore
-      .collection(this.offersPathService.getOffersPath(uid)).doc(id)
+      .collection(this.offersPathService.getOffersPath(await this.getStoreId())).doc(id)
       .update(updates);
   }
 
@@ -87,7 +89,7 @@ export class OffersService {
     const uid = await this.getUserUid();
 
     await this.firestore
-      .doc(this.offersPathService.getOfferPath(uid, id))
+      .doc(this.offersPathService.getOfferPath(await this.getStoreId(), id))
       .delete();
   }
 
@@ -114,12 +116,17 @@ export class OffersService {
     return snapshot.ref.getDownloadURL();
   }
 
+  private async getStoreId(){
 
-  async getRedeemData(offer: Offer) {
     const uid = await this.getUserUid();
-    console.log(offer.id);
+    console.log(uid)
+    const stores = await this.firestore.collection('stores').ref.where('owner_uid', '==',uid).get();
+    if (!stores) {
+      throw new Error('Store is not found');
+    }
 
-    return this.firestore.collection(this.offersPathService.getRedeemedOfferPath(uid, offer.id)).get();
+    console.log('Here ',stores.docs);
+    return stores.docs[0].id;
   }
 }
 
