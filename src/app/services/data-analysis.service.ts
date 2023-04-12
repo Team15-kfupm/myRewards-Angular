@@ -29,10 +29,11 @@ export class DataAnalysisService {
     let store_id= await this.offerService.getUserUid()
     let date_birth = await this.getDateOfBirth(uid);
     let age = this.calculateAgeByDate(date_birth);
+    let path = this.offersPathService.getRedeemedOfferPath(store_id,offer.id)
 
 
 
-    this.firestore.collection('stores').doc(store_id).collection('offers').doc(offer.id).collection('redeems').add(
+    this.firestore.collection(path).add(
       {
         madeAt:Date().toLocaleUpperCase(),
         by:uid,

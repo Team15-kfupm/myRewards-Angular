@@ -60,10 +60,10 @@ export class RedeemPageComponent implements OnInit {
         this.promoCodeService.redeemCode(code).then(result => {
             this.openSnackBar('Redeemed !');
             this.dataAnalysisService.addRedeemedOffer(result.offer,result.uid)
+              .then(r=>console.log('Updated Data'))
             this.clearAll()
           }
         ).catch(err => {
-          console.log('Error during delete ' + err);
           this.openSnackBar('Sorry Something Went wrong')
         });
       } else {

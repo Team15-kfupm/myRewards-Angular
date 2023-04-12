@@ -64,7 +64,6 @@ export class PromoCodeService {
 
     await lastValueFrom(this.firestore.collection('stores').doc(storeId).collection('offers').doc(offer_id).get()).then(value => {
       if (value.exists) {
-        console.log(value.data())
         offer = (value.data() as Offer)
         offer.id = value.id
       }
