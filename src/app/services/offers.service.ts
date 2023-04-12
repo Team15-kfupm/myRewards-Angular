@@ -57,6 +57,11 @@ export class OffersService {
     await this.firestore
       .collection(this.offersPathService.getOffersPath(uid))
       .add(offer);
+
+    await this.firestore
+      .collection(this.offersPathService.getOffersPath(uid))
+      .add(offer);
+
     return true;
   }
 

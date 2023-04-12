@@ -4,7 +4,7 @@ import {collection, getDocs, query, where} from "@angular/fire/firestore";
 import {Offer} from "../../models/offer";
 import {lastValueFrom} from "rxjs";
 import {OffersService} from "../../services/offers.service";
-import {OffersPathService} from "../../services/offers-path.service";
+import {DataAnalysisService} from "../../services/data-analysis.service";
 
 
 @Injectable({
@@ -14,8 +14,7 @@ export class PromoCodeService {
 
 
   constructor(private firestore: AngularFirestore,
-              private offersService: OffersService,
-              private offerPathService: OffersPathService) {
+              private offersService: OffersService,) {
   }
 
 
@@ -51,6 +50,7 @@ export class PromoCodeService {
       claim_id = doc.id
     });
     let offer_id = querySnapshot.docs[0].data()['offer_id'];
+    let uid = querySnapshot.docs[0].data()['uid'];
     let offer: Offer = {
       id: '',
       description: '',
@@ -66,15 +66,19 @@ export class PromoCodeService {
       if (value.exists) {
         console.log(value.data())
         offer = (value.data() as Offer)
+        offer.id = value.id
       }
     })
+
+
+
 
     await this.offersService.incrementChoice(offer_id, ++offer.num_of_redeem).then(res => {
       console.log('Updated !', res)
     })
-
     //this.firestore.firestore.collection('temp-claim').doc(claim_id).delete().then(e => console.log('Deleted !', e))
 
+    return {offer,uid}
   }
 
 }

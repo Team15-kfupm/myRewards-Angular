@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {OffersService} from "../../../services/offers.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
+import {DataAnalysisService} from "../../../services/data-analysis.service";
 
 @Component({
   selector: 'redeem-page',
@@ -21,8 +22,11 @@ export class RedeemPageComponent implements OnInit {
   can_redeem: boolean = false
 
   constructor(private promoCodeService: PromoCodeService,
-              public dialog: MatDialog, private offersService:
-                OffersService, private snackBar: MatSnackBar) {
+              public dialog: MatDialog,
+              private offersService: OffersService,
+              private snackBar: MatSnackBar,
+              private dataAnalysisService: DataAnalysisService
+              ) {
 
   }
 
@@ -53,9 +57,9 @@ export class RedeemPageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.promoCodeService.redeemCode(code).then(r => {
-            console.log('Redeemed successfully', r);
-            this.openSnackBar('Deleted !');
+        this.promoCodeService.redeemCode(code).then(result => {
+            this.openSnackBar('Redeemed !');
+            this.dataAnalysisService.addRedeemedOffer(result.offer,result.uid)
             this.clearAll()
           }
         ).catch(err => {
