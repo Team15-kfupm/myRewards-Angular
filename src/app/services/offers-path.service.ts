@@ -18,6 +18,6 @@ export class OffersPathService {
   }
 
   public getRedeemedOfferPath(storeId: string, offerId: string): string {
-    return `${this.getOffersPath(storeId)}/${offerId}/redeems`;
+    return `${this.getOfferPath(storeId,offerId)}/redeems`;
   }
 }

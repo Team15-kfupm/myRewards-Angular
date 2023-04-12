@@ -28,7 +28,6 @@ import {NewDashboardComponent} from './components/new-dashboard/new-dashboard.co
 import {MatGridListModule} from '@angular/material/grid-list';
 import {LayoutModule} from '@angular/cdk/layout';
 import {TailwindChartComponentPie} from './components/charts/tailwind-chart-pie/tailwind-chart.component-pie';
-import {LineChartTailwindComponent} from './components/charts/line-chart-tailwind/line-chart-tailwind.component';
 import {DoughnutChartComponent} from './components/charts/doughnut-chart/doughnut-chart.component';
 import {StatCardComponent} from './components/charts/stat-card/stat-card.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -40,6 +39,7 @@ import {ConfirmationDialogComponent} from '../shared/components/confirmation-dia
 import {SpinnerComponent} from '../shared/components/spinner/spinner.component';
 import {HamburgerComponent} from '../shared/hamburger/hamburger.component';
 import {AdminPageComponent} from '../admin-page/admin-page.component';
+import { AgesHistogramComponent } from './components/charts/ages-histogram/ages-histogram.component';
 
 
 @NgModule({
@@ -57,7 +57,6 @@ import {AdminPageComponent} from '../admin-page/admin-page.component';
     MainComponent,
     NewDashboardComponent,
     TailwindChartComponentPie,
-    LineChartTailwindComponent,
     DoughnutChartComponent,
     StatCardComponent,
     ProfileComponent,
@@ -65,6 +64,7 @@ import {AdminPageComponent} from '../admin-page/admin-page.component';
     SpinnerComponent,
     HamburgerComponent,
     AdminPageComponent,
+    AgesHistogramComponent,
 
   ],
   exports: [

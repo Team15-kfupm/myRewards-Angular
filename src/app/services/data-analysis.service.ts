@@ -8,6 +8,7 @@ import {User} from "../models/user";
 import {lastValueFrom} from "rxjs";
 import {OffersService} from "./offers.service";
 import firebase from "firebase/compat/app";
+import FieldValue = firebase.firestore.FieldValue;
 
 
 @Injectable({
@@ -29,17 +30,13 @@ export class DataAnalysisService {
     let store_id= await this.offerService.getUserUid()
     let date_birth = await this.getDateOfBirth(uid);
     let age = this.calculateAgeByDate(date_birth);
-    let path = this.offersPathService.getRedeemedOfferPath(store_id,offer.id)
+    let ages:number[] =[age]
+    let path = this.offersPathService.getOffersPath(store_id)
 
 
-
-    this.firestore.collection(path).add(
-      {
-        madeAt:Date().toLocaleUpperCase(),
-        by:uid,
-        age:age
-      }
-    ).then(r=>console.log(r))
+    this.firestore.collection(path).doc(offer.id).update({
+      ages:firebase.firestore.FieldValue.arrayUnion(age)
+    }).then()
   }
 
 

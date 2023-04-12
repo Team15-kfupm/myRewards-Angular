@@ -17,6 +17,7 @@ export class NewDashboardComponent {
           //{id: 1, title: 'Card 1', cols: 1, rows: 1},
           {id: 2, title: 'Number of Offers remaining', cols: 1, rows: 2},
           {id: 3, title: 'Number of offers redeemed', cols: 1, rows: 2},
+          {id: 4, title: 'Card 4', cols: 2, rows: 1}
         ];
       }
 
@@ -24,7 +25,7 @@ export class NewDashboardComponent {
         //{id: 1, title: 'Card 1', cols: 2, rows: 2},
         {id: 2, title: 'Number of Offers remaining', cols: 1, rows: 2},
         {id: 3, title: 'Number of offers redeemed', cols: 1, rows: 2},
-        // {id: 4, title: 'Card 4', cols: 1, rows: 1}
+        {id: 4, title: 'The customers ages who redeemed offers', cols: 2, rows: 2}
       ];
     })
   );
