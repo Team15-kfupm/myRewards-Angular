@@ -34,4 +34,8 @@ export class DataAnalysisService {
 
     return agesArray
   }
+
+
+
+
 }
