@@ -25,7 +25,7 @@ export class RedeemPageComponent implements OnInit {
               public dialog: MatDialog,
               private offersService: OffersService,
               private snackBar: MatSnackBar,
-              private dataAnalysisService: DataAnalysisService
+              // private dataAnalysisService: DataAnalysisService
               ) {
 
   }
@@ -59,8 +59,8 @@ export class RedeemPageComponent implements OnInit {
       if (result) {
         this.promoCodeService.redeemCode(code).then(result => {
             this.openSnackBar('Redeemed !');
-            this.dataAnalysisService.addRedeemedOffer(result.offer,result.uid)
-              .then(r=>console.log('Updated Data'))
+            // this.dataAnalysisService.addRedeemedOffer(result.offer,result.uid)
+            //   .then(r=>console.log('Updated Data'))
             this.clearAll()
           }
         ).catch(err => {

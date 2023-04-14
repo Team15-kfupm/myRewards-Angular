@@ -5,8 +5,6 @@ import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {AuthService} from "../shared/services/auth.service";
 import {OffersPathService} from "./offers-path.service";
 import {Observable} from "rxjs";
-import firebase from "firebase/compat";
-
 
 
 @Injectable({
@@ -26,11 +24,11 @@ export class OffersService {
    * @description returns all offers from the firestore
    * **/
 
-   getOffers(): Observable<any> {
+  getOffers(): Observable<any> {
     return new Observable((observer) => {
-      this.getStoreId().then((storeId) => {
-        console.log(storeId);
-        const collection = this.firestore.collection(this.offersPathService.getOffersPath(storeId));
+      this.getUserUid().then(async (userUid) => {
+        const collection = this.firestore
+          .collection(await this.offersPathService.getOffersPath(userUid));
         const subscription = collection.snapshotChanges().subscribe(observer);
         return () => subscription.unsubscribe();
       }).catch((error) => {
@@ -53,14 +51,10 @@ export class OffersService {
     const uid = await this.getUserUid();
     offer.id = this.firestore.createId();
     offer.uid = uid;
-
-    const url = await this.uploadImageAndGetUrl(offer.id, image);
-    offer.image = url;
-
+    offer.image = await this.uploadImageAndGetUrl(offer.id, image);
     await this.firestore
-      .collection(this.offersPathService.getOffersPath(await this.getStoreId()))
+      .collection(await this.offersPathService.getOffersPath(uid))
       .add(offer);
-
     return true;
   }
 
@@ -74,7 +68,7 @@ export class OffersService {
     const uid = await this.getUserUid();
 
     await this.firestore
-      .collection(this.offersPathService.getOffersPath(await this.getStoreId())).doc(id)
+      .collection(await this.offersPathService.getOffersPath(uid)).doc(id)
       .update(updates);
   }
 
@@ -87,9 +81,8 @@ export class OffersService {
 
   async deleteOffer(id: string): Promise<void> {
     const uid = await this.getUserUid();
-
     await this.firestore
-      .doc(this.offersPathService.getOfferPath(await this.getStoreId(), id))
+      .doc(await this.offersPathService.getOfferPath(uid, id))
       .delete();
   }
 
@@ -104,9 +97,8 @@ export class OffersService {
 
   async incrementChoice(id: string, num: number) {
     const uid = await this.getUserUid();
-
     await this.firestore
-      .doc(this.offersPathService.getOfferPath(uid, id))
+      .doc(await this.offersPathService.getOfferPath(uid, id))
       .update({num_of_redeem: num});
   }
 
@@ -116,18 +108,7 @@ export class OffersService {
     return snapshot.ref.getDownloadURL();
   }
 
-  private async getStoreId(){
 
-    const uid = await this.getUserUid();
-    console.log(uid)
-    const stores = await this.firestore.collection('stores').ref.where('owner_uid', '==',uid).get();
-    if (!stores) {
-      throw new Error('Store is not found');
-    }
-
-    console.log('Here ',stores.docs);
-    return stores.docs[0].id;
-  }
 }
 
 
