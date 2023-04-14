@@ -4,7 +4,7 @@ import {Offer} from "../../models/offer";
 import {lastValueFrom} from "rxjs";
 import {OffersService} from "../../services/offers.service";
 import {OffersPathService} from "../../services/offers-path.service";
-import firebase from "firebase/compat";
+import firebase from "firebase/compat/app";
 import Timestamp = firebase.firestore.Timestamp;
 import {collection} from "@angular/fire/firestore";
 
@@ -35,12 +35,14 @@ export class PromoCodeService {
 
   async validateCode(code: string): Promise<string> {
     const ownerId = await this.offersService.getUserUid();
-    const storeId = await this.offersPathService.getStoreId(ownerId);
+    let storeId = await this.offersPathService.getStoreId(ownerId);
+
     const querySnapshot = await this.firestore
       .collection('temp-claim').ref
       .where('code', '==', code)
       .where('store_id', '==', storeId)
       .limit(1).get();
+
 
     if (querySnapshot.docs.length == 0) throw Error('No code is found');
     let offerId = (querySnapshot.docs[0].data() as PromoCode)['offer_id'];
@@ -116,6 +118,7 @@ export class PromoCodeService {
     return {offer, customerUid}
 
   }
+
 
 
 }

@@ -28,7 +28,7 @@ export class OffersService {
     return new Observable((observer) => {
       this.getUserUid().then(async (userUid) => {
         const collection = this.firestore
-          .collection(await this.offersPathService.getOffersPath(userUid));
+          .collection(await this.offersPathService.getOffersPath(await this.offersPathService.getStoreId(userUid)));
         const subscription = collection.snapshotChanges().subscribe(observer);
         return () => subscription.unsubscribe();
       }).catch((error) => {
@@ -49,11 +49,12 @@ export class OffersService {
     }
 
     const uid = await this.getUserUid();
+    const storeId = await this.offersPathService.getStoreId(uid);
     offer.id = this.firestore.createId();
-    offer.uid = uid;
+    offer.uid = storeId;
     offer.image = await this.uploadImageAndGetUrl(offer.id, image);
     await this.firestore
-      .collection(await this.offersPathService.getOffersPath(uid))
+      .collection(await this.offersPathService.getOffersPath(storeId))
       .add(offer);
     return true;
   }

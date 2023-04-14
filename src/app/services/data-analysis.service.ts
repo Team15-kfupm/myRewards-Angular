@@ -20,44 +20,18 @@ export class DataAnalysisService {
   }
 
 
-  // async addRedeemedOffer(offer: Offer, uid: string) {
-  //   let store_id = await this.offerService.getUserUid()
-  //   let date_birth = await this.getDateOfBirth(uid);
-  //   let age = this.calculateAgeByDate(date_birth);
-  //   let ages: number[] = [age]
-  //   let path = await this.offersPathService.getOffersPath(store_id)
-  //
-  //   this.firestore.collection(path).doc(offer.id).update({
-  //     ages: firebase.firestore.FieldValue.arrayUnion(age)
-  //   }).then()
-  // }
 
+  async getAgesForOffer(offer:Offer){
+    const ownerUid = await this.offerService.getUserUid();
+    const storeId = await this.offersPathService.getStoreId(ownerUid);
+    let agesArray:number[]=[]
+    const redeems = await this.firestore.collection(`analysis/${storeId}/redeems`).ref.where('offer_id','==',offer.id).get();
+    if (redeems.docs.length == 0) console.log('no docs')
+    redeems.forEach(doc=>{
+      // @ts-ignore
+      agesArray.push(doc.data().age)
+    })
 
-  calculateAgeByDate(date: string) {
-    const birthDate = new Date(date);
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDifference = today.getMonth() - birthDate.getMonth();
-
-    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-    return age;
+    return agesArray
   }
-
-  // async getDateOfBirth(uid: string): Promise<string> {
-  //   let date = ''
-  //   await lastValueFrom(this.firestore.collection('users').doc(uid).get()).then(res => {
-  //     if (res.exists) {
-  //       const data = res.data();
-  //       date = data.birth_date.toString()
-  //       return date
-  //     } else
-  //       return ''
-  //   })
-  //
-  //   return date;
-  // }
-
-
 }

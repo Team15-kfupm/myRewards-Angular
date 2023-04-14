@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {Store} from "../models/store";
 
 @Injectable({
   providedIn: 'root'
@@ -14,23 +15,22 @@ export class OffersPathService {
   }
 
   public async getStoreId(uid: string): Promise<string> {
+
     const stores = await this.firestore
       .collection('stores').ref
       .where('owner_uid', '==', uid)
       .limit(1)
       .get();
-    if (!stores) {
-      throw new Error('Store is not found');
-    }
-    return stores.docs[0].id;
+
+    return (stores.docs[0] as unknown as Store).id;
   }
 
   public async getOffersPath(uid: string): Promise<string> {
-    const storeId = await this.getStoreId(uid);
-    return `${this.STORES_PATH}/${storeId}/offers`;
+    return `${this.STORES_PATH}/${uid}/offers`;
   }
 
   public async getOfferPath(uid: string, offerId: string): Promise<string> {
+    console.log(uid)
     const storeId = await this.getStoreId(uid);
     return `${await this.getOffersPath(storeId)}/${offerId}`;
   }

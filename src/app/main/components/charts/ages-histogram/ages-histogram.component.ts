@@ -3,6 +3,7 @@ import {Chart} from "chart.js/auto";
 import {OffersService} from "../../../../services/offers.service";
 import {Offer} from "../../../../models/offer";
 import {Redeem} from "../../../../models/redeem";
+import {DataAnalysisService} from "../../../../services/data-analysis.service";
 
 @Component({
   selector: 'app-ages-histogram',
@@ -11,13 +12,11 @@ import {Redeem} from "../../../../models/redeem";
 })
 export class AgesHistogramComponent implements OnInit {
 
-  constructor(private offersService: OffersService) {
+  constructor(private offersService: OffersService, private dataService:DataAnalysisService) {
   }
 
 
   histogram!: Chart;
-  offersLabels: string[] = []
-  offersData: number[][] = []
   offers: Offer[] = []
   bins = [10, 20, 30, 40, 50, 60];
 
@@ -47,7 +46,6 @@ export class AgesHistogramComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     await this.getAllOffers()
 
-
   }
 
 
@@ -55,23 +53,13 @@ export class AgesHistogramComponent implements OnInit {
     this.offersService.getOffers().subscribe({
       next: (res) => {
         this.offers = res.map((e: any) => {
-          console.log('ages array ', e.payload.doc.data().ages,e.payload.doc.data().title)
-          this.offersData.push(e.payload.doc.data().ages);
           const data = e.payload.doc.data();
           data.id = e.payload.doc.id;
           return data;
         });
 
-        this.dataHist = {
-          labels: this.creatBinLabels(),
-          datasets: this.getAllData(this.offers),
-        };
-
 
         this.createChart()
-
-
-
       },
       error: (err) => {
         console.log(err);
@@ -80,8 +68,14 @@ export class AgesHistogramComponent implements OnInit {
   }
 
 
-  createChart() {
+  async createChart() {
+    let data = await this.getAllData(this.offers)
+    this.dataHist = {
+      labels: this.creatBinLabels(),
+      datasets: data,
+    };
 
+    console.log('creating chart')
     this.histogram = new Chart("histogram", {
       type: "bar",
       data:this.dataHist
@@ -100,19 +94,23 @@ export class AgesHistogramComponent implements OnInit {
   }
 
 
-  getAllData(offers:Offer[]){
+  async getAllData(offers:Offer[]){
 
     let data:any[]=[]
-    offers.forEach(
-      (offer,index)=>{
+    for (const offer of offers) {
+      let ages:number[]=[]
+      await this.dataService.getAgesForOffer(offer).then(
+        res=> {
+          ages = res
 
-        data.push({
-          label:offer.title,
-          data:this.getHistogramData(this.offersData[index],this.bins)
-        })
-      }
-    )
+          data.push({
+            label:offer.title,
+            data:this.getHistogramData(ages,this.bins)
+          })
+        }
+      )
 
+    }
 
     return data;
   }
