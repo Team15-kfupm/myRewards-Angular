@@ -93,6 +93,13 @@ export class PromoCodeService {
       num_of_redeem: 0,
     };
 
+
+    // Adding new Redeem Object
+    await this.firestore.collection('redeems').add(redeem)
+      .then(res=>console.log('Added ',res))
+      .catch(err=>console.error(err))
+
+
     await lastValueFrom(this.firestore.collection('stores').doc(storeId).collection('offers').doc(offerId).get()).then(value => {
       if (value.exists) {
         offer = (value.data() as Offer)
@@ -109,5 +116,6 @@ export class PromoCodeService {
     return {offer, customerUid}
 
   }
+
 
 }
