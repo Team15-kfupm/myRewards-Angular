@@ -12,14 +12,11 @@ import {DataAnalysisService} from "../../../../services/data-analysis.service";
 })
 export class AgesHistogramComponent implements OnInit {
 
-  constructor(private offersService: OffersService, private dataService:DataAnalysisService) {
-  }
-
-
   histogram!: Chart;
   offers: Offer[] = []
   bins = [10, 20, 30, 40, 50, 60];
-
+  showSpinner: boolean = false;
+  showNoData: boolean = true;
 
   dataHist = {
     labels: this.creatBinLabels(),
@@ -28,9 +25,9 @@ export class AgesHistogramComponent implements OnInit {
         label: "My First Dataset",
         data: [300, 50, 100],
         backgroundColor: [
-          // "rgb(133, 105, 241)",
-          // "rgb(164, 101, 241)",
-          // "rgb(101, 143, 241)",
+          "rgb(133, 105, 241)",
+          "rgb(164, 101, 241)",
+          "rgb(101, 143, 241)",
           "rgb(235, 59, 90)",
           "rgb(253, 126, 20)",
           "rgb(46, 204, 113)",
@@ -43,13 +40,16 @@ export class AgesHistogramComponent implements OnInit {
   };
 
 
-  async ngOnInit(): Promise<void> {
-    await this.getAllOffers()
+  constructor(private offersService: OffersService, private dataService: DataAnalysisService) {
+  }
 
+  ngOnInit(): void {
+    this.getAllOffers()
   }
 
 
   async getAllOffers() {
+    this.showSpinner = true
     this.offersService.getOffers().subscribe({
       next: (res) => {
         this.offers = res.map((e: any) => {
@@ -58,8 +58,9 @@ export class AgesHistogramComponent implements OnInit {
           return data;
         });
 
-
+        this.showNoData = this.offers.length == 0
         this.createChart()
+
       },
       error: (err) => {
         console.log(err);
@@ -69,16 +70,21 @@ export class AgesHistogramComponent implements OnInit {
 
 
   async createChart() {
+
+    this.showSpinner = false;
+
+
     let data = await this.getAllData(this.offers)
+
     this.dataHist = {
       labels: this.creatBinLabels(),
       datasets: data,
     };
 
-    console.log('creating chart')
+
     this.histogram = new Chart("histogram", {
       type: "bar",
-      data:this.dataHist
+      data: this.dataHist
     });
 
   }
@@ -94,18 +100,18 @@ export class AgesHistogramComponent implements OnInit {
   }
 
 
-  async getAllData(offers:Offer[]){
+  async getAllData(offers: Offer[]) {
 
-    let data:any[]=[]
+
+    let data: any[] = []
     for (const offer of offers) {
-      let ages:number[]=[]
+      let ages: number[] = []
       await this.dataService.getAgesForOffer(offer).then(
-        res=> {
+        res => {
           ages = res
-
           data.push({
-            label:offer.title,
-            data:this.getHistogramData(ages,this.bins)
+            label: offer.title,
+            data: this.getHistogramData(ages, this.bins)
           })
         }
       )
@@ -116,9 +122,8 @@ export class AgesHistogramComponent implements OnInit {
   }
 
 
-
   // Function to calculate histogram data
-   getHistogramData(data:number[], bins:number[]) {
+  getHistogramData(data: number[], bins: number[]) {
     var histogramData = Array(bins.length - 1).fill(0);
     for (var i = 0; i < data.length; i++) {
       for (var j = 0; j < bins.length - 1; j++) {

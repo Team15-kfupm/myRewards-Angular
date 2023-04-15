@@ -20,14 +20,13 @@ export class DataAnalysisService {
   }
 
 
-
-  async getAgesForOffer(offer:Offer){
+  async getAgesForOffer(offer: Offer) {
     const ownerUid = await this.offerService.getUserUid();
     const storeId = await this.offersPathService.getStoreId(ownerUid);
-    let agesArray:number[]=[]
-    const redeems = await this.firestore.collection(`analysis/${storeId}/redeems`).ref.where('offer_id','==',offer.id).get();
+    let agesArray: number[] = []
+    const redeems = await this.firestore.collection(`analysis/${storeId}/redeems`).ref.where('offer_id', '==', offer.id).get();
     if (redeems.docs.length == 0) console.log('no docs')
-    redeems.forEach(doc=>{
+    redeems.forEach(doc => {
       // @ts-ignore
       agesArray.push(doc.data().age)
     })
@@ -36,23 +35,20 @@ export class DataAnalysisService {
   }
 
 
-  async getTotalCostumers(){
+  async getTotalCostumers() {
     const ownerUid = await this.offerService.getUserUid();
     const storeId = await this.offersPathService.getStoreId(ownerUid);
-    let costumers:string[]=[]
+    let costumers: string[] = []
 
-    await this.firestore.collection('analysis').doc(storeId).get().forEach(doc => {
+    await this.firestore.collection('stores').doc(storeId).get().forEach(doc => {
       // @ts-ignore
-      costumers = (doc.data()).costumers;
+      costumers = (doc.data()).customers;
     })
 
 
     return costumers.length
 
   }
-
-
-
 
 
 }

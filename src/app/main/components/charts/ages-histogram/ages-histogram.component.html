@@ -1,4 +1,11 @@
-<div class="overflow-hidden w-full">
-  <canvas class="p-5" id="histogram">{{histogram}}</canvas>
-</div>
+<ng-container *ngIf="!showNoData">
+  <div class="overflow-hidden w-full">
+    <canvas class="p-5" id="histogram">{{histogram}}</canvas>
+  </div>
+</ng-container>
+<app-spinner *ngIf="showSpinner"></app-spinner>
 
+
+<div *ngIf="showNoData && !showSpinner" class="flex flex-col justify-center items-center font-bold">
+  <h2>No Data to Show ...</h2>
+</div>
