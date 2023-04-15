@@ -38,7 +38,7 @@ export class TailwindChartComponentPie implements OnInit {
 
 
   ngOnInit(): void {
-    //this.getAllOffers()
+    this.getAllOffers()
   }
 
 

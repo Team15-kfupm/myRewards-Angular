@@ -99,7 +99,7 @@ export class DoughnutChartComponent implements OnInit {
       type: "doughnut",
       data: this.dataDoughnut,
     });
-    this.noData = true;
+    
   }
 
 
