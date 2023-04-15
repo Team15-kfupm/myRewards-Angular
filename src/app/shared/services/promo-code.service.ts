@@ -6,7 +6,6 @@ import {OffersService} from "../../services/offers.service";
 import {OffersPathService} from "../../services/offers-path.service";
 import firebase from "firebase/compat/app";
 import Timestamp = firebase.firestore.Timestamp;
-import {collection} from "@angular/fire/firestore";
 import FieldValue = firebase.firestore.FieldValue;
 
 
@@ -125,7 +124,6 @@ export class PromoCodeService {
 
 
   async detectPoints(points:number,costumerId:string,storeID:string){
-
     points = points*-1;
     await this.firestore.collection('users').doc(costumerId).update({
       ["points."+storeID]:(FieldValue.increment(points))
