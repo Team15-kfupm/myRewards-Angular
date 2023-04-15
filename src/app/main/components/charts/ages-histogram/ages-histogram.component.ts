@@ -28,11 +28,6 @@ export class AgesHistogramComponent implements OnInit {
           "rgb(133, 105, 241)",
           "rgb(164, 101, 241)",
           "rgb(101, 143, 241)",
-          "rgb(235, 59, 90)",
-          "rgb(253, 126, 20)",
-          "rgb(46, 204, 113)",
-          "rgb(52, 152, 219)",
-          "rgb(155, 89, 182)",
         ],
         hoverOffset: 4,
       },
@@ -104,14 +99,28 @@ export class AgesHistogramComponent implements OnInit {
 
 
     let data: any[] = []
-    for (const offer of offers) {
+    let backgroundColors: any[] = [
+      "rgb(133, 105, 241)",
+      "rgb(164, 101, 241)",
+      "rgb(101, 143, 241)",
+      "rgb(142, 116, 255)",
+      "rgb(120, 129, 242)",
+      "rgb(144, 123, 239)",
+      "rgb(138, 135, 255)",
+      "rgb(120, 120, 255)",
+      "rgb(144, 116, 231)"
+
+    ]
+    for (const [index, offer] of offers.entries()) {
       let ages: number[] = []
       await this.dataService.getAgesForOffer(offer).then(
         res => {
           ages = res
           data.push({
             label: offer.title,
-            data: this.getHistogramData(ages, this.bins)
+            data: this.getHistogramData(ages, this.bins),
+            backgroundColor: backgroundColors[index % backgroundColors.length]
+
           })
         }
       )

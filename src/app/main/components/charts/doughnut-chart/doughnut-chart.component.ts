@@ -39,12 +39,10 @@ export class DoughnutChartComponent implements OnInit {
   constructor(private offersService: OffersService) {
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
 
 
-    await this.getAllOffers().then(e => {
-      this.loaded = true
-    })
+    this.getAllOffers()
 
   }
 
@@ -71,6 +69,13 @@ export class DoughnutChartComponent implements OnInit {
                 "rgb(133, 105, 241)",
                 "rgb(164, 101, 241)",
                 "rgb(101, 143, 241)",
+                "rgb(142, 116, 255)",
+                "rgb(120, 129, 242)",
+                "rgb(144, 123, 239)",
+                "rgb(138, 135, 255)",
+                "rgb(120, 120, 255)",
+                "rgb(144, 116, 231)"
+
               ],
               hoverOffset: 4,
             },
