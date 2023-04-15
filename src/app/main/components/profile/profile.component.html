@@ -1,25 +1,27 @@
 <div class="container items-start p-5">
 
-  <div class="columns-1">
-    <h2 class="section-title">Account details</h2>
+  <!--  <div class="columns-1">-->
+  <!--    <h2 class="section-title">Account details</h2>-->
 
-    <form [formGroup]="accountDetailsForm" novalidate (ngSubmit)="onSubmitAccountDetails(accountDetailsForm.value)">
-      <div class="flex flex-col max-w-xs">
-        <mat-form-field>
-          <input matInput maxlength="25" placeholder="Organization Name" formControlName="organizationName" required>
-          <!--          <mat-error *ngFor="let validation of account_validation_messages.username">-->
-          <!--            <mat-error class="error-message"-->
-          <!--                       *ngIf="accountDetailsForm.get('username').hasError(validation.type) && (accountDetailsForm.get('username').dirty || accountDetailsForm.get('username').touched)">{{validation.message}}</mat-error>-->
-          <!--          </mat-error>-->
-        </mat-form-field>
+  <!--    <form [formGroup]="accountDetailsForm" novalidate (ngSubmit)="onSubmitAccountDetails(accountDetailsForm.value)">-->
+  <!--      <div class="flex flex-col max-w-xs">-->
+  <!--        <mat-form-field>-->
+  <!--          <input matInput maxlength="25" placeholder="Organization Name" formControlName="organizationName" required>-->
+  <!--          &lt;!&ndash;          <mat-error *ngFor="let validation of account_validation_messages.username">&ndash;&gt;-->
+  <!--          &lt;!&ndash;            <mat-error class="error-message"&ndash;&gt;-->
+  <!--          &lt;!&ndash;                       *ngIf="accountDetailsForm.get('username').hasError(validation.type) && (accountDetailsForm.get('username').dirty || accountDetailsForm.get('username').touched)">{{validation.message}}</mat-error>&ndash;&gt;-->
+  <!--          &lt;!&ndash;          </mat-error>&ndash;&gt;-->
+  <!--        </mat-form-field>-->
 
-        <button class="submit-btn w-fit  " color="primary" mat-raised-button type="submit"
-                [disabled]="!accountDetailsForm.valid">
-          Submit
-        </button>
-      </div>
-    </form>
+  <!--        <button class="submit-btn w-fit  " color="primary" mat-raised-button type="submit"-->
+  <!--                [disabled]="!accountDetailsForm.valid">-->
+  <!--          Submit-->
+  <!--        </button>-->
+  <!--      </div>-->
+  <!--    </form>-->
 
-  </div>
+  <!--  </div>-->
+
+
 </div>
 
