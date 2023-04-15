@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {OffersService} from "../../../../services/offers.service";
 import {Offer} from "../../../../models/offer";
 import {DataAnalysisService} from "../../../../services/data-analysis.service";
@@ -11,11 +11,13 @@ import {DataAnalysisService} from "../../../../services/data-analysis.service";
 export class StatCardComponent implements OnInit {
 
 
-  num_customers!:number;
-  num_offers!:number;
-  num_redeems:number=0;
-  offers!:Offer[];
-  constructor(private offersService:OffersService, private dataAnalysisService:DataAnalysisService) { }
+  num_costumers!: number;
+  num_offers!: number;
+  num_redeems: number = 0;
+  offers!: Offer[];
+
+  constructor(private offersService: OffersService, private dataAnalysisService: DataAnalysisService) {
+  }
 
   ngOnInit(): void {
     this.getAllOffers()
@@ -40,15 +42,15 @@ export class StatCardComponent implements OnInit {
 
   }
 
-  get_num_redeems(offers:Offer[]){
-    offers.forEach(offer=>{
-      this.num_redeems+=offer.num_of_redeem
+  get_num_redeems(offers: Offer[]) {
+    offers.forEach(offer => {
+      this.num_redeems += offer.num_of_redeem
     })
   }
 
-   getTotalCostumers(){
-    this.dataAnalysisService.getTotalCostumers().then(res=>{
-      this.num_customers= res
+  getTotalCostumers() {
+    this.dataAnalysisService.getTotalCostumers().then(res => {
+      this.num_costumers = res
     })
 
   }
