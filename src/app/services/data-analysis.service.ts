@@ -36,6 +36,23 @@ export class DataAnalysisService {
   }
 
 
+  async getTotalCostumers(){
+    const ownerUid = await this.offerService.getUserUid();
+    const storeId = await this.offersPathService.getStoreId(ownerUid);
+    let costumers:string[]=[]
+
+    await this.firestore.collection('analysis').doc(storeId).get().forEach(doc => {
+      // @ts-ignore
+      costumers = (doc.data()).costumers;
+    })
+
+
+    return costumers.length
+
+  }
+
+
+
 
 
 }
