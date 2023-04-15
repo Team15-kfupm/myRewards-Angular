@@ -55,7 +55,7 @@ export class DoughnutChartComponent implements OnInit {
           data.id = e.payload.doc.id;
           return data;
         });
-        // this.no_Offers = this.offers.length === 0;
+
         this.offersLabels = this.getLabels(this.offers);
         this.offersData = this.getData(this.offers);
 
@@ -99,7 +99,7 @@ export class DoughnutChartComponent implements OnInit {
       type: "doughnut",
       data: this.dataDoughnut,
     });
-    this.loaded = true;
+    this.noData = true;
   }
 
 
