@@ -37,9 +37,9 @@ import {MatMenuModule} from "@angular/material/menu";
 import {ProfileComponent} from './components/profile/profile.component';
 import {ConfirmationDialogComponent} from '../shared/components/confirmation-dialog/confirmation-dialog.component';
 import {SpinnerComponent} from '../shared/components/spinner/spinner.component';
-import {HamburgerComponent} from '../shared/hamburger/hamburger.component';
+import {HamburgerComponent} from '../shared/components/hamburger/hamburger.component';
 import {AdminPageComponent} from '../admin-page/admin-page.component';
-import { AgesHistogramComponent } from './components/charts/ages-histogram/ages-histogram.component';
+import {AgesHistogramComponent} from './components/charts/ages-histogram/ages-histogram.component';
 
 
 @NgModule({

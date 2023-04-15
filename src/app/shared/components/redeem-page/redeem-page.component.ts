@@ -6,6 +6,8 @@ import {OffersService} from "../../../services/offers.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
 import {DataAnalysisService} from "../../../services/data-analysis.service";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {doc} from "@angular/fire/firestore";
 
 @Component({
   selector: 'redeem-page',
@@ -25,12 +27,14 @@ export class RedeemPageComponent implements OnInit {
               public dialog: MatDialog,
               private offersService: OffersService,
               private snackBar: MatSnackBar,
-              private dataAnalysisService: DataAnalysisService
+              private firestore: AngularFirestore
               ) {
 
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+
+
   }
 
   applyPromoCode(code: string) {
@@ -39,7 +43,7 @@ export class RedeemPageComponent implements OnInit {
       this.can_redeem = true
       this.planName = "The plan name is " + status
     }).catch(error => {
-      console.error(error)
+      console.log(error)
       this.planName = "That is not a valid code"
     });
     console.log(code);
@@ -59,8 +63,8 @@ export class RedeemPageComponent implements OnInit {
       if (result) {
         this.promoCodeService.redeemCode(code).then(result => {
             this.openSnackBar('Redeemed !');
-            this.dataAnalysisService.addRedeemedOffer(result.offer,result.uid)
-              .then(r=>console.log('Updated Data'))
+            // this.dataAnalysisService.addRedeemedOffer(result.offer,result.uid)
+            //   .then(r=>console.log('Updated Data'))
             this.clearAll()
           }
         ).catch(err => {

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {OffersService} from "../../../../services/offers.service";
 import {Offer} from "../../../../models/offer";
+import {DataAnalysisService} from "../../../../services/data-analysis.service";
 
 @Component({
   selector: 'app-stat-card',
@@ -10,15 +11,17 @@ import {Offer} from "../../../../models/offer";
 export class StatCardComponent implements OnInit {
 
 
-  num_customers:number=110;
-  num_offers!:number;
-  num_redeems:number=0;
-  offers!:Offer[];
-  constructor(private offersService:OffersService) { }
+  num_costumers!: number;
+  num_offers!: number;
+  num_redeems: number = 0;
+  offers!: Offer[];
+
+  constructor(private offersService: OffersService, private dataAnalysisService: DataAnalysisService) {
+  }
 
   ngOnInit(): void {
     this.getAllOffers()
-
+    this.getTotalCostumers()
   }
 
   getAllOffers() {
@@ -39,10 +42,17 @@ export class StatCardComponent implements OnInit {
 
   }
 
-  get_num_redeems(offers:Offer[]){
-    offers.forEach(offer=>{
-      this.num_redeems+=offer.num_of_redeem
+  get_num_redeems(offers: Offer[]) {
+    offers.forEach(offer => {
+      this.num_redeems += offer.num_of_redeem
     })
+  }
+
+  getTotalCostumers() {
+    this.dataAnalysisService.getTotalCostumers().then(res => {
+      this.num_costumers = res
+    })
+
   }
 
 }

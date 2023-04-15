@@ -3,6 +3,7 @@ import {Chart} from "chart.js/auto";
 import {OffersService} from "../../../../services/offers.service";
 import {Offer} from "../../../../models/offer";
 import {Redeem} from "../../../../models/redeem";
+import {DataAnalysisService} from "../../../../services/data-analysis.service";
 
 @Component({
   selector: 'app-ages-histogram',
@@ -11,16 +12,11 @@ import {Redeem} from "../../../../models/redeem";
 })
 export class AgesHistogramComponent implements OnInit {
 
-  constructor(private offersService: OffersService) {
-  }
-
-
   histogram!: Chart;
-  offersLabels: string[] = []
-  offersData: number[][] = []
   offers: Offer[] = []
   bins = [10, 20, 30, 40, 50, 60];
-
+  showSpinner: boolean = false;
+  showNoData: boolean = true;
 
   dataHist = {
     labels: this.creatBinLabels(),
@@ -29,14 +25,9 @@ export class AgesHistogramComponent implements OnInit {
         label: "My First Dataset",
         data: [300, 50, 100],
         backgroundColor: [
-          // "rgb(133, 105, 241)",
-          // "rgb(164, 101, 241)",
-          // "rgb(101, 143, 241)",
-          "rgb(235, 59, 90)",
-          "rgb(253, 126, 20)",
-          "rgb(46, 204, 113)",
-          "rgb(52, 152, 219)",
-          "rgb(155, 89, 182)",
+          "rgb(133, 105, 241)",
+          "rgb(164, 101, 241)",
+          "rgb(101, 143, 241)",
         ],
         hoverOffset: 4,
       },
@@ -44,33 +35,26 @@ export class AgesHistogramComponent implements OnInit {
   };
 
 
-  async ngOnInit(): Promise<void> {
-    await this.getAllOffers()
+  constructor(private offersService: OffersService, private dataService: DataAnalysisService) {
+  }
 
-
+  ngOnInit(): void {
+    this.getAllOffers()
   }
 
 
   async getAllOffers() {
+    this.showSpinner = true
     this.offersService.getOffers().subscribe({
       next: (res) => {
         this.offers = res.map((e: any) => {
-          console.log('ages array ', e.payload.doc.data().ages,e.payload.doc.data().title)
-          this.offersData.push(e.payload.doc.data().ages);
           const data = e.payload.doc.data();
           data.id = e.payload.doc.id;
           return data;
         });
 
-        this.dataHist = {
-          labels: this.creatBinLabels(),
-          datasets: this.getAllData(this.offers),
-        };
-
-
+        this.showNoData = this.offers.length == 0
         this.createChart()
-
-
 
       },
       error: (err) => {
@@ -80,11 +64,22 @@ export class AgesHistogramComponent implements OnInit {
   }
 
 
-  createChart() {
+  async createChart() {
+
+    this.showSpinner = false;
+
+
+    let data = await this.getAllData(this.offers)
+
+    this.dataHist = {
+      labels: this.creatBinLabels(),
+      datasets: data,
+    };
+
 
     this.histogram = new Chart("histogram", {
       type: "bar",
-      data:this.dataHist
+      data: this.dataHist
     });
 
   }
@@ -100,27 +95,44 @@ export class AgesHistogramComponent implements OnInit {
   }
 
 
-  getAllData(offers:Offer[]){
+  async getAllData(offers: Offer[]) {
 
-    let data:any[]=[]
-    offers.forEach(
-      (offer,index)=>{
 
-        data.push({
-          label:offer.title,
-          data:this.getHistogramData(this.offersData[index],this.bins)
-        })
-      }
-    )
+    let data: any[] = []
+    let backgroundColors: any[] = [
+      "rgb(133, 105, 241)",
+      "rgb(164, 101, 241)",
+      "rgb(101, 143, 241)",
+      "rgb(142, 116, 255)",
+      "rgb(120, 129, 242)",
+      "rgb(144, 123, 239)",
+      "rgb(138, 135, 255)",
+      "rgb(120, 120, 255)",
+      "rgb(144, 116, 231)"
 
+    ]
+    for (const [index, offer] of offers.entries()) {
+      let ages: number[] = []
+      await this.dataService.getAgesForOffer(offer).then(
+        res => {
+          ages = res
+          data.push({
+            label: offer.title,
+            data: this.getHistogramData(ages, this.bins),
+            backgroundColor: backgroundColors[index % backgroundColors.length]
+
+          })
+        }
+      )
+
+    }
 
     return data;
   }
 
 
-
   // Function to calculate histogram data
-   getHistogramData(data:number[], bins:number[]) {
+  getHistogramData(data: number[], bins: number[]) {
     var histogramData = Array(bins.length - 1).fill(0);
     for (var i = 0; i < data.length; i++) {
       for (var j = 0; j < bins.length - 1; j++) {

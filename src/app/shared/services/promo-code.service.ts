@@ -1,37 +1,57 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {collection, getDocs, query, where} from "@angular/fire/firestore";
 import {Offer} from "../../models/offer";
 import {lastValueFrom} from "rxjs";
 import {OffersService} from "../../services/offers.service";
-import {DataAnalysisService} from "../../services/data-analysis.service";
+import {OffersPathService} from "../../services/offers-path.service";
+import firebase from "firebase/compat/app";
+import Timestamp = firebase.firestore.Timestamp;
+import FieldValue = firebase.firestore.FieldValue;
 
+
+interface PromoCode {
+  code: string;
+  offer_id: string;
+  uid: string,
+}
+
+
+interface Redeem {
+  store_id: string,
+  offer_id: string,
+  customer_uid: string,
+  date: Timestamp,
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class PromoCodeService {
-
-
   constructor(private firestore: AngularFirestore,
-              private offersService: OffersService,) {
+              private offersService: OffersService,
+              private offersPathService: OffersPathService) {
   }
 
 
   async validateCode(code: string): Promise<string> {
-    const storeId = await this.offersService.getUserUid();
+    const ownerId = await this.offersService.getUserUid();
+    let storeId = await this.offersPathService.getStoreId(ownerId);
 
-    // let status: boolean = false;
-    let info: string = "";
-    console.log(storeId)
+    const querySnapshot = await this.firestore
+      .collection('temp-claim').ref
+      .where('code', '==', code)
+      .where('store_id', '==', storeId)
+      .limit(1).get();
 
-    const q = query(collection(this.firestore.firestore, '/temp-claim'), where('code', '==', code), where('store_id', '==', storeId))
-    const querySnapshot = await getDocs(q);
+
     if (querySnapshot.docs.length == 0) throw Error('No code is found');
-    let offer_id = querySnapshot.docs[0].data()['offer_id'];
-    console.log('Here is ' + offer_id)
+    let offerId = (querySnapshot.docs[0].data() as PromoCode)['offer_id'];
 
-    return await lastValueFrom(this.firestore.collection('stores').doc(storeId).collection('offers').doc(offer_id).get()).then(value => {
+    return await lastValueFrom(
+      this.firestore.doc(
+        await this.offersPathService.getOfferPath(ownerId, offerId)
+      ).get()
+    ).then(value => {
       if (value.exists) {
         return (value.data() as Offer).title + " and the description " + (value.data() as Offer).description;
       } else
@@ -41,16 +61,29 @@ export class PromoCodeService {
 
 
   async redeemCode(code: string) {
-    const storeId = await this.offersService.getUserUid();
-    let claim_id = "";
-    const q = query(collection(this.firestore.firestore, '/temp-claim'), where('code', '==', code), where('store_id', '==', storeId))
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
+    const ownerUid = await this.offersService.getUserUid();
+    const storeId = await this.offersPathService.getStoreId(ownerUid);
 
-      claim_id = doc.id
-    });
-    let offer_id = querySnapshot.docs[0].data()['offer_id'];
-    let uid = querySnapshot.docs[0].data()['uid'];
+    let claim_id = "";
+    const querySnapshot = await this.firestore
+      .collection('temp-claim').ref
+      .where('code', '==', code)
+      .where('store_id', '==', storeId)
+      .limit(1).get();
+
+    if (querySnapshot.docs.length == 0) throw Error('No code is found');
+    const promoCode = (querySnapshot.docs[0].data() as PromoCode)
+    const offerId = promoCode.offer_id;
+    const customerUid = promoCode.uid;
+
+
+    const redeem: Redeem = {
+      store_id: storeId,
+      offer_id: offerId,
+      customer_uid: customerUid,
+      date: Timestamp.now()
+    }
+
     let offer: Offer = {
       id: '',
       description: '',
@@ -62,7 +95,14 @@ export class PromoCodeService {
       num_of_redeem: 0,
     };
 
-    await lastValueFrom(this.firestore.collection('stores').doc(storeId).collection('offers').doc(offer_id).get()).then(value => {
+
+    // Adding new Redeem Object
+    await this.firestore.collection('redeems').add(redeem)
+      .then(res=>console.log('Added ',res))
+      .catch(err=>console.error(err))
+
+
+    await lastValueFrom(this.firestore.collection('stores').doc(storeId).collection('offers').doc(offerId).get()).then(value => {
       if (value.exists) {
         offer = (value.data() as Offer)
         offer.id = value.id
@@ -70,14 +110,25 @@ export class PromoCodeService {
     })
 
 
+    await this.detectPoints(offer.worth_points,customerUid,storeId)
 
-
-    await this.offersService.incrementChoice(offer_id, ++offer.num_of_redeem).then(res => {
+    await this.offersService.incrementChoice(offerId, ++offer.num_of_redeem).then(res => {
       console.log('Updated !', res)
     })
     //this.firestore.firestore.collection('temp-claim').doc(claim_id).delete().then(e => console.log('Deleted !', e))
 
-    return {offer,uid}
+    return {offer, customerUid}
+
+  }
+
+
+
+  async detectPoints(points:number,costumerId:string,storeID:string){
+    points = points*-1;
+    await this.firestore.collection('users').doc(costumerId).update({
+      ["points."+storeID]:(FieldValue.increment(points))
+    })
+
   }
 
 }
