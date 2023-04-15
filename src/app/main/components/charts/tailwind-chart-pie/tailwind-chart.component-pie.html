@@ -2,3 +2,7 @@
 
   <canvas class="p-5" id="pieChart">{{chart}}</canvas>
 </div>
+
+<div *ngIf="noData" class="flex flex-col justify-center items-center">
+  <h2>No Data to Show ...</h2>
+</div>

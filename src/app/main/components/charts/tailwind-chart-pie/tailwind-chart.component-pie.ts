@@ -31,13 +31,14 @@ export class TailwindChartComponentPie implements OnInit {
       }
     ]
   };
+  noData: boolean = true;
 
   constructor(private offersService: OffersService) {
   }
 
 
   ngOnInit(): void {
-    this.getAllOffers()
+    //this.getAllOffers()
   }
 
 
@@ -76,7 +77,7 @@ export class TailwindChartComponentPie implements OnInit {
           ],
         };
 
-        //this.noData = this.offers.length == 0
+        this.noData = this.offers.length == 0
         this.createChart()
 
 
