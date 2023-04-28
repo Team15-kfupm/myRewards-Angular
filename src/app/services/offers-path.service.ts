@@ -30,7 +30,6 @@ export class OffersPathService {
   }
 
   public async getOfferPath(uid: string, offerId: string): Promise<string> {
-    console.log(uid)
     const storeId = await this.getStoreId(uid);
     return `${await this.getOffersPath(storeId)}/${offerId}`;
   }

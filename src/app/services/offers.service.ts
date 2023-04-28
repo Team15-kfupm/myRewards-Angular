@@ -67,9 +67,10 @@ export class OffersService {
    * **/
   async updateOffer(id: string, updates: any): Promise<void> {
     const uid = await this.getUserUid();
+    const storeId = await this.offersPathService.getStoreId(uid);
 
     await this.firestore
-      .collection(await this.offersPathService.getOffersPath(uid)).doc(id)
+      .collection(await this.offersPathService.getOffersPath(storeId)).doc(id)
       .update(updates);
   }
 

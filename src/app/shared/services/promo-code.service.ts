@@ -98,8 +98,8 @@ export class PromoCodeService {
 
     // Adding new Redeem Object
     await this.firestore.collection('redeems').add(redeem)
-      .then(res=>console.log('Added ',res))
-      .catch(err=>console.error(err))
+      .then(res => console.log('Added ', res))
+      .catch(err => console.error(err))
 
 
     await lastValueFrom(this.firestore.collection('stores').doc(storeId).collection('offers').doc(offerId).get()).then(value => {
@@ -110,23 +110,24 @@ export class PromoCodeService {
     })
 
 
-    await this.detectPoints(offer.worth_points,customerUid,storeId)
+    await this.detectPoints(offer.worth_points, customerUid, storeId)
 
     await this.offersService.incrementChoice(offerId, ++offer.num_of_redeem).then(res => {
       console.log('Updated !', res)
     })
-    //this.firestore.firestore.collection('temp-claim').doc(claim_id).delete().then(e => console.log('Deleted !', e))
+
+
+    this.firestore.firestore.collection('temp-claim').doc(claim_id).delete().then(e => console.log('Deleted !', e))
 
     return {offer, customerUid}
 
   }
 
 
-
-  async detectPoints(points:number,costumerId:string,storeID:string){
-    points = points*-1;
+  async detectPoints(points: number, costumerId: string, storeID: string) {
+    points = points * -1;
     await this.firestore.collection('users').doc(costumerId).update({
-      ["points."+storeID]:(FieldValue.increment(points))
+      ["points." + storeID]: (FieldValue.increment(points))
     })
 
   }
