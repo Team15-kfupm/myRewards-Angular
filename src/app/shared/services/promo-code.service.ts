@@ -10,6 +10,7 @@ import FieldValue = firebase.firestore.FieldValue;
 
 
 interface PromoCode {
+  id: string
   code: string;
   offer_id: string;
   uid: string,
@@ -76,6 +77,7 @@ export class PromoCodeService {
     const offerId = promoCode.offer_id;
     const customerUid = promoCode.uid;
 
+    claim_id = querySnapshot.docs[0].id
 
     const redeem: Redeem = {
       store_id: storeId,
