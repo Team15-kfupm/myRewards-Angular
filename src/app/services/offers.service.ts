@@ -50,12 +50,12 @@ export class OffersService {
 
     const uid = await this.getUserUid();
     const storeId = await this.offersPathService.getStoreId(uid);
-    //offer.id = this.firestore.createId();
+    offer.id = this.firestore.createId();
     offer.uid = storeId;
     offer.image = await this.uploadImageAndGetUrl(offer.id, image);
     await this.firestore
       .collection(await this.offersPathService.getOffersPath(storeId))
-      .add(offer);
+      .add(offer).then(res => res.update({id: res.id}));
     return true;
   }
 
