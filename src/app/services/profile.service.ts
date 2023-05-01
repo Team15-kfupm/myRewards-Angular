@@ -54,7 +54,7 @@ export class ProfileService {
 
     await this.firestore.collection(`stores`).doc(storeId).get().forEach(doc => {
       // @ts-ignore
-      name = doc.data().store_name
+      name = doc.data().name
     })
 
 
